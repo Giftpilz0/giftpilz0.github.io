@@ -1,0 +1,4 @@
+{
+  securityLevel: 'strict',
+  theme: 'dark',
+}

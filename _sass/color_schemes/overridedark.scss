@@ -1,0 +1,68 @@
+@import "./color_schemes/dark";
+
+// --- Colors
+
+$background_dark: #1a1c18;
+$background_light: lighten($background_dark, 90%);
+
+$surface_dark: #1a1c18;
+$surface_light: lighten($surface_dark, 90%);
+
+$primary: #8cd3d4;
+$primary_light: lighten($primary, 22%);
+$primary_dark: darken($primary, 62%);
+
+$secondary: #bdcbb0;
+$secondary_light: lighten($secondary, 22%);
+$secondary_dark: darken($secondary, 62%);
+
+$tertiary: #bbc2dd;
+$tertiary_light: lighten($tertiary, 22%);
+$tertiary_dark: darken($tertiary, 62%);
+
+// --- Colors
+
+$sidebar-color: $primary_dark;
+$link-color: $surface_light;
+
+$body-background-color: $background_dark;
+$body-heading-color: $background_light;
+$body-text-color: $background_light;
+
+$code-background-color: $surface_dark;
+$search-background-color: $surface_dark;
+$search-result-preview-color: $surface_light;
+
+$table-background-color: $secondary_dark;
+$base-button-color: $tertiary_dark;
+$btn-primary-color: $tertiary;
+
+$nav-child-link-color: $tertiary_light;
+$border-color: lighten($background_dark, 20%);
+
+$font-size-1: 11px;
+$font-size-1-sm: 12px;
+$font-size-2: 13px;
+$font-size-3: 14px;
+$font-size-4: 16px;
+$font-size-5: 18px;
+$font-size-6: 20px;
+$font-size-7: 26px;
+$font-size-8: 34px;
+$font-size-9: 38px;
+$font-size-10: 44px;
+$font-size-10-sm: 50px;
+
+
+$font-size-1: 11px;
+$font-size-1-sm: 12px;
+$font-size-2: 13px;
+$font-size-3: 14px;
+$font-size-4: 16px;
+$font-size-5: 18px;
+$font-size-6: 20px;
+$font-size-7: 26px;
+$font-size-8: 34px;
+$font-size-9: 38px;
+$font-size-10: 44px;
+$font-size-10-sm: 50px;
