@@ -15,6 +15,6 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
-Es wird empfohlen, für Software Releasestags zu verwenden. Du kannst einen neuen Tag namens 1.0.0 mit folgendem Befehl erstellen
+You can create a new tag called 1.0.0 with the following command
 
 `git tag 1.0.0 commit-ID`

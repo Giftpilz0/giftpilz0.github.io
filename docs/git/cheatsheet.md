@@ -25,36 +25,36 @@ undo changes
 
 `git checkout commit-ID`
 
-Lokalen Änderungen komplett entfernen und den letzten Stand vom entfernten Repository holen
+Completely remove local changes and get the latest version from the remote repository
 
 ```
 git fetch origin
 git reset --hard origin/main
 ```
 
-Lokale Commits verwerfen
+Discard local commits
 
 `git reset --hard reponame/branch`
 
-Vergleich von zwei Branches
+Comparison of two branches
 
 ```
-git diff quell_branch ziel_branch
-git diff --name-status quell_branch ziel_branch
+git diff source_branch target_branch
+git diff --name-status source_branch target_branch
 ```
 
-Vergleiche generell
+Compare in general
 
 `git diff --staged`
 
-Branch löschen
+Delete branches
 
 ```
-git branch -d branch # Vorher merge in anderen Branch nötig
-git branch -D branch # Löscht auch ohne Merge
+git branch -d branch # Need to merge in other branch first
+git branch -D branch # Also deletes without merging
 ```
 
-Mache FeatureBranch zu main
+Make FeatureBranch main
 
 ```
 git checkout main

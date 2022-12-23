@@ -26,8 +26,10 @@ Display whois information for domain
 
 Display DNS information for domain
 
-`dig domain`
-`nslookup domain`
+```
+dig domain
+nslookup domain
+```
 
 Reverse lookup of IP_ADDRESS
 
@@ -72,9 +74,11 @@ Scan ports of IP, if host is not reachable
 
 Change MAC address
 
-`ip link set {device} down`
-`ip link set {device} address aa:aa:aa:aa:aa:aa`
-`ip link set {device} up`
+```
+ip link set {device} down
+ip link set {device} address aa:aa:aa:aa:aa:aa
+ip link set {device} up
+```
 
 Get network info
 
@@ -82,18 +86,16 @@ Get network info
 
 Get wireless networks
 
-`nmcli -p --mode tabular --fields BSSID,SSID,MODE,CHAN,FREQ,BARS,ACTIVE,SECURITY device wifi list`
-`wavemon`
+```
+nmcli -p --mode tabular --fields BSSID,SSID,MODE,CHAN,FREQ,BARS,ACTIVE,SECURITY device wifi list
+wavemon
+```
 
 nmap vuln scan
 
-https://geekflare.com/de/nmap-vulnerability-scan
+https://geekflare.com/de/nmap-vulnerability-scan \
 https://nmap.org/book/nse-usage.html
 
 Spoof IP
 
 `iptables -t nat -A POSTROUTING -j SNAT --to-source ipaddress`
-
-https://sandilands.info/sgordon/address-spoofing-with-iptables-in-linux
-
-![](/app/joplin-desktop/resources/app/:/db6f9316a6d4d9c047f7d90ed6580935.png)

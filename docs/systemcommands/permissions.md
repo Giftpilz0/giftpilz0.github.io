@@ -17,8 +17,8 @@ Example
 
 Legend
 
-| Text | Short | Number |
-| ------- | -------- | ---- |
-| Read    | r        | 4    |
-| Write   | w        | 2    |
-| Execute | x        | 1    |
+| Text    | Short | Number |
+| ------- | ----- | ------ |
+| Read    | r     | 4      |
+| Write   | w     | 2      |
+| Execute | x     | 1      |

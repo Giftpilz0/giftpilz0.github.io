@@ -8,14 +8,14 @@ parent: Systemcommands
 
 ______________________________________________________________________
 
-| Option | Function | Example |
-| ------ | --------------------------------- | ---------------------------------- |
-| c | create | tar cf Archive.tar Data |
-| x | extract | tar xf Archive.tar |
-| f | file | |
-| v | verbose | |
-| I | select compression program | tar cI zst -f Archive.tar.zst Data |
-| a | automatic compression program | tar caf Archive.tar.zst Data |
+| Option | Function                      | Example                            |
+| ------ | ----------------------------- | ---------------------------------- |
+| c      | create                        | tar cf Archive.tar Data            |
+| x      | extract                       | tar xf Archive.tar                 |
+| f      | file                          |                                    |
+| v      | verbose                       |                                    |
+| I      | select compression program    | tar cI zst -f Archive.tar.zst Data |
+| a      | automatic compression program | tar caf Archive.tar.zst Data       |
 
 Create tar named archive.tar containing directory
 

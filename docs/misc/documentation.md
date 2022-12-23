@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Documentations
+title: Documentation
 parent: Misc
 ---
 
@@ -42,7 +42,7 @@ ______________________________________________________________________
 
 <https://kubernetes.io/docs/concepts>
 
-## Web Server
+### Web Server
 
 ______________________________________________________________________
 

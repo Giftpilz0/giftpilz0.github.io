@@ -26,9 +26,11 @@ Find files larger than 100MB in /home
 
 List installed software
 
-`dpkg --get-selections`
-`dnf list installed`
+```
+dpkg --get-selections
+dnf list installed
+```
 
-Get filepath of application
+Get file path of application
 
 `which {{ app }}`
