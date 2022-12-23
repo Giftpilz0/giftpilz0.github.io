@@ -10,10 +10,10 @@ ______________________________________________________________________
 
 {: .note }
 
-> Branches werden benutzt, um verschiedene Funktionen isoliert voneinander zu entwickeln.
-> Der main-Branch ist der Standard-Branch, wenn du ein neues Repository erstellst.
-> Du solltest aber für die Entwicklung andere Branches verwenden und diese dann in den
-> Main-Branch zusammenführen.
+> Branches are used to develop different functions in isolation from each other.
+> The main branch is the default branch when you create a new repository.
+> But you should use other branches for development and then merge them into the
+> main branch.
 
 ______________________________________________________________________
 
@@ -32,14 +32,14 @@ ______________________________________________________________________
        commit
 ```
 
-Erstelle einen neuen Branch mit dem Namen develop und wechsle zu diesem
+Create a new branch called develop and switch to it
 
 `git checkout --branch develop`
 
-Um zu Main zurück zu wechseln
+To switch back to main
 
 `git checkout main`
 
-Den erstellten Branch wieder löschen
+Delete the created branch
 
 `git branch -d develop`

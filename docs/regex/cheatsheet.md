@@ -8,20 +8,20 @@ parent: Regex
 
 ______________________________________________________________________
 
-[Regex testen](https://regex101.com/)
+[test regex](https://regex101.com/)
 
-General Tokens
+General tokens
 
-| Ausdruck | Funktion                                                                           |
+| Expression | Function                                                                           |
 | -------- | ---------------------------------------------------------------------------------- |
 | \\n      | Matches a newline character.                                                       |
 | \\r      | Matches a carriage return, unicode character U+2185.                               |
 | \\t      | Matches a tab character. Historically, tab stops happen every 8 characters.        |
 | \\0      | Matches a null character, most often visually represented in unicode using U+2400. |
 
-Character Classes
+Character classes
 
-| Ausdruck   | Funktion                                                   |
+| Expression | Function |
 | ---------- | ---------------------------------------------------------- |
 | \[abc\]    | Matches either an a, b or c character.                     |
 | \[^abc\]   | Matches any character except for an a, b or c.             |
@@ -30,7 +30,7 @@ Character Classes
 
 Meta Sequences
 
-| Ausdruck | Funktion                                                   |
+| Expression | Function |
 | -------- | ---------------------------------------------------------- |
 | .        | Matches any character.                                     |
 | a\|b     | Matches either what is before the \| or what is after it.  |
@@ -44,7 +44,7 @@ Meta Sequences
 
 Quantifiers
 
-| Ausdruck | Funktion                                                    |
+| Expression | Function |
 | -------- | ----------------------------------------------------------- |
 | \*       | Matches zero or more consecutive.                           |
 | ?        | Matches an character or nothing.                            |
@@ -54,14 +54,14 @@ Quantifiers
 
 Anchors
 
-| Ausdruck | Funktion                                                        |
+| Expression | Function |
 | -------- | --------------------------------------------------------------- |
 | ^        | Matches the start of a string without consuming any characters. |
 | $        | Matches the end of a string without consuming any characters.   |
 
 Modifiers
 
-| Ausdruck | Funktion                                                                                                                                                       |
+| Expression | Function |
 | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | g        | Also known as global mode, it instruct the engine not to stop after the first match has been found, but rather to continue until no more matches can be found. |
 | s        | This enables the dot metacharacter . to also match newlines. The whole string is treated as a single line input.                                               |

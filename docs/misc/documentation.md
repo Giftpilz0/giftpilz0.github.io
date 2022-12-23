@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Dokumentationen
+title: Documentations
 parent: Misc
 ---
 
@@ -10,11 +10,11 @@ ______________________________________________________________________
 
 {: .note }
 
-> Eine Auswahl an verschiedenen nützlichen Wissens-Quelle
+> A selection of various useful knowledge sources
 
 ______________________________________________________________________
 
-### Netzwerk
+### Network
 
 ______________________________________________________________________
 
@@ -22,7 +22,7 @@ ______________________________________________________________________
 <https://www.kali.org/tools>
 <https://developers.redhat.com/blog/2018/10/22/introduction-to-linux-interfaces-for-virtual-networking>
 
-### Linux - Allgemeines
+### Linux - General
 
 ______________________________________________________________________
 
@@ -42,7 +42,7 @@ ______________________________________________________________________
 
 <https://kubernetes.io/docs/concepts>
 
-## Webserver
+## Web Server
 
 ______________________________________________________________________
 
@@ -56,13 +56,13 @@ ______________________________________________________________________
 <https://docs.ansible.com/ansible_community.html>
 <https://docs.ansible.com/ansible/latest/collections/index.html>
 
-### Webserver Security
+### Web Server Security
 
 ______________________________________________________________________
 
 <https://infosec.mozilla.org/guidelines/web_security.html>
 
-### PKI - SSL-Zertifikate
+### PKI - SSL Certificates
 
 ______________________________________________________________________
 

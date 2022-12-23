@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Windows
-parent: Lizensverwaltung
+parent: License Management
 ---
 
 # {{ page.title }}
@@ -15,9 +15,9 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
-Windows 10/11 halbjährlich
+Windows 10/11 semi-annually
 
-| Betriebssystemedition                | KMS-Client-Product Key        |
+| Edition | KMS Client Product Key |
 | ------------------------------------ | ----------------------------- |
 | Windows 10/11 Pro                    | W269N-WFGWX-YVC9B-4J6C9-T83GX |
 | Windows 10/11 Pro N                  | MH37W-N47XK-V7XM9-C7227-GCQG9 |
@@ -34,7 +34,7 @@ Windows 10/11 halbjährlich
 
 Windows 8.1
 
-| Betriebssystemedition    | KMS-Client-Product Key        |
+| Edition | KMS Client Product Key |
 | ------------------------ | ----------------------------- |
 | Windows 8.1 Pro          | GCRJD-8NW9H-F2CDX-CCM8D-9D6T9 |
 | Windows 8.1 Pro N        | HMCNV-VVBFX-7HMBH-CTY9B-B4FXY |
@@ -43,7 +43,7 @@ Windows 8.1
 
 Windows 8
 
-| Betriebssystemedition  | KMS-Client-Product Key        |
+| Edition | KMS Client Product Key |
 | ---------------------- | ----------------------------- |
 | Windows 8 Pro          | NG4HW-VH26C-733KW-K6F98-J8CK4 |
 | Windows 8 Pro N        | XCVCF-2NXM9-723PB-MHCB7-2RYQQ |
@@ -52,7 +52,7 @@ Windows 8
 
 Windows 7
 
-| Betriebssystemedition    | KMS-Client-Product Key        |
+| Eedition | KMS Client Product Key |
 | ------------------------ | ----------------------------- |
 | Windows 7 Professional   | FJ82H-XT6CR-J8D7P-XQJJ2-GPDD4 |
 | Windows 7 Professional N | MRPKT-YTG23-K7D7T-X2JMM-QY7MG |

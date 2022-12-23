@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Systeminfo
-parent: Systembefehle
+parent: Systemcommands
 ---
 
 # {{ page.title }}
@@ -32,6 +32,6 @@ Show system reboot history
 
 `last reboot`
 
-Programme für Informationen
+Programs for information
 
 `screenfetch; neofetch`

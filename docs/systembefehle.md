@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Systembefehle
+title: Systemcommands
 has_children: true
-permalink: /docs/systembefehle
+permalink: /docs/systemcommands
 ---
 
 # {{ page.title }}

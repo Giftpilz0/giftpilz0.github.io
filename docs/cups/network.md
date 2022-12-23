@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Netzwerk
+title: Network
 parent: Cups
 ---
 

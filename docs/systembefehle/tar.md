@@ -1,21 +1,21 @@
 ---
 layout: default
 title: Tar
-parent: Systembefehle
+parent: Systemcommands
 ---
 
 # {{ page.title }}
 
 ______________________________________________________________________
 
-| Option | Funktion                          | Beispiel                           |
+| Option | Function | Example |
 | ------ | --------------------------------- | ---------------------------------- |
-| c      | erstellen                         | tar cf Archive.tar Data            |
-| x      | extrahieren                       | tar xf Archive.tar                 |
-| f      | datei                             |                                    |
-| v      | ausführlich                       |                                    |
-| I      | kompressionsprogram auswählen     | tar cI zst -f Archive.tar.zst Data |
-| a      | automatisches kompressionsprogram | tar caf Archive.tar.zst Data       |
+| c | create | tar cf Archive.tar Data |
+| x | extract | tar xf Archive.tar |
+| f | file | |
+| v | verbose | |
+| I | select compression program | tar cI zst -f Archive.tar.zst Data |
+| a | automatic compression program | tar caf Archive.tar.zst Data |
 
 Create tar named archive.tar containing directory
 
@@ -41,7 +41,7 @@ Extract a bzip2 compressed tar file
 
 `tar xjf archive.tar.bz2`
 
-System-Backup
+System backup
 
 ```bash
 sudo tar -cvpzf ./backup.tar.gz

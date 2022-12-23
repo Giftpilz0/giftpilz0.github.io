@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Dokumentation
+title: Documentation
 ---
 
 # {{ page.title }}
 
-Hier findest du Dokumentation zu verschiedenen Themen.
+Here you can find documentation on various topics.

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Nützliche Filter
+title: Useful Filters
 parent: Regex
 ---
 

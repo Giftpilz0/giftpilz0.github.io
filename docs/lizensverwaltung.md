@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Lizensverwaltung
+title: License Management
 has_children: true
-permalink: /docs/lizensverwaltung
+permalink: /docs/licensemanagement
 ---
 
 # {{ page.title }}
 
-Microsoft Lizensverwaltungssoftware, Schlüssel und \
-Key Management Service
+Microsoft license management software, keys and \
+Key management service

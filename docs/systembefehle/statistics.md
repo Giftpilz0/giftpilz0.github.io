@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Statistiken
-parent: Systembefehle
+title: Statistics
+parent: Systemcommands
 ---
 
 # {{ page.title }}
@@ -28,7 +28,7 @@ Capture and display all packets on interface eth0
 
 `tcpdump -i eth0`
 
-Monitor all traffic on port 80 ( HTTP )
+Monitor all traffic on port 80 (HTTP)
 
 `tcpdump -i eth0 'port 80'`
 

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Office
-parent: Lizensverwaltung
+parent: License Management
 ---
 
 # {{ page.title }}

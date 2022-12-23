@@ -1,14 +1,14 @@
 ---
 layout: default
-title: Netzwerk
-parent: Systembefehle
+title: Network
+parent: Systemcommands
 ---
 
 # {{ page.title }}
 
 ______________________________________________________________________
 
-Display all network interfaces and IP address
+Display all network interfaces and IP addresses
 
 `ip a`
 
@@ -66,11 +66,11 @@ Scan ports of IP
 
 `nmap -sS 192.168.178.151`
 
-Scan ports of IP, if host isnt reachable
+Scan ports of IP, if host is not reachable
 
 `nmap -Pn 192.168.178.151`
 
-MAC-address ändern
+Change MAC address
 
 `ip link set {device} down`
 `ip link set {device} address aa:aa:aa:aa:aa:aa`

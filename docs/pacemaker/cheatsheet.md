@@ -76,7 +76,7 @@ Pacemaker cluster command to stop debugging cluster resource. You can use the sw
 
 `pcs resource debug-stop`
 
-Pacemaker cluster command to monitor cluster resource debuging. You can use the switch --full for even more verbose output
+Pacemaker cluster command to monitor cluster resource debugging. You can use the switch --full for even more verbose output
 
 `pcs resource debug-monitor`
 
@@ -88,7 +88,7 @@ Pacemaker cluster command to list available cluster resource agents with more in
 
 `pcs resource list`
 
-Pacemaker cluster command to view detailed infirmotation about cluster resource agents and their configuration or settings
+Pacemaker cluster command to view detailed information about cluster resource agents and their configuration or settings
 
 `pcs resource describe`
 

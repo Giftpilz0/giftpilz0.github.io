@@ -1,14 +1,14 @@
 ---
 layout: default
 title: Awk
-parent: Systembefehle
+parent: Systemcommands
 ---
 
 # {{ page.title }}
 
 ______________________________________________________________________
 
-Basic Syntax
+Basic syntax
 
 `awk options 'selection-criteria {action}'`
 

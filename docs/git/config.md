@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Config
+title: Configuration
 parent: Git
 ---
 
@@ -10,16 +10,16 @@ ______________________________________________________________________
 
 {: .note }
 
-> Gitconfig Datein werden verwendet um global Einstelungen bezüglich Editor,
-> Farben, Standard-Branch und mehr zu setzen.
+> Git config files are used to set global settings related to the editor,
+> Set colors, default branch and more.
 
 ______________________________________________________________________
 
 ```ini
 [user]
-    email = schmidtmoritz404@gmail.com
+    email = 86166667+Giftpilz0@users.noreply.github.com
     name = Moritz Schmidt
-    username = Giftpilz
+    username = Giftpilz0
 
 [init]
     defaultBranch = main

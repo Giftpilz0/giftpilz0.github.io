@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Vorlage
+title: Template
 parent: Ansible
 ---
 
@@ -8,6 +8,6 @@ parent: Ansible
 
 ______________________________________________________________________
 
-Vorlage für neues Ansible Projekt
+Template for new Ansible projects
 
 [AnsibleSkelleton.tar.zst](../../assets/misc/AnsibleSkelleton.tar.zst)

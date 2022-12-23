@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Datenverwaltung
-parent: Systembefehle
+title: File Management
+parent: Systemcommands
 ---
 
 # {{ page.title }}
@@ -28,6 +28,6 @@ Display total disk usage off the current directory
 
 `du –sh`
 
-Alles in einem (ncdu)
+All in one (ncdu)
 
 `ncdu`

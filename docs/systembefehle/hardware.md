@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Hardware
-parent: Systembefehle
+parent: Systemcommands
 ---
 
 # {{ page.title }}

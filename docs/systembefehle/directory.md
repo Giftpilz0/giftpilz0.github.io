@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Verzeichnisse
-parent: Systembefehle
+title: Directories
+parent: Systemcommands
 ---
 
 # {{ page.title }}

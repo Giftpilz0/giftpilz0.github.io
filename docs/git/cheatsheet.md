@@ -6,22 +6,22 @@ parent: Git
 
 # {{ page.title }}
 
-Änderungen zu einem Commit anzeigen
+View changes of a commit
 
 `git show`
 
-Lokale Änderungen verwerfen (noch kein add)
+Discard local changes (no add yet)
 
-`git checkout Dateiname`
+`git checkout filename`
 
-Lokale Änderungen verwerfen (nach add)
+Discard local changes (after add)
 
 ```
-git reset HEAD Dateiname # hiernach ist alles wie bevor "add"
-git checkout Dateiname
+git reset HEAD filename # after this everything is as before "add"
+git checkout filename
 ```
 
-Änderungen rückgängig machen
+undo changes
 
 `git checkout commit-ID`
 

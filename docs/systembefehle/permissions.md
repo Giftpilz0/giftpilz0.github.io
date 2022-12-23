@@ -1,23 +1,23 @@
 ---
 layout: default
-title: Dateiberechtigungen
-parent: Systembefehle
+title: File Permissions
+parent: Systemcommands
 ---
 
 # {{ page.title }}
 
 ______________________________________________________________________
 
-Beispiel
+Example
 
 | User | Group | World | Group |
 | ---- | ----- | ----- | ----- |
 | rwx  | r-x   | r-x   | 755   |
 | rw-  | r--   | r--   | 644   |
 
-Legende
+Legend
 
-| Text    | Kurzform | Zahl |
+| Text | Short | Number |
 | ------- | -------- | ---- |
 | Read    | r        | 4    |
 | Write   | w        | 2    |

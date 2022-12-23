@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Prozesse
-parent: Systembefehle
+title: Processes
+parent: Systemcommands
 ---
 
 # {{ page.title }}

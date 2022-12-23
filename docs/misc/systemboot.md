@@ -1,6 +1,6 @@
 ---
 layout: default
-title: System Bootprobleme
+title: System Boot Problems
 parent: Misc
 ---
 
@@ -10,12 +10,11 @@ ______________________________________________________________________
 
 {: .note }
 
-> Wenn der Windows Bootloader defekt ist, kann er mit einen Installationsstick
-> Wiederhergestellt werden
+> If the Windows bootloader is defective, it can be repaired using an installation stick
 
 ______________________________________________________________________
 
-Windows Installationsmedium starten und folgende Befehle ausführen um den gesammten Windows Bootloader neu zu installieren
+Start the Windows installation medium and run the following commands to reinstall the entire Windows bootloader
 
 ```
 diskpart

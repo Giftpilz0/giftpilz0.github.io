@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Rsync
-parent: Systembefehle
+parent: Systemcommands
 ---
 
 # {{ page.title }}
@@ -16,6 +16,6 @@ Synchronize files/directories between the local and remote system with compressi
 
 `rsync -avz /home server:/backups/`
 
-um verschiedene Ordner gleich zu halten
+To keep different directories in sync
 
 `rsync -rltpDug --modify-window=1 --progress --delete /home /backup`

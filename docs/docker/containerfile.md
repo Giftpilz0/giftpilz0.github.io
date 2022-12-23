@@ -10,37 +10,37 @@ ______________________________________________________________________
 
 {: .note }
 
-> Containerfiles sind Bauanleitungen für Container Images, welche die ausgeführte Software darstellen.
+> Container files are building instructions for container images that represent the running software.
 
 ______________________________________________________________________
 
-Die folgenden Anweisungen stehen in Dockerfiles zur Verfügung:
+The following directives are available in Dockerfiles:
 
-| Anweisung  | Funktion                                                                                                                                                                            |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| FROM       | Definiert das Base Image welches verwendet wird.                                                                                                                                    |
-| ADD        | Kopiert Dateien in das Image.                                                                                                                                                       |
-| ARG        | Temporäre ENV-Variable aus Build Context.                                                                                                                                           |
-| CMD        | Führt ein Befehl im Container beim run aus, sofern NICHTS an Argumenten übergeben wurde. kann in "exec" oder "shell" Form angegeben werden (Shell form akzeptiert keine Parameter!) |
-| ENTRYPOINT | Wie CMD, wird aber immer ausgeführt sobald der Container gestartet wird. kann in "exec" oder "shell" Form angegeben werden (Shell form akzeptiert keine Parameter!)                 |
-| ENV        | Setzt eine Environment Variable. Kann im Dockerfile als auch im Container genutzt werden.                                                                                           |
-| EXPOSE     | Deklariert Ports für den Containerzugriff                                                                                                                                           |
-| USER       | Ab der Angabe USER werden alle folgenden Commands (CMD, ENTRYPOINT etc.) im Container als USER ausgeführt                                                                           |
+| instruction | function |
+| ---------- | -------------------------------------------------- -------------------------------------------------- -------------------------------------------------- ----------------------------- |
+| FROM | Defines the base image that is used. |
+| ADD | Copies files into the image. |
+| ARG | Temporary ENV variable from Build Context. |
+| CMD | Executes a command in the container at run if NOTHING is passed as arguments. can be specified in "exec" or "shell" form (Shell form does not accept parameters!) |
+| ENTRY POINT | Like CMD, but always executed when the container is started. can be specified in "exec" or "shell" form (Shell form does not accept parameters!) |
+| EPS | Sets an environment variable. Can be used in the Dockerfile as well as in the container. |
+| EXPOSE | Declares ports for container access |
+| USER | From the specification USER all following commands (CMD, ENTRYPOINT etc.) are executed in the container as USER |
 
-## Beispiel
+## Example
 
 ______________________________________________________________________
 
 ```Dockerfile
 FROM ubuntu:latest
 
-MAINTAINER Name "[mailto:maintainer@example.com]"
+MAINTAINER name "[mailto:maintainer@example.com]"
 
 RUN apt-get update apt-get install -y python python-pip wget; apt clean
 RUN pip install Flask
 ADD hello.py /home/hello.py
 
 WORKDIR /home
-CMD ["echo","Welt"]
-ENTRYPOINT ["echo", "Hallo"]
+CMD ["echo","world"]
+ENTRYPOINT ["echo", "hello"]
 ```

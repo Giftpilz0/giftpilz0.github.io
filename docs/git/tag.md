@@ -10,8 +10,8 @@ ______________________________________________________________________
 
 {: .note }
 
-> Tags nutzt man, um einen bestimmten Meilenstein festzuhalten wie zum Beispiel
-> der Stabile Release einer Software Bsp: v1.0
+> Tags are used to save a milestone, such as
+> the stable release of a software example: v1.0
 
 ______________________________________________________________________
 

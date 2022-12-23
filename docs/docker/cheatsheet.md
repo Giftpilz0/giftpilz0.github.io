@@ -8,86 +8,86 @@ parent: Docker
 
 ______________________________________________________________________
 
-## Docker Aufräumen
+## Clean up Docker
 
 ______________________________________________________________________
 
-Alle Container löschen
+Delete all containers
 
 `docker rm -f $(sudo docker ps -a -q)`
 
-Alle Volumen löschen
+Delete all volumes
 
 `docker volume rm $(sudo docker volume ls -q)`
 
-Alle Netzwerke löschen
+Delete all networks
 
 `docker network rm $(sudo docker network ls -q)`
 
-Alle ungenutzten Images löschen
+Delete all unused images
 
 `docker system prune -a`
 
-## Arbeiten mit Docker
+## Working with Docker
 
 ______________________________________________________________________
 
-Bash in laufendem Container starten und anhängen
+Start and attach bash in running container
 
 `docker exec -u user -it container-name /bin/bash/`
 
-Infos über Docker und die Konfig / Module
+Info about Docker and the config
 
 `docker info`
 
-Welche Container laufen gerade
+Which containers are currently running
 
 `docker ps`
 
-Container starten
+Start container
 
-`docker run Image-Name`
+`docker run imagename`
 
-Leitet Port "intern" des Containers auf den Port "extern" des Hosts
+Forwards port "internal" of the container to port "external" of the host
 
-`docker run -p port-intern:port-extern`
+`docker run -p port-internal:port-external`
 
-Linked den neuen Container mit dem Container "container_name" - Intern ist dieser über den Hostname "network_alias" erreichbar
+Link the new container with the container "container_name"
 
 `docker run --link container_name:network_alias`
 
-Docker stdout/stderr von detached container ansehen
+View Docker stdout/stderr from detached container
 
 `docker logs -f container-name`
 
-Laufenden, detached Container betreten
+Enter running, detached container
 
 `docker container attach`
 
-Um mehr über eine Sitzung zu erfahren
+To learn more about a session
 
 `docker inspect`
 
-Vorhandenen Container erneut starten/stoppen
+Restart/stop existing container
 
 `docker start|stop`
 
-holt ein image aus der online registry
+Fetches an image from the online registry
 
 `docker pull`
 
-Pausiert den Container
+Pauses the container
 
 `docker pause`
 
-setzt den Container nach pause fort
+Resumes the container after pause
 
 `docker unpause`
 
-vergleicht den Container mit der des letzten Images
+Compares the container with that of the last image
 
 `docker diff`
 
-Updated das Image aus dem Container
+Updates the image from the container
 
 `docker commit`

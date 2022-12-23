@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Dateisuche
-parent: Systembefehle
+title: File Search
+parent: Systemcommands
 ---
 
 # {{ page.title }}
@@ -12,7 +12,7 @@ Search for pattern in file
 
 `grep pattern file`
 
-Search recursively for pattern in files
+Search recursively for patterns in files
 
 `grep -r pattern directory`
 
@@ -29,6 +29,6 @@ List installed software
 `dpkg --get-selections`
 `dnf list installed`
 
-Dateipfad von Anwendung herausfinden
+Get filepath of application
 
 `which {{ app }}`
