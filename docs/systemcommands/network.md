@@ -20,24 +20,13 @@ Send ICMP echo request to host
 
 `ping host`
 
-Display whois information for domain
-
-`whois domain`
-
 Display DNS information for domain
 
 ```
 dig domain
+host domain
 nslookup domain
 ```
-
-Reverse lookup of IP_ADDRESS
-
-`dig -x 192.168.178.151`
-
-Display DNS IP address for domain
-
-`host domain`
 
 Display the network address of the host name
 
@@ -64,11 +53,11 @@ Quick scan
 
 `sudo nmap -sS --top-ports 100 192.168.178.0/24`
 
-Scan ports of IP
+Scan ports
 
 `nmap -sS 192.168.178.151`
 
-Scan ports of IP, if host is not reachable
+Scan ports, if host is not reachable
 
 `nmap -Pn 192.168.178.151`
 
@@ -88,14 +77,20 @@ Get wireless networks
 
 ```
 nmcli -p --mode tabular --fields BSSID,SSID,MODE,CHAN,FREQ,BARS,ACTIVE,SECURITY device wifi list
-wavemon
 ```
 
 nmap vuln scan
 
-https://geekflare.com/de/nmap-vulnerability-scan \
-https://nmap.org/book/nse-usage.html
+<https://nmap.org/book/nse-usage.html>
 
-Spoof IP
+iptables
 
-`iptables -t nat -A POSTROUTING -j SNAT --to-source ipaddress`
+<https://wiki.archlinux.org/title/iptables>
+
+Network Bridges - NetworkManager
+
+```
+nmcli connection add type bridge
+nmcli connection modify Connection bridge.stp no ipv4.addresses 10.0.0.1/24
+nmcli connection up Connection
+```
