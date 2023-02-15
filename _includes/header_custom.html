@@ -1,5 +1,4 @@
 <img class="btn m-3 toggle-theme" src="../../assets/images/dark_mode.svg" />
-
 <script>
   const toggleTheme = document.querySelector(".toggle-theme");
 
@@ -16,10 +15,10 @@
   }
 
   jtd.addEvent(toggleTheme, "click", function () {
-    if (jtd.getTheme() === "overridelight") {
-      localStorage.setItem("theme", "overridedark");
+    if (jtd.getTheme() === "nord") {
+      localStorage.setItem("theme", "nord-dark");
     } else {
-      localStorage.setItem("theme", "overridelight");
+      localStorage.setItem("theme", "nord");
     }
     setTheme();
   });

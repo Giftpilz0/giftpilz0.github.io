@@ -14,9 +14,9 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
+color_scheme: nord-dark
 
 search_enabled: true
-color_scheme: overridedark
 
 ga_tracking:
 ga_tracking_anonymize_ip:
@@ -25,23 +25,20 @@ mermaid:
   # Pick an available version from https://cdn.jsdelivr.net/npm/mermaid/
   version: "9.3.0"
 
+# Callout boxes
+callouts_level: loud
 callouts:
   highlight:
     color: yellow
-    opacity: 0.3
   important:
     title: Important
     color: blue
-    opacity: 0.3
   new:
     title: New
     color: green
-    opacity: 0.3
   note:
     title: Note
-    color: pink
-    opacity: 0.3
+    color: purple
   warning:
     title: Warning
     color: red
-    opacity: 0.3
