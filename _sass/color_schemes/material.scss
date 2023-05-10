@@ -1,0 +1,18 @@
+@import "./color_schemes/light";
+@import "./vendor/material-theme/theme.light";
+
+// --- Theme
+$base-button-color: $md-sys-color-primary;
+$btn-primary-color: $md-sys-color-primary;
+
+$body-background-color: $md-sys-color-background;
+$code-background-color: $md-sys-color-surface-variant;
+$search-background-color: $md-sys-color-surface;
+$table-background-color: $md-sys-color-surface-variant;
+$sidebar-color: $md-sys-color-surface-variant;
+
+$body-heading-color: $md-sys-color-primary;
+$body-text-color: $md-sys-color-on-background;
+$search-result-preview-color: $md-sys-color-on-surface;
+$nav-child-link-color: $md-sys-color-on-surface;
+$link-color: $md-sys-color-on-surface;
