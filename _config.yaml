@@ -13,12 +13,12 @@ search_enabled: true
 
 # Diagrams
 mermaid:
-  version: "9.3.0"
+  version: "10.1.0"
 
 # Aux links for the upper right navigation
 aux_links:
   "View on GitHub":
-    - "https://github.com/giftpilz0/giftpilz0.github.io"
+    - "//github.com/giftpilz0/giftpilz0.github.io"
 
 # Sort order for navigation links
 nav_sort: case_sensitive
@@ -48,5 +48,4 @@ enable_copy_code_button: true
 exclude:
   - Gemfile
   - Gemfile.lock
-  - vendor/bundle/
   - .jekyll-cache/
