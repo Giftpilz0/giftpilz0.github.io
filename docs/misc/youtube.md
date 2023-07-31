@@ -14,21 +14,34 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
-Video
-
 ```bash
-# Video
-yt-dlp -r 3M -i -o '%(title)s.%(ext)s' -f 'bestvideo+bestaudio[ext=m4a]/bestvideo+bestaudio' --merge-output-format mp4 https://www.youtube.com/watch?v=
+# Video (1080p)
+yt-dlp \
+  --embed-thumbnail \
+  --merge-output-format mkv \
+  --sponsorblock-mark all \
+  -o '%(title)s.%(ext)s' \
+  -S 'res:1080' \
+  -f 'bv+ba' \
+  https://www.youtube.com/watch?v=
 
 # Audio
-yt-dlp -r 3M -i -o '%(title)s.%(ext)s' -f 'bestaudio[ext=m4a]' --embed-thumbnail --add-metadata https://www.youtube.com/watch?v=
-
-# Advanced
 yt-dlp \
-  --limit-rate 5M \
+  --add-metadata \
   --embed-thumbnail \
-  --output '%(title)s.%(ext)s' \
-  --format-sort "res:1440,vcodec:vp9" \
-  --merge-output-format mp4 \
+  -o '%(title)s.%(ext)s' \
+  -f 'ba[ext=m4a]' \
   https://www.youtube.com/watch?v=
+```
+
+______________________________________________________________________
+
+# Setup yt-dlp using ISH on IPad
+
+Only works using alpine-linux 3.15
+
+```bash
+apk add ffmpeg python3 py3-brotli py3-mutagen py3-pycryptodomex py3-websockets && \
+wget -O /bin/yt-dlp https://github.com/yt-dlp/yt-dlp/releases/download/2023.07.06/yt-dlp && \
+chmod +x /bin/yt-dlp
 ```
