@@ -42,8 +42,11 @@ Download file
 
 Display listening tcp and udp ports and corresponding programs
 
-`netstat -nutlp`
-`ss -lpntu`
+`ss -tulpn`
+
+Display active connections
+
+`ss -tupn`
 
 List arp-entries
 
@@ -51,7 +54,7 @@ List arp-entries
 
 Quick scan
 
-`sudo nmap -sS --top-ports 100 192.168.178.0/24`
+`nmap -sS --top-ports 100 192.168.178.0/24`
 
 Scan ports
 
@@ -78,10 +81,6 @@ Get wireless networks
 ```
 nmcli -p --mode tabular --fields BSSID,SSID,MODE,CHAN,FREQ,BARS,ACTIVE,SECURITY device wifi list
 ```
-
-nmap vuln scan
-
-<https://nmap.org/book/nse-usage.html>
 
 iptables
 
