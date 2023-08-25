@@ -1,48 +1,44 @@
-title: Documentation
+title: ""
 description: Documentation on various topics
-baseurl: /
 url: "https://giftpilz0.github.io"
+baseurl: /
 
 # Theme
 theme: just-the-docs
 color_scheme: material-dark
-favicon_ico: ""
+favicon_ico: "/assets/images/favicon.svg"
+logo: "/assets/images/favicon.svg"
 
-# Search
+# Misc
+nav_fold: true
 search_enabled: true
+heading_anchors: true
+enable_copy_code_button: true
+last_edit_timestamp: false
+nav_sort: case_sensitive
+
+# Footer
+gh_edit_link: true 
+gh_edit_branch: main
+gh_edit_view_mode: tree
+gh_edit_repository: "https://github.com/giftpilz0/giftpilz0.github.io"
+gh_edit_link_text: "Edit this page on GitHub."
 
 # Diagrams
 mermaid:
-  version: "10.1.0"
+  version: "10.4.0"
 
 # Aux links for the upper right navigation
 aux_links:
   "View on GitHub":
     - "//github.com/giftpilz0/giftpilz0.github.io"
 
-# Sort order for navigation links
-nav_sort: case_sensitive
-
 # Callout boxes
 callouts_level: loud
 callouts:
-  highlight:
-    color: yellow
-  important:
-    title: Important
-    color: blue
-  new:
-    title: New
-    color: green
   note:
     title: Note
-    color: purple
-  warning:
-    title: Warning
-    color: red
-
-# Codeblocks
-enable_copy_code_button: true
+    color: yellow
 
 # Jekyll excludes
 exclude:
