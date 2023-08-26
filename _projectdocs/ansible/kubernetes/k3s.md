@@ -1,0 +1,27 @@
+---
+layout: default
+title: K3S Role
+parent: Ansible Kubernetes Collection
+grand_parent: Ansible
+---
+
+# {{ page.title }}
+
+This role is not usable yet...
+
+______________________________________________________________________
+
+## Variables
+
+| Variables | Type | Options | Defaults |
+| --------- | ---- | ------- | -------- |
+|           |      |         |          |
+
+______________________________________________________________________
+
+```yaml
+- name: Import k3s Role
+  hosts: all
+  roles:
+    - role: giftpilz0.kubernetes.k3s
+```
