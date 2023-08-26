@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Podman Role
-parent: Ansible Server Collection
+parent: Server Collection
 grand_parent: Ansible
 ---
 

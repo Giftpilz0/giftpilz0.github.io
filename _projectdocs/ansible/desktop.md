@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Ansible Desktop Collection
+title: Desktop Collection
 has_children: true
 parent: Ansible
 has_toc: false

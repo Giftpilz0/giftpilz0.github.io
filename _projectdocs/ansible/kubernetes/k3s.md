@@ -1,7 +1,7 @@
 ---
 layout: default
 title: K3S Role
-parent: Ansible Kubernetes Collection
+parent: Kubernetes Collection
 grand_parent: Ansible
 ---
 

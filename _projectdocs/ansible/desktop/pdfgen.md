@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Pdfgen Role
-parent: Ansible Desktop Collection
+parent: Desktop Collection
 grand_parent: Ansible
 ---
 

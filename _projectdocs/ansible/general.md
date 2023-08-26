@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Ansible General Collection
+title: General Collection
 has_children: true
 parent: Ansible
 has_toc: false

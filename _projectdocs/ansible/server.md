@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Ansible Server Collection
+title: Server Collection
 has_children: true
 parent: Ansible
 has_toc: false

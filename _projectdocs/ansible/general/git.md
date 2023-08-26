@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Git Role
-parent: Ansible General Collection
+parent: General Collection
 grand_parent: Ansible
 ---
 
