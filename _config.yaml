@@ -28,6 +28,19 @@ gh_edit_link_text: "Edit this page on GitHub."
 mermaid:
   version: "10.4.0"
 
+# Collections
+collections:
+  projectdocs:
+    permalink: "/:collection/:path/"
+    output: true
+
+just_the_docs:
+  collections:
+    projectdocs:
+      name: project documetation
+      nav_fold: true
+
+
 # Aux links for the upper right navigation
 aux_links:
   "View on GitHub":
