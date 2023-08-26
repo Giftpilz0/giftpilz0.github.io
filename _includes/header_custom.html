@@ -1,4 +1,4 @@
-<img class="btn m-3 toggle-theme" src="../../assets/images/dark_mode.svg" />
+<img class="btn m-3 toggle-theme" src="/assets/images/dark_mode.svg" />
 <script>
   const toggleTheme = document.querySelector(".toggle-theme");
 
@@ -6,9 +6,9 @@
     currentTheme = localStorage.getItem("theme");
     if (currentTheme) {
       if (currentTheme === "material") {
-        toggleTheme.src = "../../assets/images/light_mode.svg";
+        toggleTheme.src = "/assets/images/light_mode.svg";
       } else {
-        toggleTheme.src = "../../assets/images/dark_mode.svg";
+        toggleTheme.src = "/assets/images/dark_mode.svg";
       }
       jtd.setTheme(currentTheme);
     }
