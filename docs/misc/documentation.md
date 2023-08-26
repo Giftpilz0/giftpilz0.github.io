@@ -43,7 +43,6 @@ ______________________________________________________________________
 
 <https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/index><br>
 
-
 ### Firewall
 
 ______________________________________________________________________

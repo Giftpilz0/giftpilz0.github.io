@@ -18,7 +18,7 @@ last_edit_timestamp: false
 nav_sort: case_sensitive
 
 # Footer
-gh_edit_link: true 
+gh_edit_link: true
 gh_edit_branch: main
 gh_edit_view_mode: tree
 gh_edit_repository: "https://github.com/giftpilz0/giftpilz0.github.io"
