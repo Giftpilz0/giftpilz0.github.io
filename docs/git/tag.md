@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Tag
+title: Git Tags
 parent: Git
 ---
 
@@ -8,13 +8,24 @@ parent: Git
 
 ______________________________________________________________________
 
-{: .note }
+## Introduction
 
-> Tags are used to save a milestone, such as
-> the stable release of a software example: v1.0
+Tags in Git are used to mark significant milestones in a repository's history, often representing stable releases of software. For example, you can create a tag like "v1.0" to mark the release of version 1.0 of your software.
 
 ______________________________________________________________________
 
-You can create a new tag called 1.0.0 with the following command
+## Creating a New Tag
 
-`git tag 1.0.0 commit-ID`
+To create a new tag and link it to a precise commit:
+
+```shell
+git tag 1.0.0 <commit-ID>
+```
+
+## Deleting a Tag
+
+If you need to remove a tag:
+
+```shell
+git tag -d <tag-name>
+```

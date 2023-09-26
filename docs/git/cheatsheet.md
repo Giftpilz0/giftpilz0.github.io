@@ -1,62 +1,110 @@
 ---
 layout: default
-title: Cheat Sheet
+title: Git Cheat Sheet
 parent: Git
 ---
 
 # {{ page.title }}
 
-View changes of a commit
+______________________________________________________________________
 
-`git show`
+## Introduction
 
-Discard local changes (no add yet)
+This cheat sheet provides essential Git commands for common scenarios.
 
-`git checkout filename`
+______________________________________________________________________
 
-Discard local changes (after add)
+### View Changes of a Commit
 
+To view the changes of a specific commit:
+
+```shell
+git show <commit-ID>
 ```
-git reset HEAD filename # after this everything is as before "add"
-git checkout filename
+
+### Discard Local Changes (Before Add)
+
+To discard local changes to a file before staging (adding) them:
+
+```shell
+git checkout <filename>
 ```
 
-undo changes
+### Discard Local Changes (After Add)
 
-`git checkout commit-ID`
+To discard local changes to a file after staging but before committing:
 
-Completely remove local changes and get the latest version from the remote repository
-
+```shell
+git reset HEAD <filename> # Unstage the changes
+git checkout <filename>   # Discard the changes
 ```
+
+### Undo Changes
+
+To undo changes and revert to a specific commit:
+
+```shell
+git checkout <commit-ID>
+```
+
+### Completely Remove Local Changes and Fetch Latest
+
+To discard all local changes and get the latest version from the remote repository:
+
+```shell
 git fetch origin
-git reset --hard origin/main
+git reset --hard origin/main # Replace 'main' with your desired branch
 ```
 
-Discard local commits
+### Discard Local Commits
 
-`git reset --hard reponame/branch`
+To discard local commits and reset to a remote branch:
 
-Comparison of two branches
-
-```
-git diff source_branch target_branch
-git diff --name-status source_branch target_branch
+```shell
+git reset --hard <reponame/branch>
 ```
 
-Compare in general
+### Comparison of Two Branches
 
-`git diff --staged`
+To compare changes between two branches:
 
-Delete branches
-
-```
-git branch -d branch # Need to merge in other branch first
-git branch -D branch # Also deletes without merging
+```shell
+git diff <source_branch> <target_branch>
 ```
 
-Make FeatureBranch main
+To display only the names and statuses of changed files:
 
+```shell
+git diff --name-status <source_branch> <target_branch>
 ```
+
+### Compare Staged Changes
+
+To compare the changes that are currently staged (added) but not committed:
+
+```shell
+git diff --staged
+```
+
+### Delete Branches
+
+To delete a local branch (note: you need to merge it into another branch first):
+
+```shell
+git branch -d <branch-name>
+```
+
+To forcefully delete a branch without merging:
+
+```shell
+git branch -D <branch-name>
+```
+
+### Make a Branch Main
+
+To make a feature branch the new main branch:
+
+```shell
 git checkout main
-git reset --hard FeatureBranch
+git reset --hard <FeatureBranch>
 ```
