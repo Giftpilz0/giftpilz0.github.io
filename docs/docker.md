@@ -6,3 +6,7 @@ permalink: /docs/docker
 ---
 
 # {{ page.title }}
+
+______________________________________________________________________
+
+Docker is a platform for developing, shipping, and running applications in containers. Containers are lightweight, portable, and self-sufficient units that encapsulate an application and its dependencies. Docker provides a standardized way to package, distribute, and deploy applications, ensuring consistency across different environments. With Docker, you can easily create, deploy, and scale applications, making it an essential tool for modern software development and deployment workflows.
