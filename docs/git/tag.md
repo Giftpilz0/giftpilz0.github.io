@@ -18,7 +18,7 @@ ______________________________________________________________________
 
 To create a new tag and link it to a precise commit:
 
-```shell
+```
 git tag 1.0.0 <commit-ID>
 ```
 
@@ -26,6 +26,6 @@ git tag 1.0.0 <commit-ID>
 
 If you need to remove a tag:
 
-```shell
+```
 git tag -d <tag-name>
 ```

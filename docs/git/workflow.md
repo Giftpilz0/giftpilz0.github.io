@@ -52,7 +52,7 @@ This command pushes your changes to the `main` branch of the remote repository `
 
 Here's a general workflow for working with Git branches:
 
-```shell
+```
 # Create and switch to a new branch
 git checkout -b FeatureBranch
 

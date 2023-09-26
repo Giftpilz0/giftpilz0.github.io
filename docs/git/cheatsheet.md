@@ -18,7 +18,7 @@ ______________________________________________________________________
 
 To view the changes of a specific commit:
 
-```shell
+```
 git show <commit-ID>
 ```
 
@@ -26,7 +26,7 @@ git show <commit-ID>
 
 To discard local changes to a file before staging (adding) them:
 
-```shell
+```
 git checkout <filename>
 ```
 
@@ -34,7 +34,7 @@ git checkout <filename>
 
 To discard local changes to a file after staging but before committing:
 
-```shell
+```
 git reset HEAD <filename> # Unstage the changes
 git checkout <filename>   # Discard the changes
 ```
@@ -43,7 +43,7 @@ git checkout <filename>   # Discard the changes
 
 To undo changes and revert to a specific commit:
 
-```shell
+```
 git checkout <commit-ID>
 ```
 
@@ -51,7 +51,7 @@ git checkout <commit-ID>
 
 To discard all local changes and get the latest version from the remote repository:
 
-```shell
+```
 git fetch origin
 git reset --hard origin/main # Replace 'main' with your desired branch
 ```
@@ -60,7 +60,7 @@ git reset --hard origin/main # Replace 'main' with your desired branch
 
 To discard local commits and reset to a remote branch:
 
-```shell
+```
 git reset --hard <reponame/branch>
 ```
 
@@ -68,13 +68,13 @@ git reset --hard <reponame/branch>
 
 To compare changes between two branches:
 
-```shell
+```
 git diff <source_branch> <target_branch>
 ```
 
 To display only the names and statuses of changed files:
 
-```shell
+```
 git diff --name-status <source_branch> <target_branch>
 ```
 
@@ -82,7 +82,7 @@ git diff --name-status <source_branch> <target_branch>
 
 To compare the changes that are currently staged (added) but not committed:
 
-```shell
+```
 git diff --staged
 ```
 
@@ -90,13 +90,13 @@ git diff --staged
 
 To delete a local branch (note: you need to merge it into another branch first):
 
-```shell
+```
 git branch -d <branch-name>
 ```
 
 To forcefully delete a branch without merging:
 
-```shell
+```
 git branch -D <branch-name>
 ```
 
@@ -104,7 +104,7 @@ git branch -D <branch-name>
 
 To make a feature branch the new main branch:
 
-```shell
+```
 git checkout main
 git reset --hard <FeatureBranch>
 ```
