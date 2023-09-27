@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Tar
+title: Tar Command
 parent: Systemcommands
 ---
 
@@ -8,52 +8,44 @@ parent: Systemcommands
 
 ______________________________________________________________________
 
-| Option | Function                      | Example                            |
-| ------ | ----------------------------- | ---------------------------------- |
-| c      | create                        | tar cf Archive.tar Data            |
-| x      | extract                       | tar xf Archive.tar                 |
-| f      | file                          |                                    |
-| v      | verbose                       |                                    |
-| I      | select compression program    | tar cI zst -f Archive.tar.zst Data |
-| a      | automatic compression program | tar caf Archive.tar.zst Data       |
+## Introduction
 
-Create tar named archive.tar containing directory
+This document provides a cheat sheet for the tar command, which is used for archiving and compressing files and directories.
 
-`tar cf archive.tar directory`
+______________________________________________________________________
 
-Extract the contents from archive.tar
+### Basic Operations
 
-`tar xf archive.tar`
+| Option | Function                         | Example                 |
+| ------ | -------------------------------- | ----------------------- |
+| c      | Create a tar archive             | tar cf Archive.tar Data |
+| x      | Extract files from a tar archive | tar xf Archive.tar      |
+| t      | List files in a tar archive      | tar tf Archive.tar      |
+| f      | Specify the archive file name    |                         |
 
-Create a gzip compressed tar file name archive.tar.gz
+### Compression Options
 
-`tar czf archive.tar.gz directory`
+| Option | Function                          | Example                            |
+| ------ | --------------------------------- | ---------------------------------- |
+| I      | Select compression program        | tar cI zst -f Archive.tar.zst Data |
+| a      | Use automatic compression program | tar caf Archive.tar.zst Data       |
 
-Extract a gzip compressed tar file
+### Examples
 
-`tar xzf archive.tar.gz`
+Create a tar archive named `archive.tar` containing the `directory`:
 
-Create a tar file with bzip2 compression
+```
+tar cf archive.tar directory
+```
 
-`tar cjf archive.tar.bz2 directory`
+Extract the contents from `archive.tar`:
 
-Extract a bzip2 compressed tar file
+```
+tar xf archive.tar
+```
 
-`tar xjf archive.tar.bz2`
+List the contents from `archive.tar`:
 
-System backup
-
-```bash
-sudo tar -cvpzf ./backup.tar.gz
-  --exclude=./backup.tar.gz
-  --exclude=/media/*
-  --exclude=/mnt/*
-  --exclude=/var/log/*
-  --exclude=/home/.cache/
-  --exclude=/tmp/*
-  --exclude=/proc/*
-  --exclude=/sys/*
-  --exclude=/btrfs_pool/timeshift-btrfs/*
-  --exclude=/run/timeshift/*
-  --exclude=/home/*/.local/share/Trash/
+```
+tar tf archive.tar
 ```
