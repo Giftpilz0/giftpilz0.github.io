@@ -14,4 +14,4 @@ trim whitespaces at end of line
 
 wrap long strings after 40 symbols
 
-`sed -E 's/(\b.{1,40})\s+|\n|$/\1\n/g'`
+`sed -E 's/.{1,40}( |$)/&\n/g' Notiz.md`
