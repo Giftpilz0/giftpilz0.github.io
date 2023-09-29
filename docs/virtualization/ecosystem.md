@@ -45,23 +45,21 @@ graph TD
     KVM(KVM)
     libvirt(libvirt)
     virsh(virsh)
+    virt-manager(virt-manager)
   end
 
   subgraph QEMU
     QEMU --> libvirt
-    QEMU --> virsh
   end
 
   subgraph KVM
     KVM --> libvirt
-    KVM --> virsh
     KVM --> QEMU
   end
 
   subgraph libvirt
+    libvirt --> virt-manager
     libvirt --> virsh
   end
-
-  subgraph virsh
   end
 ```
