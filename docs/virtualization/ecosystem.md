@@ -61,5 +61,4 @@ graph TD
     libvirt --> virt-manager
     libvirt --> virsh
   end
-  end
 ```
