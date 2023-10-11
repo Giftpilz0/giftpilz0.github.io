@@ -28,16 +28,21 @@ ______________________________________________________________________
 | firewalld_zones_define.zone:          | string | ---                                            | ---               |
 | firewalld_zones_define.source:        | string | ---                                            | ---               |
 |                                       |        |                                                |                   |
+| firewalld_rules_icmp:                 | dict   | ---                                            | ---               |
+| firewalld_rules_icmp.icmp_type:       | string | ---                                            | ---               |
+| firewalld_rules_icmp.zone:            | string | block, dmz, drop, internal, public, trusted... | ---               |
+| firewalld_rules_icmp.state:           | string | enabled, disabled                              | ---               |
+|                                       |        |                                                |                   |
 | firewalld_rules_services:             | dict   | ---                                            | ---               |
 | firewalld_rules_services.service:     | string | ---                                            | ---               |
 | firewalld_rules_services.zone:        | string | block, dmz, drop, internal, public, trusted... | ---               |
-| firewalld_rules_services.state:       | string | present, absent, enabled, disabled             | ---               |
+| firewalld_rules_services.state:       | string | enabled, disabled                              | ---               |
 |                                       |        |                                                |                   |
 | firewalld_rules_ports:                | dict   | ---                                            | ---               |
 | firewalld_rules_ports.port:           | int    | ---                                            | ---               |
 | firewalld_rules_ports.protocol:       | string | tcp, udp, icmp                                 | ---               |
 | firewalld_rules_ports.zone:           | string | block, dmz, drop, internal, public, trusted... | ---               |
-| firewalld_rules_ports.state:          | string | present, absent, enabled, disabled             | ---               |
+| firewalld_rules_ports.state:          | string | enabled, disabled                              | ---               |
 |                                       |        |                                                |                   |
 | firewalld_richrules_services:         | dict   | ---                                            | ---               |
 | firewalld_richrules_services.service: | string | ---                                            | ---               |
