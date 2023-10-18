@@ -26,7 +26,7 @@ gh_edit_link_text: "Edit this page on GitHub."
 
 # Diagrams
 mermaid:
-  version: "10.4.0"
+  version: "10.5.0"
 
 # Collections
 collections:
