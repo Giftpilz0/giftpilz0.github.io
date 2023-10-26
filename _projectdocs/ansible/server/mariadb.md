@@ -1,6 +1,6 @@
 ---
 layout: default
-title: mariadb Role
+title: Mariadb Role
 parent: Server Collection
 grand_parent: Ansible
 ---
