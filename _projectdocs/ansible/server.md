@@ -21,6 +21,7 @@ ______________________________________________________________________
 ## Included Roles
 
 - [cockpit](cockpit/)
+- [httpd](httpd/)
 - [nfs](nfs/)
 - [pcp](pcp/)
 - [podman](podman/)
