@@ -13,13 +13,13 @@ ______________________________________________________________________
 
 ## Variables
 
-| Variables          | Type   | Options         | Defaults                                                                                                          |
-| ------------------ | ------ | --------------- | ----------------------------------------------------------------------------------------------------------------- |
-| sysutil_bin_state: | string | present, absent | present                                                                                                           |
-| sysutil_url:       | string | ---             | https://github.com/Giftpilz0/sysutil/releases/download/{{ sysutil_tag }}/sysutil_Linux\_{{ sysutil_arch }}.tar.gz |
-| sysutil_arch:      | string | ---             | x86_64                                                                                                            |
-| sysutil_tag:       | string | ---             | 1.1.0                                                                                                             |
-| sysutil_path:      | string | ---             | /usr/local/bin                                                                                                    |
+| Variables          | Type   | Options       | Defaults                                                                                                          |
+| ------------------ | ------ | ------------- | ----------------------------------------------------------------------------------------------------------------- |
+| sysutil_bin_state: | string | present, skip | present                                                                                                           |
+| sysutil_url:       | string | ---           | https://github.com/Giftpilz0/sysutil/releases/download/{{ sysutil_tag }}/sysutil_Linux\_{{ sysutil_arch }}.tar.gz |
+| sysutil_arch:      | string | ---           | x86_64                                                                                                            |
+| sysutil_tag:       | string | ---           | 1.1.0                                                                                                             |
+| sysutil_path:      | string | ---           | /usr/local/bin                                                                                                    |
 
 ______________________________________________________________________
 
