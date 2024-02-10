@@ -24,6 +24,7 @@ ______________________________________________________________________
 - [dotfiles](dotfiles/)
 - [firewalld](firewalld/)
 - [git](git/)
+- [monitoring](monitoring/)
 - [packages](packages/)
 - [sysutil](sysutil/)
 - [timezone](timezone/)
