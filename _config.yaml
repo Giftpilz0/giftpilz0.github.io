@@ -1,6 +1,7 @@
+---
 title: ""
 description: Documentation on various topics
-url: "https://giftpilz0.github.io"
+url: https://giftpilz0.github.io
 baseurl: /
 
 plugins:
@@ -10,8 +11,8 @@ plugins:
 # Theme
 theme: just-the-docs
 color_scheme: material-dark
-favicon_ico: "/assets/images/favicon.svg"
-logo: "/assets/images/favicon.svg"
+favicon_ico: /assets/images/favicon.svg
+logo: /assets/images/favicon.svg
 
 # Misc
 nav_fold: true
@@ -25,17 +26,17 @@ nav_sort: case_sensitive
 gh_edit_link: true
 gh_edit_branch: main
 gh_edit_view_mode: tree
-gh_edit_repository: "https://github.com/giftpilz0/giftpilz0.github.io"
-gh_edit_link_text: "Edit this page on GitHub."
+gh_edit_repository: https://github.com/giftpilz0/giftpilz0.github.io
+gh_edit_link_text: Edit this page on GitHub.
 
 # Diagrams
 mermaid:
-  version: "10.6.1"
+  version: 10.6.1
 
 # Collections
 collections:
   projectdocs:
-    permalink: "/:collection/:path/"
+    permalink: /:collection/:path/
     output: true
 
 just_the_docs:
@@ -44,11 +45,10 @@ just_the_docs:
       name: project documetation
       nav_fold: true
 
-
 # Aux links for the upper right navigation
 aux_links:
-  "View on GitHub":
-    - "//github.com/giftpilz0/giftpilz0.github.io"
+  View on GitHub:
+    - //github.com/giftpilz0/giftpilz0.github.io
 
 # Callout boxes
 callouts_level: loud
