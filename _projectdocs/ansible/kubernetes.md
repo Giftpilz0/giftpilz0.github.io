@@ -10,7 +10,7 @@ has_toc: false
 
 ![Ansible-Lint](https://github.com/giftpilz0/ansible-collection-kubernetes/actions/workflows/ci.yml/badge.svg)
 
-Ansible Collection to install a k3s cluster on multiple Linux systems.
+Ansible Collection to configure and install a k3s cluster on multiple Linux systems.
 
 ______________________________________________________________________
 
@@ -20,6 +20,8 @@ ______________________________________________________________________
 
 ## Included Roles
 
+- [cilium](cilium/)
+- [helm](helm/)
 - [k3s](k3s/)
 
 ## Requirements
