@@ -1,0 +1,30 @@
+---
+layout: default
+title: Server Collection
+has_children: true
+parent: Ansible
+has_toc: false
+---
+
+![Ansible-Lint](https://github.com/giftpilz0/ansible-collection-server/actions/workflows/ci.yml/badge.svg)
+
+Ansible Collection to perform server-specific configurations on Linux systems.
+
+______________________________________________________________________
+
+## Installation
+
+`ansible-galaxy collection install git+https://github.com/Giftpilz0/ansible-collection-server.git`
+
+## Included Roles
+
+- [cockpit](cockpit/)
+- [httpd](httpd/)
+- [mariadb](mariadb/)
+- [nfs](nfs/)
+- [pcp](pcp/)
+- [podman](podman/)
+
+## Requirements
+
+- Fedora >= 38
