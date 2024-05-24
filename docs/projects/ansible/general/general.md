@@ -1,9 +1,5 @@
 ---
-layout: default
 title: General Collection
-has_children: true
-parent: Ansible
-has_toc: false
 ---
 
 ![Ansible-Lint](https://github.com/giftpilz0/ansible-collection-general/actions/workflows/ci.yml/badge.svg)

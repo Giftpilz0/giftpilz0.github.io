@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Caesar Cipher
-parent: Cryptography
 ---
 
 ______________________________________________________________________

@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Port Channels
-parent: Cisco
 ---
 
 ______________________________________________________________________

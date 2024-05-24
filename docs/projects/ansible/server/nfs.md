@@ -1,8 +1,5 @@
 ---
-layout: default
 title: NFS Role
-parent: Server Collection
-grand_parent: Ansible
 ---
 
 This Ansible role can be used to configure NFS-Shares.

@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Hot Standby Router Protocol
-parent: Cisco
 ---
 
 ______________________________________________________________________

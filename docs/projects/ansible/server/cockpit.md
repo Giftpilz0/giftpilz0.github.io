@@ -1,8 +1,5 @@
 ---
-layout: default
 title: Cockpit Role
-parent: Server Collection
-grand_parent: Ansible
 ---
 
 This Ansible role can be used to configure the Cockpit Server Administration Web UI.

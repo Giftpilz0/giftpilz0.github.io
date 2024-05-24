@@ -1,8 +1,5 @@
 ---
-layout: default
 title: Git Role
-parent: General Collection
-grand_parent: Ansible
 ---
 
 This Ansible role can be used to install git and customize git config.

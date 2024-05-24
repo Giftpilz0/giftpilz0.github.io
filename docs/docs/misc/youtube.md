@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Youtube Download
-parent: Misc
 ---
 
 ______________________________________________________________________

@@ -1,8 +1,5 @@
 ---
-layout: default
 title: DNF Role
-parent: General Collection
-grand_parent: Ansible
 ---
 
 This Ansible role can be used to configure automatic updates via dnf-automatic.

@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Containerfile
-parent: Docker
 ---
 
 ______________________________________________________________________

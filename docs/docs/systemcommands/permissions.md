@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Linux Permissions
-parent: Systemcommands
 ---
 
 ______________________________________________________________________

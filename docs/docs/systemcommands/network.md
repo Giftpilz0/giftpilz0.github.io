@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Network
-parent: Systemcommands
 ---
 
 ______________________________________________________________________

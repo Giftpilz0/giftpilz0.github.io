@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Vagrantfile
-parent: Vagrant
 ---
 
 ______________________________________________________________________

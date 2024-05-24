@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Tar Command
-parent: Systemcommands
 ---
 
 ______________________________________________________________________

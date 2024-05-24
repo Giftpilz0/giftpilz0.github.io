@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Useful Filters
-parent: Regex
 ---
 
 ______________________________________________________________________

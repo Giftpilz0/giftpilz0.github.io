@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Rsync
-parent: Systemcommands
 ---
 
 ______________________________________________________________________

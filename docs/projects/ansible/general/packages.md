@@ -1,8 +1,5 @@
 ---
-layout: default
 title: Packages Role
-parent: General Collection
-grand_parent: Ansible
 ---
 
 This Ansible role can be used to install and uninstall packages from flathub, pip and from the distribution packages. Also you can use this role to configure rpmfusion repos + mediacodecs on Fedora.

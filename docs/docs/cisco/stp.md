@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Spanning Tree Protocol
-parent: Cisco
 ---
 
 ______________________________________________________________________

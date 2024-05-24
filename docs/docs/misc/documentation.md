@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Documentation
-parent: Misc
 ---
 
 ______________________________________________________________________

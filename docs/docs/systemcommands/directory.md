@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Directories
-parent: Systemcommands
 ---
 
 ______________________________________________________________________

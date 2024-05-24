@@ -1,8 +1,5 @@
 ---
-layout: default
 title: Pdfgen Role
-parent: Desktop Collection
-grand_parent: Ansible
 ---
 
 This Ansible role can be used to install libreoffice and set up a Python script that watches for changes in Office documents and automatically converts it to PDF.

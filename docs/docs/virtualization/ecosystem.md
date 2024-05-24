@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Linux Virtualization
-parent: Virtualization
 ---
 
 ______________________________________________________________________

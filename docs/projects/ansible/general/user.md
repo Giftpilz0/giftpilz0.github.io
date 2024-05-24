@@ -1,8 +1,5 @@
 ---
-layout: default
 title: User Role
-parent: General Collection
-grand_parent: Ansible
 ---
 
 This Ansible role can be used to configure users.

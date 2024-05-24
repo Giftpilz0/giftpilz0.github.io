@@ -1,9 +1,5 @@
 ---
-layout: default
 title: Server Collection
-has_children: true
-parent: Ansible
-has_toc: false
 ---
 
 ![Ansible-Lint](https://github.com/giftpilz0/ansible-collection-server/actions/workflows/ci.yml/badge.svg)

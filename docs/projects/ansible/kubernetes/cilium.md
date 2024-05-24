@@ -1,8 +1,5 @@
 ---
-layout: default
 title: Cilium Role
-parent: Kubernetes Collection
-grand_parent: Ansible
 ---
 
 This Ansible role can be used to install cilium.

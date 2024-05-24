@@ -1,8 +1,5 @@
 ---
-layout: default
 title: Sysutil Role
-parent: General Collection
-grand_parent: Ansible
 ---
 
 This Ansible role can be used to install a small sysutil written in golang.

@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Ansible Cheat Sheet
-parent: Ansible
 ---
 
 ______________________________________________________________________

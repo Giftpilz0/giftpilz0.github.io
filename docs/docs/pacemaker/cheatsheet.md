@@ -1,8 +1,8 @@
 ---
-layout: default
 title: Cheat Sheet
-parent: Pacemaker
 ---
+
+______________________________________________________________________
 
 ## Pacemaker configuration files and directories
 

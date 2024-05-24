@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Statistics
-parent: Systemcommands
 ---
 
 ______________________________________________________________________

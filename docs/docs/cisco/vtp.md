@@ -1,7 +1,5 @@
 ---
-layout: default
 title: VLAN Trunking Protocol
-parent: Cisco
 ---
 
 ______________________________________________________________________

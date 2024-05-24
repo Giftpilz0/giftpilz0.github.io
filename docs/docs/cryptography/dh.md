@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Diffie-Hellman Key Exchange
-parent: Cryptography
 ---
 
 ______________________________________________________________________

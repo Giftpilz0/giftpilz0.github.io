@@ -1,8 +1,5 @@
 ---
-layout: default
 title: Helm Role
-parent: Kubernetes Collection
-grand_parent: Ansible
 ---
 
 This Ansible role can be used to install helm.

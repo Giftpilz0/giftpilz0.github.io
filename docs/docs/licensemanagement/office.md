@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Office
-parent: License Management
 ---
 
 ______________________________________________________________________

@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Windows Boot Problems
-parent: Misc
 ---
 
 ______________________________________________________________________

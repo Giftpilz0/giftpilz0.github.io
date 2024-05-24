@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Cryptographic Encryption Methods
-parent: Cryptography
 ---
 
 ______________________________________________________________________

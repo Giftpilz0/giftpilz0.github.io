@@ -1,7 +1,5 @@
 ---
-layout: default
 title: File Management
-parent: Systemcommands
 ---
 
 ______________________________________________________________________

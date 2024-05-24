@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Windows
-parent: License Management
 ---
 
 ______________________________________________________________________

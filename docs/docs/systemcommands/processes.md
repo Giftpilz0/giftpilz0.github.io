@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Processes
-parent: Systemcommands
 ---
 
 ______________________________________________________________________

@@ -1,8 +1,5 @@
 ---
-layout: default
 title: Mariadb Role
-parent: Server Collection
-grand_parent: Ansible
 ---
 
 This Ansible role can be used to configure mariadb-Shares.

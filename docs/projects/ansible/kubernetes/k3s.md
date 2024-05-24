@@ -1,8 +1,5 @@
 ---
-layout: default
 title: K3S Role
-parent: Kubernetes Collection
-grand_parent: Ansible
 ---
 
 This role is not usable yet...

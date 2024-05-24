@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Hardware
-parent: Systemcommands
 ---
 
 ______________________________________________________________________

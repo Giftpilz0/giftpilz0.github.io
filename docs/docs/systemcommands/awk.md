@@ -1,7 +1,5 @@
 ---
-layout: default
 title: Awk
-parent: Systemcommands
 ---
 
 ______________________________________________________________________
