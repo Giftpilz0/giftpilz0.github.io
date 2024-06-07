@@ -91,10 +91,12 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} Giftpilz0`,
     },
 
+
     // prism
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+      additionalLanguages: ["powershell", "bash", "json", "docker", "yaml"],
     },
   } satisfies Preset.ThemeConfig,
 
