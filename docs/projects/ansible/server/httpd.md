@@ -2,7 +2,7 @@
 title: Httpd Role
 ---
 
-This Ansible role can be used to install Httpd.
+This Ansible role can be used to install httpd.
 
 ______________________________________________________________________
 
@@ -18,7 +18,7 @@ ______________________________________________________________________
 |                          |        |                                                |                |
 | httpd_firewalld_zone:    | string | block, dmz, drop, internal, public, trusted... | ---            |
 | httpd_firewalld_service: | string | ---                                            | http           |
-| httpd_firewalld_state:   | string | present, absent, enabled, disabled, skip       | present        |
+| httpd_firewalld_state:   | string | present, absent, enabled, disabled, skip       | enabled        |
 
 ______________________________________________________________________
 

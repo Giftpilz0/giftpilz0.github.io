@@ -8,10 +8,11 @@ ______________________________________________________________________
 
 ## Variables
 
-| Variables       | Type   | Options | Defaults               |
-| --------------- | ------ | ------- | ---------------------- |
-| cilium_version  | string | ---     | 1.15.4                 |
-| cilium_repo_url | string | ---     | https://helm.cilium.io |
+| Variables         | Type   | Options | Defaults                  |
+| ----------------- | ------ | ------- | ------------------------- |
+| cilium_version    | string | ---     | 1.15.7                    |
+| cilium_repo_url   | string | ---     | https://helm.cilium.io    |
+| cilium_kubeconfig | string | ---     | /etc/rancher/k3s/k3s.yaml |
 
 ______________________________________________________________________
 

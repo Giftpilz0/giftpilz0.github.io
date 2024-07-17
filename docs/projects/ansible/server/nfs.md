@@ -2,7 +2,7 @@
 title: NFS Role
 ---
 
-This Ansible role can be used to configure NFS-Shares.
+This Ansible role can be used to configure NFS-shares.
 
 ______________________________________________________________________
 
@@ -28,8 +28,7 @@ ______________________________________________________________________
 |                          |        |                                                |                                     |
 | nfs_firewalld_zone:      | string | block, dmz, drop, internal, public, trusted... | ---                                 |
 | nfs_firewalld_service:   | string | ---                                            | nfs                                 |
-| nfs_firewalld_state:     | string | present, absent, enabled, disabled, skip       | present                             |
-|                          |        |                                                |                                     |
+| nfs_firewalld_state:     | string | present, absent, enabled, disabled, skip       | enabled                             |
 
 ______________________________________________________________________
 

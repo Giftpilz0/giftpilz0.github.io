@@ -1,5 +1,5 @@
 ---
-title: K3S Role
+title: k3s Role
 ---
 
 This role is not usable yet...

@@ -2,7 +2,7 @@
 title: Mariadb Role
 ---
 
-This Ansible role can be used to configure mariadb-Shares.
+This Ansible role can be used to configure mariadb.
 
 ______________________________________________________________________
 
@@ -29,7 +29,7 @@ ______________________________________________________________________
 |                             |        |                                                |                                              |
 | mariadb_firewalld_zone:     | string | block, dmz, drop, internal, public, trusted... | ---                                          |
 | mariadb_firewalld_service:  | string | ---                                            | mysql                                        |
-| mariadb_firewalld_state:    | string | present, absent, enabled, disabled, skip       | present                                      |
+| mariadb_firewalld_state:    | string | present, absent, enabled, disabled, skip       | enabled                                      |
 
 ______________________________________________________________________
 
