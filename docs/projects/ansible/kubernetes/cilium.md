@@ -13,6 +13,7 @@ ______________________________________________________________________
 | cilium_version                                         | string | ---     | 1.15.7                    |
 | cilium_repo_url                                        | string | ---     | https://helm.cilium.io    |
 | cilium_kubeconfig                                      | string | ---     | /etc/rancher/k3s/k3s.yaml |
+| cilium_config_kubeproxyreplacement                     | bool   | ---     | false                     |
 | cilium_config_k8sclientratelimit_qps                   | int    | ---     | 10                        |
 | cilium_config_k8sclientratelimit_burst                 | int    | ---     | 20                        |
 | cilium_config_rolloutciliumpods                        | bool   | ---     | false                     |
