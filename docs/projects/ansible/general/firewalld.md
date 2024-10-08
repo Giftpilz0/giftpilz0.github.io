@@ -15,6 +15,7 @@ ______________________________________________________________________
 | firewalld_service_enabled:            | bool   | false, true                                    | true              |
 | firewalld_package_state:              | string | present, absent, latest                        | present           |
 | firewalld_package:                    | list   | ---                                            | firewalld         |
+| firewalld_logging:                    | string | off, all, unicast, broadcast, multicast        | all               |
 | firewalld_permanent:                  | bool   | false, true                                    | true              |
 | firewalld_immediate:                  | bool   | false, true                                    | true              |
 | firewalld_default_zone:               | string | block, dmz, drop, internal, public, trusted... | block             |
