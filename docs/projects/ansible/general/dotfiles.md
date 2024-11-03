@@ -2,7 +2,7 @@
 title: Dotfiles Role
 ---
 
-This Ansible role can be used to configure vim, bash and readline.
+This Ansible role can be used to configure vim, bash, hyprland, eww, helix and readline.
 
 ______________________________________________________________________
 
