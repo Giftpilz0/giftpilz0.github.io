@@ -1,5 +1,5 @@
 ---
-name: Deploy Jekyll site to Pages
+name: Deploy Docusaurus site to Pages
 
 on:
   push:
