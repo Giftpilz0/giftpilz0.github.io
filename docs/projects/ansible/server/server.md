@@ -15,6 +15,7 @@ ______________________________________________________________________
 ## Included Roles
 
 - [cockpit](cockpit/)
+- [haproxy](haproxy/)
 - [httpd](httpd/)
 - [keepalived](keepalived/)
 - [mariadb](mariadb/)
