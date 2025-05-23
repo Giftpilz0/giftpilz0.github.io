@@ -15,7 +15,6 @@ ______________________________________________________________________
 ## Included Roles
 
 - [dnf](dnf/)
-- [dotfiles](dotfiles/)
 - [firewalld](firewalld/)
 - [git](git/)
 - [monitoring](monitoring/)
