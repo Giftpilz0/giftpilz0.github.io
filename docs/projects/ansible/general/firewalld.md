@@ -23,6 +23,7 @@ ______________________________________________________________________
 | firewalld_zones_define:               | dict   | ---                                            | ---               |
 | firewalld_zones_define.zone:          | string | ---                                            | ---               |
 | firewalld_zones_define.source:        | string | ---                                            | ---               |
+| firewalld_zones_define.target:        | string | %%REJECT%%, ACCEPT, DROP, default              | ---               |
 |                                       |        |                                                |                   |
 | firewalld_rules_icmp:                 | dict   | ---                                            | ---               |
 | firewalld_rules_icmp.icmp_type:       | string | ---                                            | ---               |
