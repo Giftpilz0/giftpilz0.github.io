@@ -1,17 +1,20 @@
 ---
-title: Youtube Download
+title: YouTube Download
 ---
 
 ______________________________________________________________________
+
+## Overview
 
 :::note
 yt-dlp is software for downloading videos from various sources
 :::
 
-______________________________________________________________________
+## Usage Examples
+
+### Video (1080p)
 
 ```bash
-# Video (1080p)
 yt-dlp \
   --embed-thumbnail \
   --merge-output-format mkv \
@@ -20,8 +23,11 @@ yt-dlp \
   -S 'res:1080' \
   -f 'bv+ba' \
   https://www.youtube.com/watch?v=
+```
 
-# Audio
+### Audio
+
+```bash
 yt-dlp \
   --add-metadata \
   --embed-thumbnail \
@@ -30,11 +36,9 @@ yt-dlp \
   https://www.youtube.com/watch?v=
 ```
 
-______________________________________________________________________
+## Setup yt-dlp using ISH on iPad
 
-# Setup yt-dlp using ISH on IPad
-
-Only works using alpine-linux 3.15
+Only works using Alpine Linux 3.15
 
 ```bash
 apk add ffmpeg python3 py3-brotli py3-mutagen py3-pycryptodomex py3-websockets && \

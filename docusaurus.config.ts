@@ -10,7 +10,7 @@ const config: Config = {
   url: "https://giftpilz0.github.io",
   baseUrl: "/",
 
-  // GitHub pages deployment
+  // GitHub Pages deployment
   organizationName: "giftpilz0",
   projectName: "giftpilz0.github.io",
 
@@ -79,7 +79,7 @@ const config: Config = {
           label: "Projects",
         },
         {
-          href: "https://github.com/Giftpilz0/giftpilz0.github.io",
+          href: "https://github.com/giftpilz0/giftpilz0.github.io",
           label: "GitHub",
           position: "right",
         },
@@ -90,7 +90,6 @@ const config: Config = {
     footer: {
       copyright: `Copyright © ${new Date().getFullYear()} Giftpilz0`,
     },
-
 
     // prism
     prism: {

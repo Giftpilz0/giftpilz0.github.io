@@ -101,7 +101,7 @@ ______________________________________________________________________
 
 To run a playbook on target hosts:
 
-```
+```bash
 ansible-playbook playbook.yml
 ```
 
@@ -109,7 +109,7 @@ ansible-playbook playbook.yml
 
 To run single tasks or commands on target hosts without writing a playbook:
 
-```
+```bash
 ansible webservers -m ping
 ```
 
@@ -117,7 +117,7 @@ ansible webservers -m ping
 
 To view and manage inventory data:
 
-```
+```bash
 ansible-inventory --list
 ```
 
@@ -125,7 +125,7 @@ ansible-inventory --list
 
 To encrypt sensitive data like passwords and keys in Ansible files:
 
-```
+```bash
 ansible-vault encrypt secrets.yml
 ```
 
@@ -133,6 +133,6 @@ ansible-vault encrypt secrets.yml
 
 To install, create, and manage Ansible roles:
 
-```
+```bash
 ansible-galaxy install namespace.role_name
 ```

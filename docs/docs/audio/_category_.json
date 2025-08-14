@@ -1,0 +1,7 @@
+{
+  "label": "Audio",
+  "link": {
+    "type": "generated-index",
+    "description": "Audio management and virtual device configuration for PulseAudio."
+  }
+}
