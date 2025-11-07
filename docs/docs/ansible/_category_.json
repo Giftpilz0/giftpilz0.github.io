@@ -1,0 +1,7 @@
+{
+  "label": "Ansible",
+  "link": {
+    "type": "generated-index",
+    "description": "Ansible is an open-source automation tool that simplifies the process of configuring and managing servers, applications, and infrastructure. Using a simple and human-readable language, Ansible playbooks, and roles, you can define and automate complex tasks, making it easier to ensure consistency and efficiency in your IT environment. Ansible operates over SSH, eliminating the need for agents or additional software on managed hosts. With its idempotent nature and broad support for various platforms and services, Ansible is a powerful choice for automating repetitive tasks and orchestrating infrastructure deployments."
+  }
+}
