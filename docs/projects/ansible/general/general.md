@@ -2,15 +2,9 @@
 title: General Collection
 ---
 
-![Ansible-Lint](https://github.com/giftpilz0/ansible-collection-general/actions/workflows/ci.yml/badge.svg)
-
 Ansible Collection to perform simple configurations on Linux systems.
 
 ______________________________________________________________________
-
-## Installation
-
-`ansible-galaxy collection install git+https://github.com/Giftpilz0/ansible-collection-general.git`
 
 ## Included Roles
 
@@ -23,7 +17,3 @@ ______________________________________________________________________
 - [timezone](timezone/)
 - [update](update/)
 - [user](user/)
-
-## Requirements
-
-- Fedora >= 40
