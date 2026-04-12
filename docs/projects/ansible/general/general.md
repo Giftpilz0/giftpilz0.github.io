@@ -13,7 +13,6 @@ ______________________________________________________________________
 - [git](git/)
 - [monitoring](monitoring/)
 - [packages](packages/)
-- [sysutil](sysutil/)
 - [timezone](timezone/)
 - [update](update/)
 - [user](user/)

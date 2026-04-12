@@ -17,7 +17,6 @@ const config: Config = {
   // warning
   onBrokenLinks: "warn",
   onBrokenAnchors: "warn",
-  onBrokenMarkdownLinks: "warn",
   onDuplicateRoutes: "warn",
 
   // localization
@@ -103,6 +102,9 @@ const config: Config = {
   themes: ["@docusaurus/theme-mermaid"],
   markdown: {
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: "warn",
+    },
   },
 
   plugins: [require.resolve("docusaurus-lunr-search")],

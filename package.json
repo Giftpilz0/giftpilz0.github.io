@@ -31,6 +31,12 @@
     "@docusaurus/types": "3.10.0",
     "typescript": "~6.0.2"
   },
+  "resolutions": {
+    "webpack": "5.105.4"
+  },
+  "overrides": {
+    "webpack": "5.105.4"
+  },
   "browserslist": {
     "production": [
       ">0.5%",
@@ -44,6 +50,6 @@
     ]
   },
   "engines": {
-    "node": ">=18.0"
+    "node": ">=20.0"
   }
 }
