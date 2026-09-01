@@ -2,32 +2,34 @@
 title: Monitoring Role
 ---
 
-This Ansible role can be used to install grafana agent.
+Install and configure the Grafana Alloy monitoring agent.
 
 ______________________________________________________________________
 
 ## Variables
 
-| Variables                                        | Type   | Options                               | Defaults                                                                                                                                            |
-| ------------------------------------------------ | ------ | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| monitoring_agent_package_state:                  | string | present, absent, latest               | present                                                                                                                                             |
-| monitoring_agent_package:                        | string | ---                                   | `https://github.com/grafana/alloy/releases/download/v{{ monitoring_agent_tag }}/alloy-{{ monitoring_agent_tag }}-1.{{ monitoring_agent_arch }}.rpm` |
-| monitoring_agent_arch:                           | string | ---                                   | amd64                                                                                                                                               |
-| monitoring_agent_tag:                            | string | ---                                   | 1.11.3                                                                                                                                              |
-| monitoring_agent_config_remoteserver_prometheus: | string | ---                                   | http://127.0.0.1:3100/loki/api/v1/push                                                                                                              |
-| monitoring_agent_config_remoteserver_loki:       | string | ---                                   | http://127.0.0.1:9100/api/v1/push                                                                                                                   |
-| monitoring_agent_config_path:                    | string | ---                                   | /etc/alloy/config.alloy                                                                                                                             |
-| monitoring_agent_service_name:                   | string | ---                                   | alloy.service                                                                                                                                       |
-| monitoring_agent_service_state:                  | string | reloaded, restarted, started, stopped | started                                                                                                                                             |
-| monitoring_agent_service_enabled:                | bool   | false, true                           | true                                                                                                                                                |
-
-______________________________________________________________________
-
-## Example Playbook
-
-```yaml
-- name: Import monitoring Role
-  hosts: all
-  roles:
-    - role: giftpilz0.general.monitoring
-```
+| Variable                                          | Type           | Options                               | Default                                                                                                                                                 | Description                                                  |
+| ------------------------------------------------- | -------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `monitoring_agent_arch`                           | string         | ---                                   | amd64                                                                                                                                                   | alloy agent architecture (e.g. amd64, arm64)                 |
+| `monitoring_agent_tag`                            | string         | ---                                   | 1.19.0                                                                                                                                                  | alloy release version tag                                    |
+| `monitoring_agent_package_state`                  | string         | present, absent, latest               | present                                                                                                                                                 | desired state of the alloy package                           |
+| `monitoring_agent_package`                        | list of string | ---                                   | `["https://github.com/grafana/alloy/releases/download/v{{ monitoring_agent_tag }}/alloy-{{ monitoring_agent_tag }}-1.{{ monitoring_agent_arch }}.rpm"]` | list of packages to install                                  |
+| `monitoring_agent_config_path`                    | string         | ---                                   | /etc/alloy/config.alloy                                                                                                                                 | path to the alloy configuration file                         |
+| `monitoring_agent_service_name`                   | string         | ---                                   | alloy.service                                                                                                                                           | systemd service unit name                                    |
+| `monitoring_agent_service_state`                  | string         | reloaded, restarted, started, stopped | started                                                                                                                                                 | desired state of the alloy service                           |
+| `monitoring_agent_service_enabled`                | bool           | true, false                           | true                                                                                                                                                    | whether the alloy service is enabled at boot                 |
+| `monitoring_agent_config_remoteserver_loki`       | string         | ---                                   | ""                                                                                                                                                      | Loki remote write endpoint URL                               |
+| `monitoring_agent_config_remoteserver_prometheus` | string         | ---                                   | ""                                                                                                                                                      | Prometheus remote write endpoint URL                         |
+| `monitoring_alloy_loki_basic_auth_username`       | string         | ---                                   | alloy                                                                                                                                                   | basic auth username for Loki                                 |
+| `monitoring_alloy_loki_basic_auth_password`       | string         | ---                                   | ""                                                                                                                                                      | basic auth password for Loki                                 |
+| `monitoring_alloy_mimir_basic_auth_username`      | string         | ---                                   | alloy                                                                                                                                                   | basic auth username for Mimir/Prometheus                     |
+| `monitoring_alloy_mimir_basic_auth_password`      | string         | ---                                   | ""                                                                                                                                                      | basic auth password for Mimir/Prometheus                     |
+| `monitoring_agent_external_labels`                | dict           | ---                                   | `{"host":"{{ inventory_hostname }}"}`                                                                                                                   | external labels added to all metrics and logs                |
+| `monitoring_alloy_permissions_setup`              | bool           | true, false                           | true                                                                                                                                                    | whether to add alloy user to extra groups for journal access |
+| `monitoring_alloy_extra_groups`                   | list of string | ---                                   | ["adm","systemd-journal"]                                                                                                                               | additional system groups for the alloy user                  |
+| `monitoring_alloy_node_exporter_scrape_interval`  | string         | ---                                   | 60s                                                                                                                                                     | scrape interval for node exporter metrics                    |
+| `monitoring_alloy_loki_journal_max_age`           | string         | ---                                   | 24h                                                                                                                                                     | maximum age of journal entries sent to Loki                  |
+| `monitoring_alloy_traefik_scrape_enabled`         | bool           | true, false                           | false                                                                                                                                                   | whether to scrape Traefik metrics                            |
+| `monitoring_alloy_traefik_metrics_address`        | string         | ---                                   | 127.0.0.1:8082                                                                                                                                          | Traefik metrics endpoint address                             |
+| `monitoring_alloy_traefik_scrape_interval`        | string         | ---                                   | 30s                                                                                                                                                     | scrape interval for Traefik metrics                          |
+| `monitoring_alloy_extra_config`                   | string         | ---                                   | ""                                                                                                                                                      | extra Alloy configuration appended to the main config        |

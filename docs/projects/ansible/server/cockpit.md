@@ -2,36 +2,25 @@
 title: Cockpit Role
 ---
 
-This Ansible role can be used to configure the Cockpit Server Administration Web UI.
+Install and enable the Cockpit web console.
 
 ______________________________________________________________________
 
 ## Variables
 
-| Variables                               | Type   | Options                                        | Defaults                                          |
-| --------------------------------------- | ------ | ---------------------------------------------- | ------------------------------------------------- |
-| cockpit_service_name:                   | string | ---                                            | cockpit.socket                                    |
-| cockpit_service_state:                  | string | reloaded, restarted, started, stopped          | started                                           |
-| cockpit_service_enabled:                | bool   | false, true                                    | true                                              |
-| cockpit_package_state:                  | string | present, absent, latest                        | present                                           |
-| cockpit_package:                        | list   | ---                                            | cockpit, cockpit-storaged, cockpit-networkmanager |
-|                                         |        |                                                |                                                   |
-| cockpit_additional_package:             | dict   | ---                                            | ---                                               |
-| cockpit_additional_package.package:     | string | ---                                            | ---                                               |
-| cockpit_additional_package.requirement: | string | ---                                            | ---                                               |
-| cockpit_additional_package.state:       | string | present, absent, latest, skip                  | present                                           |
-|                                         |        |                                                |                                                   |
-| cockpit_firewalld_zone:                 | string | block, dmz, drop, internal, public, trusted... | ---                                               |
-| cockpit_firewalld_service:              | string | ---                                            | cockpit                                           |
-| cockpit_firewalld_state:                | string | present, absent, enabled, disabled, skip       | enabled                                           |
-
-______________________________________________________________________
-
-## Example Playbook
-
-```yaml
-- name: Import cockpit Role
-  hosts: all
-  roles:
-    - role: giftpilz0.server.cockpit
-```
+| Variable                                 | Type           | Options                                  | Default                                                                                                                                                                                                                                                                                        | Description                                           |
+| ---------------------------------------- | -------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| `cockpit_service_name`                   | string         | ---                                      | cockpit.socket                                                                                                                                                                                                                                                                                 | systemd service unit name                             |
+| `cockpit_service_state`                  | string         | reloaded, restarted, started, stopped    | started                                                                                                                                                                                                                                                                                        | desired state of the cockpit service                  |
+| `cockpit_service_enabled`                | bool           | true, false                              | true                                                                                                                                                                                                                                                                                           | whether the cockpit service is enabled at boot        |
+| `cockpit_package_state`                  | string         | present, absent, latest                  | present                                                                                                                                                                                                                                                                                        | desired state of cockpit packages                     |
+| `cockpit_package`                        | list of string | ---                                      | ["cockpit","cockpit-storaged","cockpit-networkmanager"]                                                                                                                                                                                                                                        | list of cockpit packages to install                   |
+| `cockpit_additional_package_state`       | string         | present, absent, latest, skip            |                                                                                                                                                                                                                                                                                                | desired state of additional cockpit packages          |
+| `cockpit_additional_package`             | list of dict   | ---                                      | `[{"package":"cockpit-pcp","requirement":"pcp","state":"present"},{"package":"cockpit-podman","requirement":"podman","state":"present"},{"package":"cockpit-selinux","requirement":"libselinux","state":"present"},{"package":"cockpit-machines","requirement":"qemu-kvm","state":"present"}]` | list of additional cockpit packages with requirements |
+| `cockpit_additional_package.package`     | string         | ---                                      |                                                                                                                                                                                                                                                                                                | package name                                          |
+| `cockpit_additional_package.requirement` | string         | ---                                      |                                                                                                                                                                                                                                                                                                | requirement package name                              |
+| `cockpit_additional_package.state`       | string         | present, absent, latest, skip            |                                                                                                                                                                                                                                                                                                | desired state of the package                          |
+|                                          |                |                                          |                                                                                                                                                                                                                                                                                                |                                                       |
+| `cockpit_firewalld_zone`                 | string         | ---                                      |                                                                                                                                                                                                                                                                                                | firewall zone for cockpit rules                       |
+| `cockpit_firewalld_service`              | string         | ---                                      | cockpit                                                                                                                                                                                                                                                                                        | firewall service name                                 |
+| `cockpit_firewalld_state`                | string         | present, absent, enabled, disabled, skip | enabled                                                                                                                                                                                                                                                                                        | desired state of firewall rules                       |

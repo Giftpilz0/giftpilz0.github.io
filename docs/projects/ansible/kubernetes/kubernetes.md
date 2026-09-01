@@ -2,7 +2,7 @@
 title: Kubernetes Collection
 ---
 
-Ansible Collection to configure and install a k3s cluster on multiple Linux systems.
+Ansible collection for kubernetes cluster
 
 ______________________________________________________________________
 

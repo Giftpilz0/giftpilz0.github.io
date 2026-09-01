@@ -2,27 +2,16 @@
 title: Helm Role
 ---
 
-This Ansible role can be used to install helm.
+Install the Helm package manager binary.
 
 ______________________________________________________________________
 
 ## Variables
 
-| Variables       | Type   | Options       | Defaults                                                                |
-| --------------- | ------ | ------------- | ----------------------------------------------------------------------- |
-| helm_bin_state: | string | present, skip | present                                                                 |
-| helm_url:       | string | ---           | `https://get.helm.sh/helm-v{{ helm_tag }}-linux-{{ helm_arch }}.tar.gz` |
-| helm_arch:      | string | ---           | amd64                                                                   |
-| helm_tag:       | string | ---           | 3.19.0                                                                  |
-| helm_path:      | string | ---           | /usr/local/sbin                                                         |
-
-______________________________________________________________________
-
-## Example Playbook
-
-```yaml
-- name: Import helm Role
-  hosts: all
-  roles:
-    - role: giftpilz0.kubernetes.helm
-```
+| Variable         | Type   | Options       | Default                                                                 | Description                             |
+| ---------------- | ------ | ------------- | ----------------------------------------------------------------------- | --------------------------------------- |
+| `helm_bin_state` | string | present, skip | present                                                                 | desired state of the helm binary        |
+| `helm_url`       | string | ---           | `https://get.helm.sh/helm-v{{ helm_tag }}-linux-{{ helm_arch }}.tar.gz` | download URL for the helm binary        |
+| `helm_arch`      | string | ---           | amd64                                                                   | target architecture (e.g. amd64, arm64) |
+| `helm_tag`       | string | ---           | 4.2.4                                                                   | release version tag                     |
+| `helm_path`      | string | ---           | /usr/local/sbin                                                         | installation directory for the binary   |

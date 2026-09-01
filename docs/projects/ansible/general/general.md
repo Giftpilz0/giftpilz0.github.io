@@ -2,7 +2,7 @@
 title: General Collection
 ---
 
-Ansible Collection to perform simple configurations on Linux systems.
+Ansible collection for general linux tasks
 
 ______________________________________________________________________
 

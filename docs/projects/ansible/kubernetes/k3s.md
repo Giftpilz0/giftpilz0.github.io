@@ -1,22 +1,31 @@
 ---
-title: k3s Role
+title: K3S Role
 ---
 
-This role is not usable yet...
+Install and configure a single-server k3s cluster with kube-vip.
 
 ______________________________________________________________________
 
 ## Variables
 
-| Variables | Type | Options | Defaults |
-| --------- | ---- | ------- | -------- |
-|           |      |         |          |
-
-______________________________________________________________________
-
-```yaml
-- name: Import k3s Role
-  hosts: all
-  roles:
-    - role: giftpilz0.kubernetes.k3s
-```
+| Variable                | Type    | Options                                  | Default                                                                                                                                                                                   | Description                                     |
+| ----------------------- | ------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| `k3s_version`           | string  | ---                                      | v1.36.3+k3s1                                                                                                                                                                              | k3s install version                             |
+| `k3s_vip_api_endpoint`  | string  | ---                                      | `{{ hostvars[groups['k3s'][0]]['ansible_host'] \| default(groups['k3s'][0]) }}`                                                                                                           | virtual IP for the API server                   |
+| `k3s_api_port`          | integer | ---                                      | 6443                                                                                                                                                                                      | API server port                                 |
+| `k3s_token`             | string  | ---                                      | W7hzb52sN7wpDHv2ayzQYfLz4tH2pQvpyg3vKe2iAK577bStCuruqeftKjwkd34                                                                                                                           | shared cluster token for node authentication    |
+| `k3s_extra_server_args` | string  | ---                                      | `--tls-san {{ k3s_vip_api_endpoint }} --flannel-backend=none --disable-network-policy --disable-helm-controller --disable metrics-server --disable servicelb --disable traefik --selinux` | additional arguments passed to k3s server       |
+| `k3s_service_name`      | string  | ---                                      | k3s.service                                                                                                                                                                               | systemd service unit name                       |
+| `k3s_service_state`     | string  | reloaded, restarted, started, stopped    | started                                                                                                                                                                                   | desired state of the k3s service                |
+| `k3s_service_enabled`   | bool    | true, false                              | true                                                                                                                                                                                      | whether the k3s service is enabled at boot      |
+| `k3s_kube_vip_tag`      | string  | ---                                      | v1.2.3                                                                                                                                                                                    | kube-vip container image tag                    |
+| `k3s_kube_vip_iface`    | string  | ---                                      | enp6s18                                                                                                                                                                                   | network interface for kube-vip                  |
+| `k3s_service_cidr`      | string  | ---                                      | 10.43.0.0/16                                                                                                                                                                              | cluster service CIDR range                      |
+| `k3s_cluster_cidr`      | string  | ---                                      | 10.42.0.0/16                                                                                                                                                                              | cluster pod CIDR range                          |
+| `k3s_firewalld_state`   | string  | present, absent, enabled, disabled, skip | enabled                                                                                                                                                                                   | desired state of firewall rules                 |
+| `k3s_firewalld_zone`    | string  | ---                                      | kubernetes                                                                                                                                                                                | firewall zone for k3s rules                     |
+| `k3s_manage_cilium`     | bool    | true, false                              | true                                                                                                                                                                                      | whether to install and configure cilium         |
+| `k9s_tag`               | string  | ---                                      | 0.51.0                                                                                                                                                                                    | k9s version tag passed to the k9s role          |
+| `fluxcli_tag`           | string  | ---                                      | 2.9.4                                                                                                                                                                                     | flux CLI version tag passed to the fluxcli role |
+| `helm_tag`              | string  | ---                                      | 4.2.4                                                                                                                                                                                     | helm version tag passed to the helm role        |
+| `cilium_version`        | string  | ---                                      | 1.20.1                                                                                                                                                                                    | cilium chart version passed to the cilium role  |

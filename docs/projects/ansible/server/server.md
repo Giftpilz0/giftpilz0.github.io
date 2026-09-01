@@ -2,7 +2,7 @@
 title: Server Collection
 ---
 
-Ansible Collection to perform server-specific configurations on Linux systems.
+Ansible collection for linux server management
 
 ______________________________________________________________________
 

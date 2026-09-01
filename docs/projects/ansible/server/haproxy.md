@@ -1,51 +1,34 @@
 ---
-title: HAProxy Role
+title: Haproxy Role
 ---
 
-This Ansible role can be used to set up HAProxy.
+Install and configure HAProxy with HTTP and TCP backends.
 
 ______________________________________________________________________
 
 ## Variables
 
-| Variables                              | Type   | Options                 | Defaults                  |
-| -------------------------------------- | ------ | ----------------------- | ------------------------- |
-| haproxy_service_name:                  | string | ---                     | haproxy.service           |
-| haproxy_service_state:                 | string | started, stopped        | started                   |
-| haproxy_service_enabled:               | bool   | false, true             | true                      |
-| haproxy_package_state:                 | string | present, absent, latest | present                   |
-| haproxy_package:                       | list   | ---                     | haproxy                   |
-| haproxy_config_path:                   | string | ---                     | /etc/haproxy/haproxy.cfg  |
-| haproxy_config_ssl:                    | bool   | false, true             | true                      |
-| haproxy_config_force_https:            | bool   | false, true             | true                      |
-| haproxy_config_maxconn:                | int    | ---                     | 2000                      |
-| haproxy_selinux_permissive:            | bool   | false, true             | true                      |
-|                                        |        |                         |                           |
-| haproxy_config_http_apps:              | dict   | ---                     | ---                       |
-| haproxy_config_http_apps.name:         | string | ---                     | example-app1              |
-| haproxy_config_http_apps.domain:       | string | ---                     | example.com               |
-| haproxy_config_http_apps.force_https:  | bool   | false, true             | true                      |
-| haproxy_config_http_apps.certificate:  | string | ---                     | /etc/ssl/example-app1.pem |
-| haproxy_config_http_apps.servers:      | dict   | ---                     | ---                       |
-| haproxy_config_http_apps.servers.name: | string | ---                     | example_server1           |
-| haproxy_config_http_apps.servers.host: | string | ---                     | 192.168.1.101             |
-| haproxy_config_http_apps.servers.port: | int    | ---                     | 8080                      |
-|                                        |        |                         |                           |
-| haproxy_config_tcp_apps:               | dict   | ---                     | ---                       |
-| haproxy_config_tcp_apps.name:          | string | ---                     | example-tcp-app1          |
-| haproxy_config_tcp_apps.port:          | int    | ---                     | 3306                      |
-| haproxy_config_tcp_apps.servers:       | dict   | ---                     | ---                       |
-| haproxy_config_tcp_apps.servers.name:  | string | ---                     | example_server1           |
-| haproxy_config_tcp_apps.servers.host:  | string | ---                     | 192.168.1.101             |
-| haproxy_config_tcp_apps.servers.port:  | int    | ---                     | 3306                      |
-
-______________________________________________________________________
-
-## Example Playbook
-
-```yaml
-- name: Import haproxy Role
-  hosts: all
-  roles:
-    - role: giftpilz0.server.haproxy
-```
+| Variable                               | Type           | Options                               | Default                                                                                                                                                                                                                                                 | Description                                    |
+| -------------------------------------- | -------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| `haproxy_service_name`                 | string         | ---                                   | haproxy.service                                                                                                                                                                                                                                         | systemd service unit name                      |
+| `haproxy_service_state`                | string         | reloaded, restarted, started, stopped | started                                                                                                                                                                                                                                                 | desired state of the haproxy service           |
+| `haproxy_service_enabled`              | bool           | true, false                           | true                                                                                                                                                                                                                                                    | whether the haproxy service is enabled at boot |
+| `haproxy_selinux_permissive`           | bool           | true, false                           | true                                                                                                                                                                                                                                                    | set SELinux to permissive mode for haproxy     |
+| `haproxy_package_state`                | string         | present, absent, latest               | present                                                                                                                                                                                                                                                 | desired state of haproxy packages              |
+| `haproxy_package`                      | list of string | ---                                   | ["haproxy"]                                                                                                                                                                                                                                             | list of packages to install                    |
+| `haproxy_config_path`                  | string         | ---                                   | /etc/haproxy/haproxy.cfg                                                                                                                                                                                                                                | path to the haproxy configuration file         |
+| `haproxy_config_ssl`                   | bool           | true, false                           | true                                                                                                                                                                                                                                                    | enable SSL/TLS termination                     |
+| `haproxy_config_force_https`           | bool           | true, false                           | true                                                                                                                                                                                                                                                    | redirect HTTP to HTTPS                         |
+| `haproxy_config_maxconn`               | integer        | ---                                   | 2000                                                                                                                                                                                                                                                    | maximum concurrent connections                 |
+| `haproxy_config_http_apps`             | list of dict   | ---                                   | `[{"name":"example-app1","domain":"example.com","force_https":true,"certificate":"/etc/ssl/example-app1.pem","servers":[{"name":"example_server1","host":"192.168.1.101","port":8080},{"name":"example_server2","host":"192.168.1.102","port":8080}]}]` | list of HTTP frontend/backend definitions      |
+| `haproxy_config_http_apps.name`        | string         | ---                                   |                                                                                                                                                                                                                                                         | application name                               |
+| `haproxy_config_http_apps.domain`      | string         | ---                                   |                                                                                                                                                                                                                                                         | frontend domain name                           |
+| `haproxy_config_http_apps.force_https` | bool           | true, false                           |                                                                                                                                                                                                                                                         | redirect HTTP to HTTPS for this app            |
+| `haproxy_config_http_apps.certificate` | string         | ---                                   |                                                                                                                                                                                                                                                         | path to the SSL certificate file               |
+| `haproxy_config_http_apps.servers`     | list of dict   | ---                                   |                                                                                                                                                                                                                                                         | ---                                            |
+|                                        |                |                                       |                                                                                                                                                                                                                                                         |                                                |
+| `haproxy_config_tcp_apps`              | list of dict   | ---                                   | `[{"name":"example-tcp-app1","port":3306,"servers":[{"name":"example_server1","host":"192.168.1.101","port":3306},{"name":"example_server2","host":"192.168.1.102","port":3306}]}]`                                                                     | list of TCP frontend/backend definitions       |
+| `haproxy_config_tcp_apps.name`         | string         | ---                                   |                                                                                                                                                                                                                                                         | application name                               |
+| `haproxy_config_tcp_apps.port`         | integer        | ---                                   |                                                                                                                                                                                                                                                         | frontend listen port                           |
+| `haproxy_config_tcp_apps.servers`      | list of dict   | ---                                   |                                                                                                                                                                                                                                                         | ---                                            |
+|                                        |                |                                       |                                                                                                                                                                                                                                                         |                                                |

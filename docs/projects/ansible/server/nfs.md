@@ -1,42 +1,32 @@
 ---
-title: NFS Role
+title: Nfs Role
 ---
 
-This Ansible role can be used to configure NFS-shares.
+Install and configure the NFS server and its exports.
 
 ______________________________________________________________________
 
 ## Variables
 
-| Variables                | Type   | Options                                        | Defaults                            |
-| ------------------------ | ------ | ---------------------------------------------- | ----------------------------------- |
-| nfs_service_name:        | list   | ---                                            | nfs-server.service, rpcbind.service |
-| nfs_service_state:       | string | reloaded, restarted, started, stopped          | started                             |
-| nfs_service_enabled:     | bool   | false, true                                    | true                                |
-| nfs_package_state:       | string | present, absent, latest                        | present                             |
-| nfs_package:             | list   | ---                                            | nfs-utils                           |
-|                          |        |                                                |                                     |
-| nfs_exports:             | dict   | ---                                            | ---                                 |
-| nfs_exports.path:        | string | ---                                            | ---                                 |
-| nfs_exports.host:        | string | ---                                            | ---                                 |
-| nfs_exports.options:     | string | ---                                            | ---                                 |
-| nfs_exports_file:        | string | ---                                            | /etc/exports                        |
-| nfs_exports.user:        | string | ---                                            | `{{ ansible_user }}`                |
-| nfs_exports.group:       | string | ---                                            | `{{ ansible_user }}`                |
-| nfs_exports.permissions: | string | ---                                            | 0755                                |
-| nfs_exports_state:       | string | present, absent, skip                          | present                             |
-|                          |        |                                                |                                     |
-| nfs_firewalld_zone:      | string | block, dmz, drop, internal, public, trusted... | ---                                 |
-| nfs_firewalld_service:   | string | ---                                            | nfs                                 |
-| nfs_firewalld_state:     | string | present, absent, enabled, disabled, skip       | enabled                             |
-
-______________________________________________________________________
-
-## Example Playbook
-
-```yaml
-- name: Import nfs Role
-  hosts: all
-  roles:
-    - role: giftpilz0.server.nfs
-```
+| Variable                  | Type           | Options                                  | Default                                                      | Description                                  |
+| ------------------------- | -------------- | ---------------------------------------- | ------------------------------------------------------------ | -------------------------------------------- |
+| `nfs_service_name`        | list of dict   | ---                                      | `[{"name":"nfs-server.service"},{"name":"rpcbind.service"}]` | list of NFS services to manage               |
+| `nfs_service_name.name`   | string         | ---                                      |                                                              | systemd service unit name                    |
+|                           |                |                                          |                                                              |                                              |
+| `nfs_service_state`       | string         | reloaded, restarted, started, stopped    | started                                                      | desired state of NFS services                |
+| `nfs_service_enabled`     | bool           | true, false                              | true                                                         | whether NFS services are enabled at boot     |
+| `nfs_package_state`       | string         | present, absent, latest                  | present                                                      | desired state of NFS packages                |
+| `nfs_package`             | list of string | ---                                      | ["nfs-utils"]                                                | list of packages to install                  |
+| `nfs_exports_file`        | string         | ---                                      | /etc/exports                                                 | path to the exports file                     |
+| `nfs_exports`             | list of dict   | ---                                      |                                                              | list of NFS exports to manage                |
+| `nfs_exports.path`        | string         | ---                                      |                                                              | exported directory path                      |
+| `nfs_exports.host`        | string         | ---                                      |                                                              | allowed client host or CIDR                  |
+| `nfs_exports.options`     | string         | ---                                      |                                                              | export options (e.g. rw,sync,no_root_squash) |
+| `nfs_exports.group`       | string         | ---                                      |                                                              | directory group owner                        |
+| `nfs_exports.user`        | string         | ---                                      |                                                              | directory user owner                         |
+| `nfs_exports.permissions` | string         | ---                                      |                                                              | directory permissions (e.g. 0755)            |
+|                           |                |                                          |                                                              |                                              |
+| `nfs_exports_state`       | string         | present, absent, skip                    | present                                                      | desired state of export entries              |
+| `nfs_firewalld_zone`      | string         | ---                                      |                                                              | firewall zone for NFS rules                  |
+| `nfs_firewalld_service`   | string         | ---                                      | nfs                                                          | firewall service name                        |
+| `nfs_firewalld_state`     | string         | present, absent, enabled, disabled, skip | enabled                                                      | desired state of firewall rules              |

@@ -2,23 +2,14 @@
 title: Timezone Role
 ---
 
-This Ansible role can be used to set the time zone of the system.
+Set the system timezone.
 
 ______________________________________________________________________
 
 ## Variables
 
-| Variables          | Type   | Options | Defaults |
-| ------------------ | ------ | ------- | -------- |
-| timezone_timezone: | string | ---     | Etc/UTC  |
-
-______________________________________________________________________
-
-## Example Playbook
-
-```yaml
-- name: Import timezone Role
-  hosts: all
-  roles:
-    - role: giftpilz0.general.timezone
-```
+| Variable                 | Type           | Options                 | Default    | Description                          |
+| ------------------------ | -------------- | ----------------------- | ---------- | ------------------------------------ |
+| `timezone_package_state` | string         | present, absent, latest | present    | desired state of timezone packages   |
+| `timezone_package`       | list of string | ---                     | ["tzdata"] | list of packages to install          |
+| `timezone_timezone`      | string         | ---                     | Etc/UTC    | system timezone (e.g. Europe/Berlin) |
