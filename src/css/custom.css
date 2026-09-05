@@ -14,6 +14,8 @@
     --ifm-color-primary-lighter: #359962;
     --ifm-color-primary-lightest: #3cad6e;
     --ifm-code-font-size: 95%;
+    --ifm-container-width: 1400px;
+    --ifm-container-width-xl: 1600px;
     --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
@@ -27,4 +29,47 @@
     --ifm-color-primary-lighter: #32d8b4;
     --ifm-color-primary-lightest: #4fddbf;
     --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Keep documentation tables within the content column when long values wrap. */
+.theme-doc-markdown table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.theme-doc-markdown table th,
+.theme-doc-markdown table td {
+    vertical-align: top;
+    word-break: normal;
+    overflow-wrap: break-word;
+}
+
+.theme-doc-markdown table th:nth-child(1),
+.theme-doc-markdown table td:nth-child(1) {
+    width: 22%;
+}
+
+.theme-doc-markdown table th:nth-child(2),
+.theme-doc-markdown table td:nth-child(2) {
+    width: 10%;
+}
+
+.theme-doc-markdown table th:nth-child(3),
+.theme-doc-markdown table td:nth-child(3) {
+    width: 13%;
+}
+
+.theme-doc-markdown table th:nth-child(4),
+.theme-doc-markdown table td:nth-child(4) {
+    width: 30%;
+}
+
+.theme-doc-markdown table th:nth-child(5),
+.theme-doc-markdown table td:nth-child(5) {
+    width: 25%;
+}
+
+.theme-doc-markdown table code {
+    white-space: normal;
+    overflow-wrap: break-word;
 }
