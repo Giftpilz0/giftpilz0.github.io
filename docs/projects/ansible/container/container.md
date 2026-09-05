@@ -11,7 +11,6 @@ ______________________________________________________________________
 - [acme_dns](acme_dns/)
 - [authentik](authentik/)
 - [bumper](bumper/)
-- [cloudbeaver](cloudbeaver/)
 - [forgejo](forgejo/)
 - [gitlab_runner](gitlab_runner/)
 - [homeassistant](homeassistant/)
