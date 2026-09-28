@@ -19,6 +19,7 @@ ______________________________________________________________________
 - [misc](misc/)
 - [monitoring_stack](monitoring_stack/)
 - [mosquitto](mosquitto/)
+- [navidrome](navidrome/)
 - [opencloud](opencloud/)
 - [postgresql](postgresql/)
 - [traefik](traefik/)
