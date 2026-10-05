@@ -22,5 +22,6 @@ ______________________________________________________________________
 - [navidrome](navidrome/)
 - [opencloud](opencloud/)
 - [postgresql](postgresql/)
+- [suwayomi](suwayomi/)
 - [traefik](traefik/)
 - [vaultwarden](vaultwarden/)
