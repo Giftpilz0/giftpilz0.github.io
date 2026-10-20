@@ -10,7 +10,7 @@ ______________________________________________________________________
 
 | Variable                                                 | Type    | Options     | Default                   | Description                              |
 | -------------------------------------------------------- | ------- | ----------- | ------------------------- | ---------------------------------------- |
-| `cilium_version`                                         | string  | ---         | 1.20.1                    | cilium Helm chart version                |
+| `cilium_version`                                         | string  | ---         | 1.20.3                    | cilium Helm chart version                |
 | `cilium_repo_url`                                        | string  | ---         | https://helm.cilium.io    | cilium Helm repository URL               |
 | `cilium_kubeconfig`                                      | string  | ---         | /etc/rancher/k3s/k3s.yaml | path to kubeconfig for cluster access    |
 | `cilium_config_kubeproxyreplacement`                     | bool    | true, false | true                      | enable kube-proxy replacement            |

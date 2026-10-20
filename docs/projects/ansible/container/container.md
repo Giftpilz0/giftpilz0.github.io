@@ -9,7 +9,6 @@ ______________________________________________________________________
 ## Included Roles
 
 - [acme_dns](acme_dns/)
-- [authentik](authentik/)
 - [bumper](bumper/)
 - [forgejo](forgejo/)
 - [gitlab_runner](gitlab_runner/)
@@ -19,7 +18,10 @@ ______________________________________________________________________
 - [misc](misc/)
 - [monitoring_stack](monitoring_stack/)
 - [mosquitto](mosquitto/)
+- [navidrome](navidrome/)
 - [opencloud](opencloud/)
 - [postgresql](postgresql/)
+- [quadlet](quadlet/)
+- [suwayomi](suwayomi/)
 - [traefik](traefik/)
 - [vaultwarden](vaultwarden/)

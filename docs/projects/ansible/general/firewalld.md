@@ -19,35 +19,35 @@ ______________________________________________________________________
 | `firewalld_permanent`                  | bool           | true, false                           | true              | whether rules are applied permanently            |
 | `firewalld_immediate`                  | bool           | true, false                           | true              | whether rules are applied immediately            |
 | `firewalld_default_zone`               | string         | ---                                   | block             | default firewall zone                            |
-| `firewalld_zones_define`               | list of dict   | ---                                   |                   | list of zones to create and configure            |
+| `firewalld_zones_define`               | list of dict   | ---                                   | []                | list of zones to create and configure            |
 | `firewalld_zones_define.zone`          | string         | ---                                   |                   | zone name                                        |
 | `firewalld_zones_define.source`        | string         | ---                                   |                   | zone source (e.g. CIDR)                          |
 | `firewalld_zones_define.target`        | string         | ---                                   |                   | zone target                                      |
 |                                        |                |                                       |                   |                                                  |
-| `firewalld_rules_icmp`                 | list of dict   | ---                                   |                   | list of ICMP block rules                         |
+| `firewalld_rules_icmp`                 | list of dict   | ---                                   | []                | list of ICMP block rules                         |
 | `firewalld_rules_icmp.icmp_type`       | string         | ---                                   |                   | ICMP type to block                               |
 | `firewalld_rules_icmp.zone`            | string         | ---                                   |                   | target zone                                      |
 | `firewalld_rules_icmp.state`           | string         | enabled, disabled                     |                   | whether the rule is enabled or disabled          |
 |                                        |                |                                       |                   |                                                  |
-| `firewalld_rules_services`             | list of dict   | ---                                   |                   | list of service rules                            |
+| `firewalld_rules_services`             | list of dict   | ---                                   | []                | list of service rules                            |
 | `firewalld_rules_services.service`     | string         | ---                                   |                   | service name                                     |
 | `firewalld_rules_services.zone`        | string         | ---                                   |                   | target zone                                      |
 | `firewalld_rules_services.state`       | string         | enabled, disabled                     |                   | whether the rule is enabled or disabled          |
 |                                        |                |                                       |                   |                                                  |
-| `firewalld_rules_ports`                | list of dict   | ---                                   |                   | list of port rules                               |
+| `firewalld_rules_ports`                | list of dict   | ---                                   | []                | list of port rules                               |
 | `firewalld_rules_ports.port`           | string         | ---                                   |                   | port number                                      |
 | `firewalld_rules_ports.protocol`       | string         | tcp, udp                              |                   | protocol                                         |
 | `firewalld_rules_ports.zone`           | string         | ---                                   |                   | target zone                                      |
 | `firewalld_rules_ports.state`          | string         | enabled, disabled                     |                   | whether the rule is enabled or disabled          |
 |                                        |                |                                       |                   |                                                  |
-| `firewalld_richrules_ports`            | list of dict   | ---                                   |                   | list of rich rules for port access               |
+| `firewalld_richrules_ports`            | list of dict   | ---                                   | []                | list of rich rules for port access               |
 | `firewalld_richrules_ports.allowip`    | string         | ---                                   |                   | source IP to allow                               |
 | `firewalld_richrules_ports.port`       | string         | ---                                   |                   | port number                                      |
 | `firewalld_richrules_ports.protocol`   | string         | tcp, udp                              |                   | protocol                                         |
 | `firewalld_richrules_ports.action`     | string         | ---                                   |                   | rich rule action (e.g. accept)                   |
 | `firewalld_richrules_ports.zone`       | string         | ---                                   |                   | target zone                                      |
 |                                        |                |                                       |                   |                                                  |
-| `firewalld_richrules_services`         | list of dict   | ---                                   |                   | list of rich rules for service access            |
+| `firewalld_richrules_services`         | list of dict   | ---                                   | []                | list of rich rules for service access            |
 | `firewalld_richrules_services.allowip` | string         | ---                                   |                   | source IP to allow                               |
 | `firewalld_richrules_services.service` | string         | ---                                   |                   | service name                                     |
 | `firewalld_richrules_services.action`  | string         | ---                                   |                   | rich rule action (e.g. accept)                   |

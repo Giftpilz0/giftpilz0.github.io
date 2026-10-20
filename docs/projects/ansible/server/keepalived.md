@@ -16,7 +16,7 @@ ______________________________________________________________________
 | `keepalived_package_state`            | string         | present, absent, latest               | present                         | desired state of keepalived packages              |
 | `keepalived_package`                  | list of string | ---                                   | ["keepalived"]                  | list of packages to install                       |
 | `keepalived_config_path`              | string         | ---                                   | /etc/keepalived/keepalived.conf | path to the keepalived configuration file         |
-| `keepalived_config_virtual_ip`        | string         | ---                                   |                                 | virtual IP address to manage                      |
+| `keepalived_config_virtual_ip`        | string         | ---                                   | ""                              | virtual IP address to manage                      |
 | `keepalived_config_interface`         | string         | ---                                   | eth0                            | network interface for VRRP advertisements         |
 | `keepalived_config_priority`          | integer        | ---                                   | 255                             | VRRP priority (higher wins election)              |
 | `keepalived_config_virtual_router_id` | integer        | ---                                   | 100                             | VRRP virtual router ID                            |
