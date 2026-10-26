@@ -24,7 +24,7 @@
     "prism-react-renderer": "^2.4.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.3",
-    "webpack": "5.112.0"
+    "webpack": "5.112.1"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.10.2",
