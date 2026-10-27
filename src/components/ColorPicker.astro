@@ -1,0 +1,220 @@
+---
+import { DEFAULT_SEED, PRESET_SEEDS } from "../lib/theme-constants";
+---
+
+<m3-color-picker>
+  <details>
+    <summary aria-label="Theme color" title="Theme color">
+      <span class="swatch current" aria-hidden="true"></span>
+    </summary>
+    <div class="panel">
+      <p class="heading">Theme color</p>
+      <div class="presets">
+        {
+          PRESET_SEEDS.map((seed) => (
+            <button
+              type="button"
+              class="swatch"
+              data-seed={seed}
+              style={`--seed:${seed}`}
+              aria-label={`Use ${seed}`}
+            />
+          ))
+        }
+      </div>
+      <label class="custom">
+        <input type="color" value={DEFAULT_SEED} />
+        <span>Custom color</span>
+      </label>
+      <button type="button" class="reset">
+        Reset to default
+      </button>
+    </div>
+  </details>
+</m3-color-picker>
+
+<script>
+  import { CHANGE_EVENT, DEFAULT_SEED, STORAGE_KEY, STYLE_ID } from "../lib/theme-constants";
+
+  function loadSeed(): string {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || "null")?.seed ?? DEFAULT_SEED;
+    } catch {
+      return DEFAULT_SEED;
+    }
+  }
+
+  async function applySeed(seed: string): Promise<void> {
+    let style = document.getElementById(STYLE_ID);
+    if (seed.toLowerCase() === DEFAULT_SEED) {
+      style?.remove();
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch {}
+    } else {
+      // Loaded on demand to keep pages small.
+      const { themeCss } = await import("../lib/theme");
+      const css = themeCss(seed);
+      if (!style) {
+        style = document.createElement("style");
+        style.id = STYLE_ID;
+        document.head.appendChild(style);
+      }
+      style.textContent = css;
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ seed, css }));
+      } catch {}
+    }
+    document.dispatchEvent(new CustomEvent(CHANGE_EVENT, { detail: seed }));
+  }
+
+  class ColorPicker extends HTMLElement {
+    connectedCallback() {
+      const details = this.querySelector("details")!;
+      const input = this.querySelector<HTMLInputElement>('input[type="color"]')!;
+
+      const sync = (seed: string) => {
+        input.value = seed;
+        for (const button of this.querySelectorAll<HTMLButtonElement>("[data-seed]")) {
+          button.setAttribute("aria-pressed", String(button.dataset.seed === seed.toLowerCase()));
+        }
+      };
+      sync(loadSeed());
+      document.addEventListener(CHANGE_EVENT, (e) => sync((e as CustomEvent<string>).detail));
+
+      for (const button of this.querySelectorAll<HTMLButtonElement>("[data-seed]")) {
+        button.addEventListener("click", () => applySeed(button.dataset.seed!));
+      }
+      input.addEventListener("input", () => applySeed(input.value));
+      this.querySelector(".reset")!.addEventListener("click", () => applySeed(DEFAULT_SEED));
+
+      document.addEventListener("click", (e) => {
+        if (details.open && !this.contains(e.target as Node)) details.open = false;
+      });
+      this.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && details.open) {
+          details.open = false;
+          details.querySelector("summary")!.focus();
+        }
+      });
+    }
+  }
+
+  customElements.define("m3-color-picker", ColorPicker);
+
+  // Refresh the cached CSS in case the theme generator changed since it was saved.
+  if (loadSeed() !== DEFAULT_SEED) applySeed(loadSeed());
+</script>
+
+<style>
+  m3-color-picker {
+    position: relative;
+    display: flex;
+  }
+  summary {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem;
+    border-radius: 999px;
+    cursor: pointer;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary:hover {
+    background: var(--md-sys-color-surface-container-highest);
+  }
+  .swatch {
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    border: 2px solid var(--md-sys-color-outline-variant);
+    border-radius: 999px;
+    background: var(--seed);
+    cursor: pointer;
+  }
+  .swatch.current {
+    background: conic-gradient(
+      var(--md-sys-color-primary) 0 50%,
+      var(--md-sys-color-tertiary) 0 75%,
+      var(--md-sys-color-secondary-container) 0
+    );
+  }
+  .swatch[aria-pressed="true"] {
+    outline: 2px solid var(--md-sys-color-primary);
+    outline-offset: 2px;
+  }
+  .panel {
+    position: absolute;
+    inset-inline-end: 0;
+    top: calc(100% + 0.5rem);
+    z-index: var(--sl-z-index-menu);
+    display: grid;
+    gap: 0.75rem;
+    width: 13.5rem;
+    padding: 1rem;
+    border-radius: 1.75rem;
+    background: var(--md-sys-color-surface-container-high);
+    color: var(--md-sys-color-on-surface);
+    box-shadow: var(--sl-shadow-md);
+  }
+  /* Open upwards in the mobile menu. */
+  :global(.mobile-preferences) .panel {
+    top: auto;
+    bottom: calc(100% + 0.5rem);
+  }
+  .heading {
+    margin: 0;
+    font-size: var(--sl-text-sm);
+    font-weight: 600;
+  }
+  .presets {
+    display: grid;
+    grid-template-columns: repeat(4, 1.75rem);
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+  .presets .swatch {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+  .custom {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--sl-text-sm);
+    cursor: pointer;
+  }
+  .custom input {
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0;
+    border: none;
+    border-radius: 999px;
+    background: none;
+    cursor: pointer;
+  }
+  .custom input::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+  .custom input::-webkit-color-swatch,
+  .custom input::-moz-color-swatch {
+    border: 2px solid var(--md-sys-color-outline-variant);
+    border-radius: 999px;
+  }
+  .reset {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--md-sys-color-outline);
+    border-radius: 999px;
+    background: none;
+    color: var(--md-sys-color-primary);
+    font: inherit;
+    font-size: var(--sl-text-sm);
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .reset:hover {
+    background: color-mix(in srgb, var(--md-sys-color-primary) 8%, transparent);
+  }
+</style>

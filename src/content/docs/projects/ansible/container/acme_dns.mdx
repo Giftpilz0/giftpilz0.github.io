@@ -1,0 +1,107 @@
+---
+title: acme_dns
+description: Deploy the acme-dns ACME challenge server as a Podman quadlet.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: acme_dns
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless podman operations.
+    default: '{{ ansible_user }}'
+  - name: acme_dns_image
+    type: str
+    description: Image name without tag.
+    default: docker.io/joohoi/acme-dns
+  - name: acme_dns_version
+    type: str
+    description: Acme-dns container image version.
+    default: v2.0.2
+  - name: acme_dns_autoupdate
+    type: bool
+    description: Enable Podman auto-update for this container.
+    default: 'true'
+  - name: acme_dns_network_enabled
+    type: bool
+    description: Create and manage the Podman network.
+    default: 'true'
+  - name: acme_dns_network_name
+    type: str
+    description: Podman network name.
+    default: acme_dns-internal
+  - name: acme_dns_network_driver
+    type: str
+    description: Podman network driver.
+    default: bridge
+  - name: acme_dns_network_internal
+    type: bool
+    description: Create an internal-only Podman network.
+    default: 'false'
+  - name: acme_dns_port_map_enabled
+    type: bool
+    description: Expose DNS ports on the host.
+    default: 'true'
+  - name: acme_dns_bind_ip
+    type: str
+    description: Host IP to bind the public DNS ports to.
+    default: '{{ ansible_facts[''default_ipv4''][''address''] }}'
+  - name: acme_dns_port_map
+    type: list[str]
+    description: Host:container port mappings.
+    default: '- ''53:53''
+
+      - 53:53/udp'
+  - name: acme_dns_domain
+    type: str
+    description: Delegated zone served by acme-dns.
+    default: auth.example.org
+  - name: acme_dns_nsname
+    type: str
+    description: Authoritative nameserver name advertised for the delegated zone.
+    default: ns1.example.org
+  - name: acme_dns_nsadmin
+    type: str
+    description: Administrative email with the @ represented as a dot.
+    default: admin.example.org
+  - name: acme_dns_records
+    type: list[str]
+    description: Additional records served by acme-dns.
+    default: '- ''{{ acme_dns_domain }}. NS {{ acme_dns_nsname }}.'''
+  - name: acme_dns_disable_registration
+    type: bool
+    description: Disable the registration endpoint.
+    default: 'false'
+  - name: acme_dns_api_port
+    type: str
+    description: REST API listen port.
+    default: '80'
+  - name: acme_dns_loglevel
+    type: str
+    description: Logging level.
+    default: info
+  - name: acme_dns_logformat
+    type: str
+    description: Logging format.
+    default: json
+  - name: acme_dns_environment_vars
+    type: dict
+    description: Extra environment variables injected into the container.
+    default: '{}'
+  - name: acme_dns_entrypoint
+    type: str
+    description: Optional container entrypoint override.
+    default: '""'
+  - name: acme_dns_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src or source, dest, optional mount, mode, and template.
+    default: '[]'
+  - name: acme_dns_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src or source, dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

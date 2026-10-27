@@ -1,0 +1,101 @@
+---
+title: quadlet
+description: Deploy the quadlet files of a service role and (re)start its units.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: quadlet
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless Podman operations.
+    default: '{{ ansible_user }}'
+  - name: podman_unprivileged_port_start
+    type: int
+    description: Lowest host port rootless containers may bind.
+    default: '80'
+  - name: podman_proxy_enabled
+    type: bool
+    description: Configure an HTTP proxy for image pulls and all containers on the host.
+    default: 'false'
+  - name: podman_proxy_http
+    type: str
+    description: HTTP proxy URL.
+    default: '""'
+  - name: podman_proxy_https
+    type: str
+    description: HTTPS proxy URL.
+    default: '""'
+  - name: podman_proxy_no_proxy
+    type: str
+    description: Comma-separated list of proxy exclusions.
+    default: '""'
+  - name: quadlet_role
+    type: str
+    required: true
+    description: Service role whose templates/ and files/ trees are deployed.
+    default: '""'
+  - name: quadlet_role_path
+    type: path
+    description: Path of the service role, needed for roles outside this collection.
+    default: '{{ role_path | dirname }}/{{ quadlet_role }}'
+  - name: quadlet_dir
+    type: str
+    description: Main quadlet directory of the service; extra files and dirs are placed here.
+    default: '{{ quadlet_role | replace(''_'', ''-'') }}-pod'
+  - name: quadlet_dir_modes
+    type: dict
+    description: Directory modes that differ from the role source tree, keyed by path relative to the quadlet base dir.
+    default: '{}'
+  - name: quadlet_units
+    type: list[str]
+    required: true
+    description: systemd user units to start in order; restarted when deployed files changed.
+    default: '[]'
+  - name: quadlet_force_restart
+    type: bool
+    description: Restart the units even if no file changed.
+    default: 'false'
+  - name: quadlet_images_changed
+    type: bool
+    description: Set by tasks_from build when an image was rebuilt.
+    default: 'false'
+  - name: quadlet_extra_files
+    type: list[dict]
+    description: Extra file entries with src (controller path) or source (host path), dest, optional mount, mode, template and relabel (SELinux :Z).
+    default: '[]'
+  - name: quadlet_extra_dirs
+    type: list[dict]
+    description: Extra directory entries with src (controller path) or source (host path), dest, optional mount, mode and relabel (SELinux :Z).
+    default: '[]'
+  - name: quadlet_extra_file_defaults
+    type: dict
+    description: Values for keys missing in quadlet_extra_files entries.
+    default: 'mode: ''0640''
+
+      template: false
+
+      mount: ''''
+
+      source: ''''
+
+      src: ''''
+
+      relabel: true'
+  - name: quadlet_extra_dir_defaults
+    type: dict
+    description: Values for keys missing in quadlet_extra_dirs entries.
+    default: 'mode: ''0755''
+
+      mount: ''''
+
+      source: ''''
+
+      src: ''''
+
+      relabel: true'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

@@ -1,0 +1,125 @@
+---
+title: monitoring
+description: Install and configure the Grafana Alloy monitoring agent.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.general
+  name: monitoring
+  variables:
+  - name: monitoring_agent_arch
+    type: str
+    description: alloy agent architecture (e.g. amd64, arm64).
+    default: amd64
+  - name: monitoring_agent_tag
+    type: str
+    description: alloy release version tag.
+    default: 1.21.1
+  - name: monitoring_agent_package_state
+    type: str
+    description: desired state of the alloy package.
+    default: present
+    choices:
+    - present
+    - absent
+    - latest
+    - skip
+  - name: monitoring_agent_package
+    type: list[str]
+    description: list of packages to install.
+    default: "- https://github.com/grafana/alloy/releases/download/v{{ monitoring_agent_tag }}/alloy-{{\n  monitoring_agent_tag }}-1.{{ monitoring_agent_arch }}.rpm"
+  - name: monitoring_agent_package_name
+    type: str
+    description: name of the installed alloy package, used for removal.
+    default: alloy
+  - name: monitoring_agent_data_path
+    type: str
+    description: alloy data directory, removed with the package.
+    default: /var/lib/alloy
+  - name: monitoring_agent_config_path
+    type: str
+    description: path to the alloy configuration file.
+    default: /etc/alloy/config.alloy
+  - name: monitoring_agent_service_name
+    type: str
+    description: systemd service unit name.
+    default: alloy.service
+  - name: monitoring_agent_service_state
+    type: str
+    description: desired state of the alloy service.
+    default: started
+    choices:
+    - reloaded
+    - restarted
+    - started
+    - stopped
+  - name: monitoring_agent_service_enabled
+    type: bool
+    description: whether the alloy service is enabled at boot.
+    default: 'true'
+  - name: monitoring_agent_config_remoteserver_loki
+    type: str
+    description: Loki remote write endpoint URL.
+    default: '""'
+  - name: monitoring_agent_config_remoteserver_prometheus
+    type: str
+    description: Prometheus remote write endpoint URL.
+    default: '""'
+  - name: monitoring_alloy_loki_basic_auth_username
+    type: str
+    description: basic auth username for Loki.
+    default: alloy
+  - name: monitoring_alloy_loki_basic_auth_password
+    type: str
+    description: basic auth password for Loki.
+    default: '""'
+  - name: monitoring_alloy_mimir_basic_auth_username
+    type: str
+    description: basic auth username for Mimir/Prometheus.
+    default: alloy
+  - name: monitoring_alloy_mimir_basic_auth_password
+    type: str
+    description: basic auth password for Mimir/Prometheus.
+    default: '""'
+  - name: monitoring_agent_external_labels
+    type: dict
+    description: external labels added to all metrics and logs.
+    default: 'host: ''{{ inventory_hostname }}'''
+  - name: monitoring_alloy_permissions_setup
+    type: bool
+    description: whether to add alloy user to extra groups for journal access.
+    default: 'true'
+  - name: monitoring_alloy_extra_groups
+    type: list[str]
+    description: additional system groups for the alloy user.
+    default: '- adm
+
+      - systemd-journal'
+  - name: monitoring_alloy_node_exporter_scrape_interval
+    type: str
+    description: scrape interval for node exporter metrics.
+    default: 60s
+  - name: monitoring_alloy_loki_journal_max_age
+    type: str
+    description: maximum age of journal entries sent to Loki.
+    default: 24h
+  - name: monitoring_alloy_traefik_scrape_enabled
+    type: bool
+    description: whether to scrape Traefik metrics.
+    default: 'false'
+  - name: monitoring_alloy_traefik_metrics_address
+    type: str
+    description: Traefik metrics endpoint address.
+    default: 127.0.0.1:8082
+  - name: monitoring_alloy_traefik_scrape_interval
+    type: str
+    description: scrape interval for Traefik metrics.
+    default: 30s
+  - name: monitoring_alloy_extra_config
+    type: str
+    description: extra Alloy configuration appended to the main config.
+    default: '""'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

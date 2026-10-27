@@ -1,0 +1,89 @@
+---
+title: user
+description: Manage a local user account and its SSH authorized keys.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.general
+  name: user
+  variables:
+  - name: user
+    type: list[dict]
+    description: list of user accounts to manage.
+    default: '[]'
+    options:
+    - name: user_username
+      type: str
+      required: true
+      description: login name.
+    - name: user_state
+      type: str
+      description: whether the user exists.
+      choices:
+      - present
+      - absent
+    - name: user_password
+      type: str
+      description: plaintext password (hashed at runtime).
+    - name: user_sudo_pwless
+      type: bool
+      description: grant passwordless sudo.
+    - name: user_groups
+      type: list[str]
+      description: supplementary groups.
+    - name: user_home
+      type: bool
+      description: create home directory.
+    - name: user_remove_home
+      type: bool
+      description: remove the home directory when the user is absent.
+    - name: user_shell
+      type: str
+      description: login shell.
+    - name: user_comment
+      type: str
+      description: GECOS comment field.
+    - name: user_pub
+      type: list[str]
+      description: SSH public keys to add to authorized_keys.
+    - name: user_install_key_to_targets
+      type: bool
+      description: also install keys on user_key_target_users.
+  - name: user_key_target_users
+    type: list[str]
+    description: list of users that receive all user SSH public keys.
+    default: '- root'
+  - name: user_retired_ssh_keys
+    type: list[str]
+    description: SSH public keys to remove from all managed users and key targets.
+    default: '[]'
+  - name: user_defaults
+    type: dict
+    description: values for keys missing in user entries.
+    default: 'user_state: present
+
+      user_password: ''!''
+
+      user_sudo_pwless: false
+
+      user_groups: []
+
+      user_home: true
+
+      user_remove_home: false
+
+      user_shell: /bin/bash
+
+      user_comment: ''''
+
+      user_pub: []
+
+      user_install_key_to_targets: false'
+  - name: user_mkpasswd_package
+    type: str
+    description: package providing mkpasswd.
+    default: '{{ ''mkpasswd'' if ansible_facts[''os_family''] == ''RedHat'' else ''whois'' }}'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

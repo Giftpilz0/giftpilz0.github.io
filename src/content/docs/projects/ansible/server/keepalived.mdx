@@ -1,0 +1,70 @@
+---
+title: keepalived
+description: Install and configure keepalived for a virtual IP (VRRP).
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.server
+  name: keepalived
+  variables:
+  - name: keepalived_service_name
+    type: str
+    description: systemd service unit name.
+    default: keepalived.service
+  - name: keepalived_service_state
+    type: str
+    description: desired state of the keepalived service.
+    default: started
+    choices:
+    - reloaded
+    - restarted
+    - started
+    - stopped
+  - name: keepalived_service_enabled
+    type: bool
+    description: whether the keepalived service is enabled at boot.
+    default: 'true'
+  - name: keepalived_package_state
+    type: str
+    description: desired state of keepalived packages.
+    default: present
+    choices:
+    - present
+    - absent
+    - latest
+  - name: keepalived_package
+    type: list[str]
+    description: list of packages to install.
+    default: '- keepalived'
+  - name: keepalived_config_path
+    type: str
+    description: path to the keepalived configuration file.
+    default: /etc/keepalived/keepalived.conf
+  - name: keepalived_config_virtual_ip
+    type: str
+    description: virtual IP address to manage.
+    default: '""'
+  - name: keepalived_config_interface
+    type: str
+    description: network interface for VRRP advertisements.
+    default: eth0
+  - name: keepalived_config_priority
+    type: int
+    description: VRRP priority (higher wins election).
+    default: '255'
+  - name: keepalived_config_virtual_router_id
+    type: int
+    description: VRRP virtual router ID.
+    default: '100'
+  - name: keepalived_config_vrrp_instance
+    type: str
+    description: VRRP instance name.
+    default: VG
+  - name: keepalived_config_state
+    type: str
+    description: initial VRRP state (MASTER or BACKUP).
+    default: MASTER
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

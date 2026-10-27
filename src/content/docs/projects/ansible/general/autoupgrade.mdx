@@ -1,0 +1,73 @@
+---
+title: autoupgrade
+description: Configure automatic package upgrades on Debian or Red Hat systems.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.general
+  name: autoupgrade
+  variables:
+  - name: autoupgrade_service_name
+    type: str
+    description: systemd service or timer unit name.
+    default: '{{ ''apt-daily-upgrade.timer'' if ansible_facts[''os_family''] == ''Debian'' else ''dnf-automatic.timer'' }}'
+  - name: autoupgrade_service_state
+    type: str
+    description: desired state of the autoupgrade service.
+    default: started
+    choices:
+    - reloaded
+    - restarted
+    - started
+    - stopped
+  - name: autoupgrade_service_enabled
+    type: bool
+    description: whether the autoupgrade service is enabled at boot.
+    default: 'true'
+  - name: autoupgrade_package_state
+    type: str
+    description: desired state of autoupgrade packages.
+    default: present
+    choices:
+    - present
+    - absent
+    - latest
+  - name: autoupgrade_package_list
+    type: list[str]
+    description: list of packages to install for automatic upgrades.
+    default: '{{ [''unattended-upgrades''] if ansible_facts[''os_family''] == ''Debian'' else [''dnf-automatic''] }}'
+  - name: autoupgrade_config_path
+    type: str
+    description: path to the autoupgrade configuration file.
+    default: '{{ ''/etc/apt/apt.conf.d/20auto-upgrades'' if ansible_facts[''os_family''] == ''Debian'' else ''/etc/dnf/automatic.conf'' }}'
+  - name: autoupgrade_auto_apply
+    type: bool
+    description: whether to automatically apply package upgrades.
+    default: 'true'
+  - name: autoupgrade_upgrade_type
+    type: str
+    description: type of upgrades to apply.
+    default: default
+    choices:
+    - default
+    - security
+  - name: autoupgrade_reboot
+    type: bool
+    description: reboot when an upgrade requires it.
+    default: 'false'
+  - name: autoupgrade_blacklist
+    type: list[str]
+    description: list of packages excluded from automatic upgrades.
+    default: '[]'
+  - name: autoupgrade_mail_report
+    type: str
+    description: email reporting frequency (e.g. on-change, always, only-on-error).
+    default: '""'
+  - name: autoupgrade_mail
+    type: str
+    description: recipient email address for upgrade reports.
+    default: '""'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

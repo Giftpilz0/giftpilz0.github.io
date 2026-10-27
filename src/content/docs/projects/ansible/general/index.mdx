@@ -1,0 +1,41 @@
+---
+title: giftpilz0.general
+description: Ansible collection for general linux tasks
+sidebar:
+  order: 0
+tableOfContents: false
+ansibleCollection:
+  name: giftpilz0.general
+  roles:
+  - name: autoupgrade
+    description: Configure automatic package upgrades on Debian or Red Hat systems.
+    variables: 12
+  - name: beszel_agent
+    description: Install the Beszel monitoring agent as a systemd service.
+    variables: 7
+  - name: firewalld
+    description: Install, configure, and manage firewalld zones and rules.
+    variables: 18
+  - name: git
+    description: Install git and optionally configure system-wide git settings.
+    variables: 4
+  - name: monitoring
+    description: Install and configure the Grafana Alloy monitoring agent.
+    variables: 25
+  - name: packages
+    description: Install and manage RPM, Flatpak, and Python packages and repositories.
+    variables: 12
+  - name: timezone
+    description: Set the system timezone.
+    variables: 3
+  - name: update
+    description: Apply system package updates with an optional automatic reboot.
+    variables: 3
+  - name: user
+    description: Manage a local user account and its SSH authorized keys.
+    variables: 5
+---
+
+import AnsibleCollection from "../../../../../components/ansible/AnsibleCollection.astro";
+
+<AnsibleCollection />

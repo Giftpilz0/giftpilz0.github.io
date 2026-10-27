@@ -1,0 +1,99 @@
+---
+title: bumper
+description: Deploy the Bumper web application (built from a git commit) as a Podman quadlet.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: bumper
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless podman operations.
+    default: '{{ ansible_user }}'
+  - name: bumper_image
+    type: str
+    description: Image name without tag.
+    default: localhost/bumper-custom
+  - name: bumper_version
+    type: str
+    description: Container image version.
+    default: latest
+  - name: bumper_git_repo
+    type: str
+    description: Git repository the bumper image is built from.
+    default: https://github.com/MVladislav/bumper.git
+  - name: bumper_commit
+    type: str
+    description: Git commit to build from.
+    default: 3d1b908ec70e3c3ceaf71d3dbb5773daee572de3
+  - name: bumper_autoupdate
+    type: bool
+    description: Enable podman auto-update for this container.
+    default: 'true'
+  - name: bumper_network_enabled
+    type: bool
+    description: Create and manage the podman network.
+    default: 'true'
+  - name: bumper_network_name
+    type: str
+    description: Podman network name.
+    default: bumper-internal
+  - name: bumper_network_driver
+    type: str
+    description: Podman network driver.
+    default: bridge
+  - name: bumper_port_map_enabled
+    type: bool
+    description: Expose container ports on the host.
+    default: 'true'
+  - name: bumper_bind_ip
+    type: str
+    description: Host IP to bind exposed ports to.
+    default: '{{ ansible_facts[''default_ipv4''][''address''] }}'
+  - name: bumper_port_map
+    type: list[str]
+    description: Host:container port mappings.
+    default: '- 443:443
+
+      - 1883:1883
+
+      - 5223:5223
+
+      - 8007:8007
+
+      - 8443:8443'
+  - name: bumper_environment_vars
+    type: dict
+    description: Extra environment variables injected into the container.
+    default: 'TZ: Europe/Berlin
+
+      WEB_SERVER_HTTPS_PORT: 8443
+
+      WEB_SERVER_LISTEN_PORT: 8007
+
+      MQTT_LISTEN_PORT_TLS: 443
+
+      MQTT_LISTEN_PORT: 1883
+
+      XMPP_LISTEN_PORT_TLS: 5223
+
+      DEBUG_BUMPER_VERBOSE: 2
+
+      DEBUG_BUMPER_LEVEL: INFO'
+  - name: bumper_entrypoint
+    type: str
+    description: Optional container entrypoint override.
+    default: '""'
+  - name: bumper_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src (controller path) or source (target path), dest, optional mount, mode, and template.
+    default: '[]'
+  - name: bumper_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src (controller directory) or source (target path), dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

@@ -1,0 +1,89 @@
+<script>
+  import { CHANGE_EVENT } from "../lib/theme-constants";
+
+  const diagrams = [...document.querySelectorAll<HTMLElement>("pre.mermaid")];
+  const sources = new Map(diagrams.map((diagram) => [diagram, diagram.textContent ?? ""]));
+
+  /** Mermaid's base theme, colored with the current Material color scheme. */
+  function themeVariables() {
+    const style = getComputedStyle(document.documentElement);
+    const c = (role: string) => style.getPropertyValue(`--md-sys-color-${role}`).trim();
+    const branches = ["primary", "tertiary", "secondary", "error"];
+    return {
+      darkMode: document.documentElement.dataset.theme === "dark",
+      fontFamily: getComputedStyle(document.body).fontFamily,
+      background: c("surface"),
+      textColor: c("on-surface"),
+      lineColor: c("outline"),
+      primaryColor: c("primary-container"),
+      primaryTextColor: c("on-primary-container"),
+      primaryBorderColor: c("primary"),
+      secondaryColor: c("secondary-container"),
+      secondaryTextColor: c("on-secondary-container"),
+      secondaryBorderColor: c("secondary"),
+      tertiaryColor: c("tertiary-container"),
+      tertiaryTextColor: c("on-tertiary-container"),
+      tertiaryBorderColor: c("tertiary"),
+      clusterBkg: c("surface-container-high"),
+      clusterBorder: c("outline-variant"),
+      edgeLabelBackground: c("surface-container-high"),
+      noteBkgColor: c("tertiary-container"),
+      noteTextColor: c("on-tertiary-container"),
+      noteBorderColor: c("tertiary"),
+      titleColor: c("on-surface"),
+      commitLabelColor: c("on-surface-variant"),
+      commitLabelBackground: c("surface-container-high"),
+      ...Object.fromEntries(
+        Array.from({ length: 8 }, (_, i) => {
+          const role = branches[i % branches.length];
+          return [
+            [`git${i}`, c(role)],
+            [`gitBranchLabel${i}`, c(`on-${role}`)],
+            [`gitInv${i}`, c(`${role}-container`)],
+          ];
+        }).flat(),
+      ),
+    };
+  }
+
+  async function render() {
+    const { default: mermaid } = await import("mermaid");
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: "base",
+      themeVariables: themeVariables(),
+      gitGraph: { rotateCommitLabel: false },
+    });
+    for (const [diagram, source] of sources) {
+      const { svg } = await mermaid.render(`mermaid-${crypto.randomUUID()}`, source);
+      diagram.innerHTML = svg;
+      // Shrink wide diagrams to fit, but not below 70 % so the text stays readable; the rest scrolls.
+      const element = diagram.querySelector("svg")!;
+      element.style.minWidth = `${element.viewBox.baseVal.width * 0.7}px`;
+      diagram.dataset.rendered = "";
+    }
+  }
+
+  if (diagrams.length > 0) {
+    render();
+    new MutationObserver(render).observe(document.documentElement, {
+      attributeFilter: ["data-theme"],
+    });
+    document.addEventListener(CHANGE_EVENT, render);
+  }
+</script>
+
+<style is:global>
+  .sl-markdown-content pre.mermaid {
+    display: flex;
+    justify-content: safe center;
+    overflow-x: auto;
+    padding: 1rem;
+    border: none;
+    border-radius: 1rem;
+    background: var(--md-sys-color-surface-container-low);
+  }
+  .sl-markdown-content pre.mermaid:not([data-rendered]) {
+    color: transparent;
+  }
+</style>

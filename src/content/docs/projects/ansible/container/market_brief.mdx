@@ -1,0 +1,89 @@
+---
+title: market_brief
+description: Run the market brief pipeline (built from its git repository) on a systemd timer as a Podman quadlet.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: market_brief
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless podman operations.
+    default: '{{ ansible_user }}'
+  - name: market_brief_image
+    type: str
+    description: Image name without tag.
+    default: localhost/market-brief
+  - name: market_brief_version
+    type: str
+    description: Image tag.
+    default: latest
+  - name: market_brief_git_repo
+    type: str
+    description: Git repository the image is built from.
+    default: https://forgejo.nixpi.de/moritz/market-brief.git
+  - name: market_brief_git_version
+    type: str
+    description: Branch, tag or commit to build from.
+    default: main
+  - name: market_brief_dockerfile
+    type: str
+    description: Dockerfile path inside the repository.
+    default: Dockerfile
+  - name: market_brief_schedule
+    type: str
+    description: systemd OnCalendar expression for the pipeline runs.
+    default: Mon..Fri 16:35 Asia/Hong_Kong
+  - name: market_brief_timer_enabled
+    type: bool
+    description: Run the pipeline on the schedule; when false it only runs when started by hand.
+    default: 'true'
+  - name: market_brief_timeout
+    type: str
+    description: Maximum runtime of one run (systemd time span).
+    default: 1h
+  - name: market_brief_data_repo
+    type: str
+    description: ssh URL of the data repository holding the watchlist and the results.
+    default: '""'
+  - name: market_brief_data_branch
+    type: str
+    description: Branch of the data repository.
+    default: main
+  - name: market_brief_deploy_key
+    type: str
+    description: Private ssh key with write access to the data repository.
+    default: '""'
+  - name: market_brief_environment_vars
+    type: dict
+    description: Pipeline settings passed as environment variables.
+    default: 'TZ: Europe/Berlin
+
+      DEVICE: cpu
+
+      HORIZON_DAYS: 5
+
+      BACKTEST_ORIGINS: 12
+
+      USE_TIMESTRAL: true
+
+      BACKFILL: true
+
+      FM_CUTOFF: ''2025-11-01'''
+  - name: market_brief_entrypoint
+    type: str
+    description: Optional container entrypoint override.
+    default: '""'
+  - name: market_brief_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src (controller path) or source (target path), dest, optional mount, mode, and template.
+    default: '[]'
+  - name: market_brief_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src (controller directory) or source (target path), dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

@@ -1,0 +1,29 @@
+---
+title: giftpilz0.misc
+description: giftpilz0 misc collection
+sidebar:
+  order: 0
+tableOfContents: false
+ansibleCollection:
+  name: giftpilz0.misc
+  roles:
+  - name: cfdyndns
+    description: Run a dynamic DNS updater that publishes the public IP to Cloudflare.
+    variables: 11
+  - name: lego
+    description: Issue and renew ACME certificates with Lego on Linux or Windows.
+    variables: 28
+  - name: profile
+    description: Install fastfetch and configure a system-wide shell profile.
+    variables: 0
+  - name: restic
+    description: Install and configure restic/resticprofile for automated repository backups.
+    variables: 15
+  - name: snapper
+    description: Install and configure Snapper filesystem snapshots.
+    variables: 4
+---
+
+import AnsibleCollection from "../../../../../components/ansible/AnsibleCollection.astro";
+
+<AnsibleCollection />

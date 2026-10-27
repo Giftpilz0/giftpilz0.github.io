@@ -1,0 +1,85 @@
+---
+title: misc
+description: Deploy the Misc web application (built from a git commit) as a Podman quadlet.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: misc
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless podman operations.
+    default: '{{ ansible_user }}'
+  - name: misc_image
+    type: str
+    description: Image name without tag.
+    default: localhost/misc-custom
+  - name: misc_version
+    type: str
+    description: Container image version.
+    default: latest
+  - name: misc_git_repo
+    type: str
+    description: Git repository the misc image is built from.
+    default: https://forgejo.nixpi.de/moritz/service-misc.git
+  - name: misc_commit
+    type: str
+    description: Git commit to build from.
+    default: db16ab7ca40f6e1e98e6e7a3947fb9e2aa04f527
+  - name: misc_dockerfile
+    type: str
+    description: Dockerfile path inside the misc repository.
+    default: docker/docker-minimal/Dockerfile
+  - name: misc_autoupdate
+    type: bool
+    description: Enable podman auto-update for this container.
+    default: 'true'
+  - name: misc_network_enabled
+    type: bool
+    description: Create and manage the podman network.
+    default: 'true'
+  - name: misc_network_name
+    type: str
+    description: Podman network name.
+    default: misc-internal
+  - name: misc_network_driver
+    type: str
+    description: Podman network driver.
+    default: bridge
+  - name: misc_port_map_enabled
+    type: bool
+    description: Expose container ports on the host.
+    default: 'true'
+  - name: misc_bind_ip
+    type: str
+    description: Host IP to bind exposed ports to.
+    default: '{{ ansible_facts[''default_ipv4''][''address''] }}'
+  - name: misc_port_map
+    type: list[str]
+    description: Host:container port mappings.
+    default: '- 8080:8080'
+  - name: misc_environment_vars
+    type: dict
+    description: Extra environment variables injected into the container.
+    default: 'TZ: Europe/Berlin
+
+      LOGLEVEL: INFO
+
+      PORT: 8080'
+  - name: misc_entrypoint
+    type: str
+    description: Optional container entrypoint override.
+    default: '""'
+  - name: misc_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src (controller path) or source (target path), dest, optional mount, mode, and template.
+    default: '[]'
+  - name: misc_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src (controller directory) or source (target path), dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

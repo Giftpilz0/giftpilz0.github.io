@@ -1,0 +1,117 @@
+---
+title: cilium
+description: Install and configure the Cilium CNI on a Kubernetes cluster.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.kubernetes
+  name: cilium
+  variables:
+  - name: cilium_version
+    type: str
+    description: cilium Helm chart version.
+    default: 1.20.3
+  - name: cilium_repo_url
+    type: str
+    description: cilium Helm repository URL.
+    default: https://helm.cilium.io
+  - name: cilium_kubeconfig
+    type: str
+    description: path to kubeconfig for cluster access.
+    default: /etc/rancher/k3s/k3s.yaml
+  - name: cilium_config_kubeproxyreplacement
+    type: bool
+    description: enable kube-proxy replacement.
+    default: 'true'
+  - name: cilium_config_k8sclientratelimit_qps
+    type: int
+    description: Kubernetes client QPS rate limit.
+    default: '30'
+  - name: cilium_config_k8sclientratelimit_burst
+    type: int
+    description: Kubernetes client burst rate limit.
+    default: '150'
+  - name: cilium_config_rolloutciliumpods
+    type: bool
+    description: trigger pod rollout after config changes.
+    default: 'true'
+  - name: cilium_config_l2announcements_enabled
+    type: bool
+    description: enable L2 announcements.
+    default: 'false'
+  - name: cilium_config_bgp_enabled
+    type: bool
+    description: enable BGP peering.
+    default: 'false'
+  - name: cilium_config_bgpcontrolplane_enabled
+    type: bool
+    description: enable BGP control plane.
+    default: 'false'
+  - name: cilium_config_ingresscontroller_enabled
+    type: bool
+    description: enable cilium ingress controller.
+    default: 'true'
+  - name: cilium_config_ingresscontroller_default
+    type: bool
+    description: set cilium as default ingress controller.
+    default: 'true'
+  - name: cilium_config_gatewayapi_enabled
+    type: bool
+    description: enable Gateway API support.
+    default: 'true'
+  - name: cilium_config_hostfirewall_enabled
+    type: bool
+    description: enable host firewall.
+    default: 'true'
+  - name: cilium_config_hubble_enabled
+    type: bool
+    description: enable Hubble observability.
+    default: 'true'
+  - name: cilium_config_hubble_relay_enabled
+    type: bool
+    description: enable Hubble Relay.
+    default: 'true'
+  - name: cilium_config_hubble_relay_rolloutpods
+    type: bool
+    description: trigger pod rollout for Hubble Relay.
+    default: 'true'
+  - name: cilium_config_hubble_ui_enabled
+    type: bool
+    description: enable Hubble UI.
+    default: 'true'
+  - name: cilium_config_hubble_ui_rolloutpods
+    type: bool
+    description: trigger pod rollout for Hubble UI.
+    default: 'true'
+  - name: cilium_config_ipam_mode
+    type: str
+    description: IPAM mode (e.g. cluster-pool).
+    default: cluster-pool
+  - name: cilium_config_ipam_operator_clusterpoolipv4podcidrlist
+    type: list
+    description: list of IPv4 pod CIDRs for cluster-pool.
+    default: '- 10.0.0.0/8'
+  - name: cilium_config_ipv4_enabled
+    type: bool
+    description: enable IPv4 networking.
+    default: 'true'
+  - name: cilium_config_ipv6_enabled
+    type: bool
+    description: enable IPv6 networking.
+    default: 'false'
+  - name: cilium_config_egressgateway_enabled
+    type: bool
+    description: enable egress gateway.
+    default: 'false'
+  - name: cilium_config_operator_enabled
+    type: bool
+    description: deploy the cilium operator.
+    default: 'true'
+  - name: cilium_config_operator_rolloutpods
+    type: bool
+    description: trigger pod rollout for the operator.
+    default: 'false'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

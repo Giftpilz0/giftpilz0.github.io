@@ -1,0 +1,119 @@
+---
+title: mariadb
+description: Deploy MariaDB as a Podman quadlet.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: mariadb
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless podman operations.
+    default: '{{ ansible_user }}'
+  - name: mariadb_image
+    type: str
+    description: Image name without tag.
+    default: docker.io/library/mariadb
+  - name: mariadb_version
+    type: str
+    description: Container image version.
+    default: '13.0'
+  - name: mariadb_autoupdate
+    type: bool
+    description: Enable podman auto-update for this container.
+    default: 'true'
+  - name: mariadb_backup_autoupdate
+    type: bool
+    description: Enable podman auto-update for the backup container.
+    default: 'true'
+  - name: mariadb_network_enabled
+    type: bool
+    description: Create and manage the podman network.
+    default: 'true'
+  - name: mariadb_network_name
+    type: str
+    description: Podman network name.
+    default: mariadb-internal
+  - name: mariadb_network_driver
+    type: str
+    description: Podman network driver.
+    default: bridge
+  - name: mariadb_port_map_enabled
+    type: bool
+    description: Expose container ports on the host.
+    default: 'true'
+  - name: mariadb_bind_ip
+    type: str
+    description: Host IP to bind exposed ports to.
+    default: 127.0.0.1
+  - name: mariadb_port_map
+    type: list[str]
+    description: Host:container port mappings.
+    default: '- 3306:3306'
+  - name: mariadb_admin_database
+    type: str
+    description: Administrator database created by the MariaDB image.
+    default: mariadb
+  - name: mariadb_admin_user
+    type: str
+    description: Administrator user created by the MariaDB image.
+    default: mariadb
+  - name: mariadb_admin_password
+    type: str
+    description: Password for the MariaDB administrator user.
+    default: '""'
+  - name: mariadb_backup_user
+    type: str
+    description: Database user used by the backup and restore container; set this to an existing user's credentials when migrating an initialized volume.
+    default: root
+  - name: mariadb_backup_password
+    type: str
+    description: Password for the backup and restore database user; MARIADB_ROOT_PASSWORD does not change an initialized volume.
+    default: '{{ mariadb_admin_password }}'
+  - name: mariadb_databases
+    type: list[dict]
+    description: Secondary databases and users to provision and include in backups; each entry has name, user, and password.
+    default: '[]'
+  - name: mariadb_backup_schedule_times
+    type: str
+    description: Backup schedule in HH:MM format.
+    default: 03:00
+  - name: mariadb_backup_retention_days
+    type: int
+    description: Number of days to keep backups.
+    default: '7'
+  - name: mariadb_backup_compression
+    type: int
+    description: Zlib compression level (0-9).
+    default: '6'
+  - name: mariadb_environment_vars
+    type: dict
+    description: Extra environment variables injected into the container.
+    default: 'MARIADB_DATABASE: ''{{ mariadb_admin_database }}''
+
+      MARIADB_USER: ''{{ mariadb_admin_user }}''
+
+      MARIADB_PASSWORD: ''{{ mariadb_admin_password }}''
+
+      MARIADB_ROOT_PASSWORD: ''{{ mariadb_backup_password }}'''
+  - name: mariadb_entrypoint
+    type: str
+    description: Optional MariaDB container entrypoint override.
+    default: '""'
+  - name: mariadb_backup_entrypoint
+    type: str
+    description: Optional MariaDB backup container entrypoint override.
+    default: '""'
+  - name: mariadb_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src (controller path) or source (target path), dest, optional mount, mode, and template.
+    default: '[]'
+  - name: mariadb_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src (controller directory) or source (target path), dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

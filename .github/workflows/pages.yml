@@ -1,0 +1,95 @@
+name: Build and deploy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  schedule:
+    # Regenerate the Ansible docs every Monday.
+    - cron: "0 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  REGENERATE: ${{ github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          # Needed for "last updated" dates.
+          fetch-depth: 0
+
+      - uses: astral-sh/setup-uv@v10.3.2
+        if: env.REGENERATE == 'true'
+
+      # Dependencies are declared inline in the script (PEP 723).
+      - name: Regenerate Ansible docs
+        if: env.REGENERATE == 'true'
+        run: uv run scripts/generate_ansible_docs.py
+
+      # Pushes made with GITHUB_TOKEN don't trigger workflows, so deploy from this run.
+      - name: Commit regenerated docs
+        if: env.REGENERATE == 'true'
+        run: |
+          if [ -z "$(git status --porcelain src/content/docs/projects/ansible)" ]; then
+            echo "Ansible docs are up to date."
+            exit 0
+          fi
+          # GitHub's bot account, so the commit is attributed to GitHub Actions.
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content/docs/projects/ansible
+          git commit -m "docs: regenerate ansible collection docs"
+          git push
+
+      # Bun runs the astro CLI with Node, and the runner's preinstalled Node can be too old for Astro.
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Type check
+        run: bun run check
+
+      - name: Build website
+        run: bun run build
+
+      - name: Upload artifact
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

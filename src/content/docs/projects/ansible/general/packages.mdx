@@ -1,0 +1,80 @@
+---
+title: packages
+description: Install and manage RPM, Flatpak, and Python packages and repositories.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.general
+  name: packages
+  variables:
+  - name: packages_package_state
+    type: str
+    description: desired state of system packages.
+    default: present
+    choices:
+    - present
+    - absent
+    - latest
+    - skip
+  - name: packages_rpmfusion_package_state
+    type: str
+    description: desired state of RPM Fusion packages.
+    default: skip
+    choices:
+    - present
+    - latest
+    - skip
+  - name: packages_additional_package_state
+    type: str
+    description: desired state of additional packages.
+    default: present
+    choices:
+    - present
+    - absent
+    - latest
+    - skip
+  - name: packages_python_package_state
+    type: str
+    description: desired state of Python packages.
+    default: present
+    choices:
+    - present
+    - absent
+    - latest
+    - skip
+  - name: packages_package
+    type: list[str]
+    description: list of system packages to manage.
+    default: "- curl\n- '{{ ''mkpasswd'' if ansible_facts[''os_family''] == ''RedHat'' else ''whois'' }}'\n- '{{ ''python-pip'' if ansible_facts[''os_family''] == ''Archlinux'' else ''python3-pip''\n  }}'\n- rsync\n- zstd"
+  - name: packages_rpmfusion_package
+    type: list[str]
+    description: list of RPM Fusion packages to manage.
+    default: "- https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_facts['distribution_major_version']\n  }}.noarch.rpm\n- https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_facts['distribution_major_version']\n  }}.noarch.rpm"
+  - name: packages_additional_package
+    type: list[str]
+    description: list of additional packages to manage.
+    default: '[]'
+  - name: packages_flatpak_package
+    type: list[dict]
+    description: list of Flatpak packages to manage.
+    default: '[]'
+  - name: packages_python_package
+    type: list[str]
+    description: list of Python packages to manage.
+    default: '[]'
+  - name: packages_flatpak_repos
+    type: list[dict]
+    description: Flatpak remotes to add.
+    default: "- name: flathub\n  flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo\n  state: present"
+  - name: packages_flatpak_repos_remove
+    type: list[str]
+    description: Flatpak remotes to remove.
+    default: '[]'
+  - name: packages_copr_repos
+    type: list[dict]
+    description: COPR repositories to enable.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

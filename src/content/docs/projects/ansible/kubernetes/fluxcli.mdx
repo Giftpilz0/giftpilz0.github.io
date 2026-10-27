@@ -1,0 +1,36 @@
+---
+title: fluxcli
+description: Install the Flux CLI (flux) binary.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.kubernetes
+  name: fluxcli
+  variables:
+  - name: fluxcli_bin_state
+    type: str
+    description: desired state of the flux binary.
+    default: present
+    choices:
+    - present
+    - skip
+  - name: fluxcli_url
+    type: str
+    description: download URL for the flux binary.
+    default: https://github.com/fluxcd/flux2/releases/download/v{{ fluxcli_tag }}/flux_{{ fluxcli_tag }}_linux_{{ fluxcli_arch }}.tar.gz
+  - name: fluxcli_arch
+    type: str
+    description: target architecture (e.g. amd64, arm64).
+    default: amd64
+  - name: fluxcli_tag
+    type: str
+    description: release version tag.
+    default: 2.9.6
+  - name: fluxcli_path
+    type: str
+    description: installation directory for the binary.
+    default: /usr/local/sbin
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

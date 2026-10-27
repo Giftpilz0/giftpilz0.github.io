@@ -1,0 +1,20 @@
+---
+title: giftpilz0.server
+description: Ansible collection for linux server management
+sidebar:
+  order: 0
+tableOfContents: false
+ansibleCollection:
+  name: giftpilz0.server
+  roles:
+  - name: keepalived
+    description: Install and configure keepalived for a virtual IP (VRRP).
+    variables: 12
+  - name: podman
+    description: Install Podman and configure the rootless port forwarder.
+    variables: 11
+---
+
+import AnsibleCollection from "../../../../../components/ansible/AnsibleCollection.astro";
+
+<AnsibleCollection />

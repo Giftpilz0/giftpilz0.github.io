@@ -1,0 +1,74 @@
+---
+title: giftpilz0.container
+description: giftpilz0 container collection
+sidebar:
+  order: 0
+tableOfContents: false
+ansibleCollection:
+  name: giftpilz0.container
+  roles:
+  - name: acme_dns
+    description: Deploy the acme-dns ACME challenge server as a Podman quadlet.
+    variables: 23
+  - name: beszel
+    description: Deploy the Beszel monitoring hub as a Podman quadlet.
+    variables: 15
+  - name: bumper
+    description: Deploy the Bumper web application (built from a git commit) as a Podman quadlet.
+    variables: 16
+  - name: forgejo
+    description: Deploy the Forgejo Git service as a Podman quadlet.
+    variables: 27
+  - name: gatus
+    description: Deploy Gatus (endpoint monitoring and status page) as a Podman quadlet.
+    variables: 27
+  - name: gitlab_runner
+    description: Deploy a GitLab Runner as a Podman quadlet.
+    variables: 15
+  - name: homeassistant
+    description: Deploy Home Assistant as a Podman quadlet.
+    variables: 15
+  - name: keycloak
+    description: Deploy Keycloak identity and access management as a Podman quadlet.
+    variables: 20
+  - name: mariadb
+    description: Deploy MariaDB as a Podman quadlet.
+    variables: 25
+  - name: market_brief
+    description: Run the market brief pipeline (built from its git repository) on a systemd timer as a Podman quadlet.
+    variables: 16
+  - name: misc
+    description: Deploy the Misc web application (built from a git commit) as a Podman quadlet.
+    variables: 17
+  - name: monitoring_stack
+    description: Deploy the monitoring stack (Garage object store, Mimir, Loki, and Perses UI) as Podman quadlets.
+    variables: 63
+  - name: mosquitto
+    description: Deploy the Eclipse Mosquitto MQTT broker as a Podman quadlet.
+    variables: 22
+  - name: navidrome
+    description: Deploy Navidrome as a Podman Quadlet pod.
+    variables: 20
+  - name: opencloud
+    description: Deploy OpenCloud as a Podman quadlet.
+    variables: 40
+  - name: postgresql
+    description: Deploy PostgreSQL as a Podman quadlet.
+    variables: 32
+  - name: quadlet
+    description: Deploy the quadlet files of a service role and (re)start its units.
+    variables: 17
+  - name: suwayomi
+    description: Deploy Suwayomi Server and its FlareSolverr companion as a Podman Quadlet pod.
+    variables: 19
+  - name: traefik
+    description: Deploy the Traefik reverse proxy as a Podman quadlet.
+    variables: 47
+  - name: vaultwarden
+    description: Deploy Vaultwarden (Bitwarden-compatible password manager) as a Podman quadlet.
+    variables: 16
+---
+
+import AnsibleCollection from "../../../../../components/ansible/AnsibleCollection.astro";
+
+<AnsibleCollection />

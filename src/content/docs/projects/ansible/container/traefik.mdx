@@ -1,0 +1,217 @@
+---
+title: traefik
+description: Deploy the Traefik reverse proxy as a Podman quadlet.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: traefik
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless podman operations.
+    default: '{{ ansible_user }}'
+  - name: traefik_image
+    type: str
+    description: Image name without tag.
+    default: docker.io/library/traefik
+  - name: traefik_version
+    type: str
+    description: Container image version.
+    default: v3.7.16
+  - name: traefik_autoupdate
+    type: bool
+    description: Enable podman auto-update for this container.
+    default: 'true'
+  - name: traefik_network_enabled
+    type: bool
+    description: Create and manage the podman network.
+    default: 'true'
+  - name: traefik_network_name
+    type: str
+    description: Podman network name.
+    default: traefik-internal
+  - name: traefik_network_driver
+    type: str
+    description: Podman network driver.
+    default: bridge
+  - name: traefik_networks
+    type: list[str]
+    description: Additional podman networks to join (by role name).
+    default: '[]'
+  - name: traefik_bind_ip
+    type: str
+    description: Host IP to bind exposed ports to.
+    default: '{{ ansible_facts[''default_ipv4''][''address''] }}'
+  - name: traefik_acme_enabled
+    type: bool
+    description: Enable ACME/Let's Encrypt certificates.
+    default: 'true'
+  - name: traefik_acme_email
+    type: str
+    description: ACME account email.
+    default: '""'
+  - name: traefik_acme_ca_server
+    type: str
+    description: ACME CA server URL.
+    default: https://acme-v02.api.letsencrypt.org/directory
+  - name: traefik_acme_challenge_type
+    type: str
+    description: ACME challenge type (dns, http, or tls).
+    default: http
+  - name: traefik_acme_dns_provider
+    type: str
+    description: DNS provider for DNS challenge.
+    default: cloudflare
+  - name: traefik_acme_dns_resolvers
+    type: list[str]
+    description: Custom DNS resolvers for DNS challenge.
+    default: '[]'
+  - name: traefik_acme_eab_enabled
+    type: bool
+    description: Enable external account binding for ACME.
+    default: 'false'
+  - name: traefik_acme_eab_kid
+    type: str
+    description: ACME EAB key ID.
+    default: '""'
+  - name: traefik_acme_eab_hmac
+    type: str
+    description: ACME EAB HMAC key.
+    default: '""'
+  - name: traefik_http_internal_port
+    type: int
+    description: Internal HTTP entrypoint port.
+    default: '80'
+  - name: traefik_https_internal_port
+    type: int
+    description: Internal HTTPS entrypoint port.
+    default: '443'
+  - name: traefik_http_redirect_https
+    type: bool
+    description: Redirect HTTP to HTTPS.
+    default: 'true'
+  - name: traefik_http3_enabled
+    type: bool
+    description: Enable HTTP/3 (QUIC).
+    default: 'true'
+  - name: traefik_http3_advertised_port
+    type: int
+    description: HTTP/3 advertised port.
+    default: '443'
+  - name: traefik_tcp_entrypoints
+    type: list[dict]
+    description: TCP entrypoint definitions.
+    default: '[]'
+  - name: traefik_log_level
+    type: str
+    description: Traefik log level.
+    default: WARN
+  - name: traefik_log_format
+    type: str
+    description: Traefik log format.
+    default: json
+  - name: traefik_access_log_format
+    type: str
+    description: Access log format.
+    default: json
+  - name: traefik_access_log_buffer_size
+    type: int
+    description: Access log channel buffer size.
+    default: '10'
+  - name: traefik_metrics_enabled
+    type: bool
+    description: Enable Prometheus metrics endpoint.
+    default: 'true'
+  - name: traefik_metrics_internal_port
+    type: int
+    description: Prometheus metrics port inside the container.
+    default: '8082'
+  - name: traefik_metrics_bind_ip
+    type: str
+    description: Bind IP for metrics endpoint.
+    default: 127.0.0.1
+  - name: traefik_ping_internal_port
+    type: int
+    description: Port of the ping endpoint used by the health check, bound to 127.0.0.1.
+    default: '8081'
+  - name: traefik_transport_timeouts_enabled
+    type: bool
+    description: Enable custom transport timeouts.
+    default: 'false'
+  - name: traefik_transport_read_timeout
+    type: str
+    description: Transport read timeout (e.g. 12h).
+    default: 12h
+  - name: traefik_transport_write_timeout
+    type: str
+    description: Transport write timeout (e.g. 12h).
+    default: 12h
+  - name: traefik_transport_idle_timeout
+    type: str
+    description: Transport idle timeout (e.g. 3m).
+    default: 3m
+  - name: traefik_plugins
+    type: dict
+    description: Experimental Traefik plugin definitions keyed by plugin name.
+    default: '{}'
+  - name: traefik_middlewares_redirect
+    type: dict
+    description: Redirect middleware definitions (path/regex-based).
+    default: '{}'
+  - name: traefik_custom_middlewares
+    type: dict
+    description: Custom traefik middleware definitions.
+    default: '{}'
+  - name: traefik_http_services
+    type: list[dict]
+    description: HTTP service/router definitions.
+    default: '[]'
+  - name: traefik_http_service_defaults
+    type: dict
+    description: Values for keys missing in traefik_http_services entries.
+    default: 'entrypoints:
+
+      - websecure
+
+      middlewares: []
+
+      tls_enabled: false
+
+      acme_enabled: ''{{ traefik_acme_enabled }}''
+
+      large_downloads: false
+
+      insecure_skip_verify: false'
+  - name: traefik_tcp_services
+    type: list[dict]
+    description: TCP service/router definitions.
+    default: '[]'
+  - name: traefik_tcp_service_defaults
+    type: dict
+    description: Values for keys missing in traefik_tcp_services entries.
+    default: 'tls_enabled: false
+
+      acme_enabled: false
+
+      tls_passthrough: false'
+  - name: traefik_environment_vars
+    type: dict
+    description: Extra environment variables for the container.
+    default: '{}'
+  - name: traefik_entrypoint
+    type: str
+    description: Optional container entrypoint override.
+    default: '""'
+  - name: traefik_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src (controller path) or source (target path), dest, optional mount, mode, and template.
+    default: '[]'
+  - name: traefik_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src (controller directory) or source (target path), dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

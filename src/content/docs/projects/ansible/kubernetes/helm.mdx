@@ -1,0 +1,36 @@
+---
+title: helm
+description: Install the Helm package manager binary.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.kubernetes
+  name: helm
+  variables:
+  - name: helm_bin_state
+    type: str
+    description: desired state of the helm binary.
+    default: present
+    choices:
+    - present
+    - skip
+  - name: helm_url
+    type: str
+    description: download URL for the helm binary.
+    default: https://get.helm.sh/helm-v{{ helm_tag }}-linux-{{ helm_arch }}.tar.gz
+  - name: helm_arch
+    type: str
+    description: target architecture (e.g. amd64, arm64).
+    default: amd64
+  - name: helm_tag
+    type: str
+    description: release version tag.
+    default: 4.3.1
+  - name: helm_path
+    type: str
+    description: installation directory for the binary.
+    default: /usr/local/sbin
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

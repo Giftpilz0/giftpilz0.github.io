@@ -1,0 +1,292 @@
+---
+title: lego
+description: Issue and renew ACME certificates with Lego on Linux or Windows.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.misc
+  name: lego
+  variables:
+  - name: lego_state_path
+    type: path
+    description: private shared Lego state directory containing account keys and certificates.
+    default: '{{ ''C:\ProgramData\lego'' if ansible_facts[''os_family''] == ''Windows'' else ''/var/lib/lego'' }}'
+  - name: lego_service_user
+    type: str
+    description: Linux account used to run Lego.
+    default: lego
+  - name: lego_service_group
+    type: str
+    description: Linux group used to run Lego.
+    default: lego
+  - name: lego_tag
+    type: str
+    description: Lego release version.
+    default: 5.5.2
+  - name: lego_arch
+    type: str
+    description: Lego release architecture.
+    default: amd64
+  - name: lego_path
+    type: path
+    description: Lego installation directory.
+    default: '{{ ''C:\ProgramData\lego\bin'' if ansible_facts[''os_family''] == ''Windows'' else ''/usr/local/bin'' }}'
+  - name: lego_url
+    type: str
+    description: Linux Lego archive URL.
+    default: https://github.com/go-acme/lego/releases/download/v{{ lego_tag }}/lego_v{{ lego_tag }}_linux_{{ lego_arch }}.tar.gz
+  - name: lego_windows_url
+    type: str
+    description: Windows Lego archive URL.
+    default: https://github.com/go-acme/lego/releases/download/v{{ lego_tag }}/lego_v{{ lego_tag }}_windows_{{ lego_arch }}.zip
+  - name: lego_windows_state_acl
+    type: list[dict]
+    description: Windows identities allowed to access private Lego state.
+    default: "- user: SYSTEM\n  rights: FullControl\n- user: Administrators\n  rights: FullControl"
+    options:
+    - name: user
+      type: str
+      required: true
+      description: Windows identity receiving access.
+    - name: rights
+      type: str
+      required: true
+      description: Windows filesystem rights to grant.
+  - name: lego_windows_task_username
+    type: str
+    description: Windows identity used by the scheduled renewal task.
+    default: SYSTEM
+  - name: lego_windows_task_logon_type
+    type: str
+    description: Windows scheduled-task logon type.
+    default: service_account
+    choices:
+    - service_account
+    - password
+    - s4u
+    - interactive_token
+  - name: lego_windows_task_password
+    type: str
+    description: Password for a password-based scheduled-task identity.
+    default: '""'
+  - name: lego_binary
+    type: path
+    description: Lego executable path.
+    default: '{{ lego_path }}/lego'
+  - name: lego_bin_state
+    type: str
+    description: whether to install Lego or use an existing binary.
+    default: present
+    choices:
+    - present
+    - skip
+  - name: lego_issue_on_deploy
+    type: bool
+    description: issue missing certificates immediately when the role is applied.
+    default: 'false'
+  - name: lego_renewal_threshold
+    type: int
+    description: renew certificates when fewer than this many days remain.
+    default: '30'
+  - name: lego_acme_email
+    type: str
+    description: ACME account email address.
+    default: '""'
+  - name: lego_acme_server
+    type: str
+    description: ACME directory URL.
+    default: https://acme-v02.api.letsencrypt.org/directory
+  - name: lego_acme_dns_resolvers
+    type: list[str]
+    description: DNS resolvers passed to Lego for DNS-01 validation.
+    default: '[]'
+  - name: lego_certificates
+    type: list[dict]
+    description: certificates to issue; each entry must define domains and a challenge.
+    default: '[]'
+    options:
+    - name: name
+      type: str
+      required: true
+      description: unique identifier used for generated environment files and deployment markers.
+    - name: domains
+      type: list[str]
+      required: true
+      description: domain names included in the certificate; the first domain names the output files.
+    - name: key_type
+      type: str
+      description: Lego private-key type.
+      choices:
+      - RSA2048
+      - RSA3072
+      - RSA4096
+      - EC256
+      - EC384
+      - EC521
+    - name: account_id
+      type: str
+      description: optional ACME account directory identifier when one email uses multiple accounts.
+    - name: renewal
+      type: dict
+      description: per-certificate renewal settings.
+      options:
+      - name: threshold
+        type: int
+        description: override the global renewal threshold in days.
+    - name: challenge
+      type: dict
+      required: true
+      description: ACME challenge method and provider credentials.
+      options:
+      - name: type
+        type: str
+        required: true
+        description: ACME validation method.
+        choices:
+        - dns-01
+        - http-01
+        - tls-alpn-01
+      - name: provider
+        type: str
+        description: Lego DNS provider name; required for dns-01.
+      - name: environment
+        type: dict
+        description: provider environment variables, normally populated from Ansible Vault.
+    - name: deploy
+      type: dict
+      description: optional certificate deployment targets.
+      options:
+      - name: pem
+        type: dict
+        description: Linux PEM deployment.
+        options:
+        - name: directory
+          type: path
+          required: true
+          description: target directory for fullchain.pem and privkey.pem.
+        - name: owner
+          type: str
+          description: owner of the deployed files and directory.
+        - name: group
+          type: str
+          description: group of the deployed files and directory.
+        - name: directory_mode
+          type: str
+          description: target directory mode.
+        - name: certificate_mode
+          type: str
+          description: fullchain.pem mode.
+        - name: private_key_mode
+          type: str
+          description: privkey.pem mode.
+      - name: pfx
+        type: dict
+        description: PFX deployment for Windows or applications that consume a PFX file.
+        options:
+        - name: path
+          type: path
+          required: true
+          description: target PFX path.
+        - name: password
+          type: str
+          required: true
+          description: password used to protect the PFX.
+        - name: owner
+          type: str
+          description: owner of the PFX on Linux.
+        - name: group
+          type: str
+          description: group of the PFX on Linux.
+        - name: mode
+          type: str
+          description: mode of the PFX on Linux.
+        - name: directory_mode
+          type: str
+          description: parent directory mode on Linux.
+      - name: windows_store
+        type: dict
+        description: optional Windows certificate-store import for a deployed PFX.
+        options:
+        - name: store_location
+          type: str
+          description: Windows certificate-store location.
+          choices:
+          - CurrentUser
+          - LocalMachine
+        - name: store_name
+          type: str
+          description: Windows certificate-store name.
+    - name: hooks
+      type: dict
+      description: commands run only after a changed certificate is deployed.
+      options:
+      - name: changed
+        type: list[dict]
+        options:
+        - name: type
+          type: str
+          description: informational; Linux runs command, Windows runs script.
+          choices:
+          - command
+          - powershell
+        - name: command
+          type: str
+          description: shell command used by a Linux hook.
+        - name: script
+          type: str
+          description: PowerShell script used by a Windows hook.
+    - name: extra_args
+      type: list[str]
+      description: additional Lego arguments for this certificate.
+  - name: lego_certificate_defaults
+    type: dict
+    description: values for keys missing in lego_certificates entries (merged recursively).
+    default: "key_type: EC256\naccount_id: '{{ lego_acme_email }}'\nextra_args: []\nrenewal:\n  threshold: '{{ lego_renewal_threshold }}'\nchallenge:\n  environment: {}\nhooks:\n  changed: []\ndeploy: {}"
+  - name: lego_default_deploy_directory_mode
+    type: str
+    description: default mode for Linux certificate deployment directories.
+    default: '0750'
+  - name: lego_default_deploy_file_mode
+    type: str
+    description: default mode for Linux deployed certificate files.
+    default: '0640'
+  - name: lego_default_deploy_private_key_mode
+    type: str
+    description: default mode for Linux deployed private keys.
+    default: '0640'
+  - name: lego_deploy_pem_defaults
+    type: dict
+    description: values for keys missing in deploy.pem.
+    default: 'owner: root
+
+      group: root
+
+      directory_mode: ''{{ lego_default_deploy_directory_mode }}''
+
+      certificate_mode: ''{{ lego_default_deploy_file_mode }}''
+
+      private_key_mode: ''{{ lego_default_deploy_private_key_mode }}'''
+  - name: lego_deploy_pfx_defaults
+    type: dict
+    description: values for keys missing in deploy.pfx.
+    default: 'owner: root
+
+      group: root
+
+      directory_mode: ''0700''
+
+      mode: ''0600'''
+  - name: lego_deploy_windows_store_defaults
+    type: dict
+    description: values for keys missing in deploy.windows_store.
+    default: 'store_location: LocalMachine
+
+      store_name: My'
+  - name: lego_extra_args
+    type: list[str]
+    description: additional Lego arguments passed to every certificate.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

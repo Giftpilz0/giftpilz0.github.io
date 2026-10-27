@@ -1,0 +1,81 @@
+---
+title: vaultwarden
+description: Deploy Vaultwarden (Bitwarden-compatible password manager) as a Podman quadlet.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: vaultwarden
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless podman operations.
+    default: '{{ ansible_user }}'
+  - name: vaultwarden_image
+    type: str
+    description: Image name without tag.
+    default: docker.io/vaultwarden/server
+  - name: vaultwarden_version
+    type: str
+    description: Container image version.
+    default: 1.37.4-alpine
+  - name: vaultwarden_autoupdate
+    type: bool
+    description: Enable podman auto-update for this container.
+    default: 'true'
+  - name: vaultwarden_network_enabled
+    type: bool
+    description: Create and manage the podman network.
+    default: 'true'
+  - name: vaultwarden_network_name
+    type: str
+    description: Podman network name.
+    default: vaultwarden-internal
+  - name: vaultwarden_network_driver
+    type: str
+    description: Podman network driver.
+    default: bridge
+  - name: vaultwarden_port_map_enabled
+    type: bool
+    description: Expose container ports on the host.
+    default: 'true'
+  - name: vaultwarden_bind_ip
+    type: str
+    description: Host IP to bind exposed ports to.
+    default: 127.0.0.1
+  - name: vaultwarden_port_map
+    type: list[str]
+    description: Host:container port mappings.
+    default: '- 80:80'
+  - name: vaultwarden_domain
+    type: str
+    description: External URL for the Vaultwarden instance.
+    default: '""'
+  - name: vaultwarden_admin_token
+    type: str
+    description: Admin token for the Vaultwarden admin panel.
+    default: '""'
+  - name: vaultwarden_environment_vars
+    type: dict
+    description: Extra environment variables injected into the container.
+    default: 'DOMAIN: ''{{ vaultwarden_domain }}''
+
+      ADMIN_TOKEN: ''{{ vaultwarden_admin_token }}''
+
+      ROCKET_PORT: ''80'''
+  - name: vaultwarden_entrypoint
+    type: str
+    description: Optional container entrypoint override.
+    default: '""'
+  - name: vaultwarden_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src (controller path) or source (target path), dest, optional mount, mode, and template.
+    default: '[]'
+  - name: vaultwarden_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src (controller directory) or source (target path), dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

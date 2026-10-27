@@ -1,0 +1,81 @@
+---
+title: snapper
+description: Install and configure Snapper filesystem snapshots.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.misc
+  name: snapper
+  variables:
+  - name: snapper_configs
+    type: list[dict]
+    description: list of snapper configurations to create.
+    default: "- name: home\n  path: /home\n  allow_users: '{{ ansible_user }}'\n  sync_acl: 'yes'\n  timeline_create: 'yes'\n  timeline_cleanup: 'yes'\n  timeline_min_age: 3600\n  timeline_limit_hourly: 5\n  timeline_limit_daily: 7\n  timeline_limit_weekly: 4\n  timeline_limit_monthly: 6\n  timeline_limit_yearly: 3\n  number_cleanup: 'yes'"
+    options:
+    - name: name
+      type: str
+      description: configuration name.
+    - name: path
+      type: str
+      description: subvolume path to manage.
+    - name: allow_users
+      type: str
+      description: comma-separated list of users allowed to create snapshots.
+    - name: sync_acl
+      type: str
+      description: synchronize ACLs from subvolume to .snapshots.
+      choices:
+      - 'yes'
+      - 'no'
+    - name: timeline_create
+      type: str
+      description: enable timeline snapshots.
+      choices:
+      - 'yes'
+      - 'no'
+    - name: timeline_cleanup
+      type: str
+      description: enable automatic timeline cleanup.
+      choices:
+      - 'yes'
+      - 'no'
+    - name: timeline_min_age
+      type: int
+      description: minimum age in seconds between snapshots.
+    - name: timeline_limit_hourly
+      type: int
+      description: number of hourly snapshots to keep.
+    - name: timeline_limit_daily
+      type: int
+      description: number of daily snapshots to keep.
+    - name: timeline_limit_weekly
+      type: int
+      description: number of weekly snapshots to keep.
+    - name: timeline_limit_monthly
+      type: int
+      description: number of monthly snapshots to keep.
+    - name: timeline_limit_yearly
+      type: int
+      description: number of yearly snapshots to keep.
+    - name: number_cleanup
+      type: str
+      description: enable number-based cleanup.
+      choices:
+      - 'yes'
+      - 'no'
+  - name: snapper_enable_timeline_timer
+    type: bool
+    description: enable the snapper timeline timer.
+    default: 'true'
+  - name: snapper_enable_cleanup_timer
+    type: bool
+    description: enable the snapper cleanup timer.
+    default: 'true'
+  - name: snapper_add_to_fstab
+    type: bool
+    description: mount .snapshots subvolumes via fstab.
+    default: 'true'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

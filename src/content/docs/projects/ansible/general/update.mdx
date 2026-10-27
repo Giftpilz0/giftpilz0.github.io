@@ -1,0 +1,25 @@
+---
+title: update
+description: Apply system package updates with an optional automatic reboot.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.general
+  name: update
+  variables:
+  - name: update_package_names
+    type: list[str]
+    description: list of packages to update (empty for all).
+    default: '*'
+  - name: update_package_security_only
+    type: bool
+    description: only apply security updates.
+    default: 'false'
+  - name: update_package_bugfix_only
+    type: bool
+    description: only apply bugfix updates.
+    default: 'false'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

@@ -1,0 +1,36 @@
+---
+title: k9s
+description: Install the k9s terminal UI for Kubernetes.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.kubernetes
+  name: k9s
+  variables:
+  - name: k9s_bin_state
+    type: str
+    description: desired state of the k9s binary.
+    default: present
+    choices:
+    - present
+    - skip
+  - name: k9s_url
+    type: str
+    description: download URL for the k9s binary.
+    default: https://github.com/derailed/k9s/releases/download/v{{ k9s_tag }}/k9s_Linux_{{ k9s_arch }}.tar.gz
+  - name: k9s_arch
+    type: str
+    description: target architecture (e.g. amd64, arm64).
+    default: amd64
+  - name: k9s_tag
+    type: str
+    description: release version tag.
+    default: 0.51.0
+  - name: k9s_path
+    type: str
+    description: installation directory for the binary.
+    default: /usr/local/sbin
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

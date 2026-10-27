@@ -1,0 +1,57 @@
+---
+title: cfdyndns
+description: Run a dynamic DNS updater that publishes the public IP to Cloudflare.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.misc
+  name: cfdyndns
+  variables:
+  - name: cfdyndns_api_email
+    type: str
+    description: Cloudflare account email used by the DDNS Worker.
+    default: '""'
+  - name: cfdyndns_api_token
+    type: str
+    description: Cloudflare API token for DNS updates.
+    default: '""'
+  - name: cfdyndns_update_url
+    type: str
+    description: DDNS update endpoint URL.
+    default: '""'
+  - name: cfdyndns_update_hostnames
+    type: list[str]
+    description: hostnames to update in one DDNS request.
+    default: '[]'
+  - name: cfdyndns_cloudflare_trace_url
+    type: str
+    description: Cloudflare trace URL for IP detection.
+    default: https://cloudflare.com/cdn-cgi/trace
+  - name: cfdyndns_script_path
+    type: str
+    description: path to the IP updater script.
+    default: /usr/local/bin/ip_updater.py
+  - name: cfdyndns_state_dir
+    type: str
+    description: directory for storing state files.
+    default: /var/lib/cfdyndns
+  - name: cfdyndns_last_ip_file
+    type: str
+    description: path to the file storing the last known IP.
+    default: '{{ cfdyndns_state_dir }}/last_ip'
+  - name: cfdyndns_check_interval
+    type: str
+    description: interval between IP change checks.
+    default: 5min
+  - name: cfdyndns_on_boot_delay
+    type: str
+    description: delay before first check after boot.
+    default: 1min
+  - name: cfdyndns_python_requests_package
+    type: str
+    description: name of the Python requests package to install.
+    default: python3-requests
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

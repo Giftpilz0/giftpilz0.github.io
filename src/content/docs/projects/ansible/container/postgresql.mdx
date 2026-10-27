@@ -1,0 +1,150 @@
+---
+title: postgresql
+description: Deploy PostgreSQL as a Podman quadlet.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: postgresql
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless podman operations.
+    default: '{{ ansible_user }}'
+  - name: postgresql_image
+    type: str
+    description: Image name without tag.
+    default: docker.io/library/postgres
+  - name: postgresql_version
+    type: str
+    description: Container image version.
+    default: 18.6-alpine
+  - name: postgresql_autoupdate
+    type: bool
+    description: Enable podman auto-update for PostgreSQL.
+    default: 'true'
+  - name: postgresql_backup_autoupdate
+    type: bool
+    description: Enable podman auto-update for the backup container.
+    default: 'true'
+  - name: postgresql_network_enabled
+    type: bool
+    description: Create and manage the podman network.
+    default: 'true'
+  - name: postgresql_network_name
+    type: str
+    description: Podman network name.
+    default: postgresql-internal
+  - name: postgresql_network_driver
+    type: str
+    description: Podman network driver.
+    default: bridge
+  - name: postgresql_port_map_enabled
+    type: bool
+    description: Expose container ports on the host.
+    default: 'false'
+  - name: postgresql_bind_ip
+    type: str
+    description: Host IP to bind exposed ports to.
+    default: 127.0.0.1
+  - name: postgresql_port_map
+    type: list[str]
+    description: Host:container port mappings.
+    default: '- 5432:5432'
+  - name: postgresql_log_destination
+    type: str
+    description: PostgreSQL log destination.
+    default: stderr
+  - name: postgresql_log_statement
+    type: str
+    description: SQL statement logging level.
+    default: none
+    choices:
+    - none
+    - ddl
+    - mod
+    - all
+  - name: postgresql_log_min_duration_statement
+    type: int
+    description: Log statements running at least this many milliseconds.
+    default: '1000'
+  - name: postgresql_log_connections
+    type: bool
+    description: Log successful connection attempts.
+    default: 'true'
+  - name: postgresql_log_disconnections
+    type: bool
+    description: Log session disconnections.
+    default: 'true'
+  - name: postgresql_log_checkpoints
+    type: bool
+    description: Log checkpoint activity.
+    default: 'true'
+  - name: postgresql_log_lock_waits
+    type: bool
+    description: Log waits exceeding deadlock timeout.
+    default: 'true'
+  - name: postgresql_log_line_prefix
+    type: str
+    description: Context prefix for each PostgreSQL log line.
+    default: '%m [%p] db=%d,user=%u,app=%a,client=%h '
+  - name: postgresql_admin_database
+    type: str
+    description: Administrator database created by the PostgreSQL image.
+    default: postgres
+  - name: postgresql_admin_user
+    type: str
+    description: Administrator user created by the PostgreSQL image.
+    default: postgres
+  - name: postgresql_admin_password
+    type: str
+    description: Password for the PostgreSQL administrator user.
+    default: '""'
+  - name: postgresql_users
+    type: list[dict]
+    description: Users to provision; each entry has name and password.
+    default: '[]'
+  - name: postgresql_databases
+    type: list[dict]
+    description: Secondary databases to provision and include in backups; each entry has name and owner.
+    default: '[]'
+  - name: postgresql_backup_schedule_times
+    type: str
+    description: Time of day to run backup (HH:MM format).
+    default: 03:00
+  - name: postgresql_backup_retention_days
+    type: int
+    description: Number of days to keep backups.
+    default: '7'
+  - name: postgresql_backup_compression
+    type: int
+    description: Gzip compression level (1-9).
+    default: '6'
+  - name: postgresql_environment_vars
+    type: dict
+    description: Extra environment variables for the container.
+    default: 'POSTGRES_DB: ''{{ postgresql_admin_database }}''
+
+      POSTGRES_USER: ''{{ postgresql_admin_user }}''
+
+      POSTGRES_PASSWORD: ''{{ postgresql_admin_password }}'''
+  - name: postgresql_entrypoint
+    type: str
+    description: Optional PostgreSQL container entrypoint override.
+    default: '""'
+  - name: postgresql_backup_entrypoint
+    type: str
+    description: Optional PostgreSQL backup container entrypoint override.
+    default: '""'
+  - name: postgresql_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src (controller path) or source (target path), dest, optional mount, mode, and template.
+    default: '[]'
+  - name: postgresql_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src (controller directory) or source (target path), dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

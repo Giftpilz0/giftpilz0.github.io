@@ -1,0 +1,103 @@
+---
+title: suwayomi
+description: Deploy Suwayomi Server and its FlareSolverr companion as a Podman Quadlet pod.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: suwayomi
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless Podman operations.
+    default: '{{ ansible_user }}'
+  - name: suwayomi_image
+    type: str
+    description: Image name without tag.
+    default: ghcr.io/suwayomi/suwayomi-server
+  - name: suwayomi_version
+    type: str
+    description: Suwayomi Server image tag.
+    default: v2.4.2435
+  - name: suwayomi_autoupdate
+    type: bool
+    description: Enable Podman registry auto-update for Suwayomi.
+    default: 'true'
+  - name: suwayomi_network_enabled
+    type: bool
+    description: Create and manage the Podman network.
+    default: 'true'
+  - name: suwayomi_network_name
+    type: str
+    description: Podman network name.
+    default: suwayomi-internal
+  - name: suwayomi_network_driver
+    type: str
+    description: Podman network driver.
+    default: bridge
+  - name: suwayomi_port_map_enabled
+    type: bool
+    description: Publish Suwayomi ports directly on the host.
+    default: 'false'
+  - name: suwayomi_bind_ip
+    type: str
+    description: Host IP for optional direct port publishing.
+    default: 127.0.0.1
+  - name: suwayomi_port_map
+    type: list[str]
+    description: Host-to-container port mappings.
+    default: '- 4567:4567'
+  - name: suwayomi_environment_vars
+    type: dict
+    description: Environment variables passed to Suwayomi. Set WebUI update interval to 0 for manual updates.
+    default: 'TZ: Europe/Berlin
+
+      BIND_IP: 0.0.0.0
+
+      BIND_PORT: ''4567''
+
+      AUTH_MODE: none
+
+      WEB_UI_UPDATE_INTERVAL: ''0''
+
+      DOWNLOAD_AS_CBZ: ''true''
+
+      FLARESOLVERR_ENABLED: ''true''
+
+      FLARESOLVERR_URL: http://127.0.0.1:8191'
+  - name: suwayomi_flaresolverr_image
+    type: str
+    description: Image name without tag.
+    default: ghcr.io/thephaseless/byparr
+  - name: suwayomi_flaresolverr_version
+    type: str
+    description: Byparr image tag used for the FlareSolverr-compatible companion.
+    default: 3.0.4
+  - name: suwayomi_flaresolverr_autoupdate
+    type: bool
+    description: Enable Podman registry auto-update for FlareSolverr.
+    default: 'true'
+  - name: suwayomi_flaresolverr_environment_vars
+    type: dict
+    description: Environment variables passed to FlareSolverr.
+    default: 'TZ: Europe/Berlin'
+  - name: suwayomi_entrypoint
+    type: str
+    description: Optional Suwayomi container entrypoint override.
+    default: '""'
+  - name: suwayomi_flaresolverr_entrypoint
+    type: str
+    description: Optional FlareSolverr container entrypoint override.
+    default: '""'
+  - name: suwayomi_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src or source, dest, optional mount, mode, and template.
+    default: '[]'
+  - name: suwayomi_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src or source, dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

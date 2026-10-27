@@ -1,0 +1,54 @@
+---
+title: git
+description: Install git and optionally configure system-wide git settings.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.general
+  name: git
+  variables:
+  - name: git_package_state
+    type: str
+    description: desired state of git packages.
+    default: present
+    choices:
+    - present
+    - absent
+    - latest
+  - name: git_package
+    type: list[str]
+    description: list of packages to install.
+    default: '- git'
+  - name: git_config_system
+    type: list[dict]
+    description: system-wide git configuration entries.
+    default: '[]'
+    options:
+    - name: key
+      type: str
+      description: git configuration key.
+    - name: value
+      type: str
+      description: git configuration value.
+  - name: git_config
+    type: list[dict]
+    description: per-user git configuration entries.
+    default: '[]'
+    options:
+    - name: key
+      type: str
+      description: git configuration key.
+    - name: value
+      type: str
+      description: git configuration value.
+    - name: scope
+      type: str
+      description: git configuration scope.
+      choices:
+      - file
+      - local
+      - global
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

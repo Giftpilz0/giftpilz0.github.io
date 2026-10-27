@@ -1,0 +1,73 @@
+---
+title: gitlab_runner
+description: Deploy a GitLab Runner as a Podman quadlet.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: gitlab_runner
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless podman operations.
+    default: '{{ ansible_user }}'
+  - name: gitlab_runner_image
+    type: str
+    description: Image name without tag.
+    default: docker.io/gitlab/gitlab-runner
+  - name: gitlab_runner_version
+    type: str
+    description: Container image version.
+    default: v19.5.1
+  - name: gitlab_runner_autoupdate
+    type: bool
+    description: Enable podman auto-update for this container.
+    default: 'true'
+  - name: gitlab_runner_network_enabled
+    type: bool
+    description: Create and manage the podman network.
+    default: 'true'
+  - name: gitlab_runner_network_name
+    type: str
+    description: Podman network name.
+    default: gitlab-runner-internal
+  - name: gitlab_runner_network_driver
+    type: str
+    description: Podman network driver.
+    default: bridge
+  - name: gitlab_runner_concurrent
+    type: int
+    description: Maximum number of concurrent jobs.
+    default: '1'
+  - name: gitlab_runner_name
+    type: str
+    description: Runner display name.
+    default: '""'
+  - name: gitlab_runner_url
+    type: str
+    description: GitLab instance URL.
+    default: '""'
+  - name: gitlab_runner_token
+    type: str
+    description: Runner registration token.
+    default: '""'
+  - name: gitlab_runner_environment_vars
+    type: dict
+    description: Extra environment variables injected into the container.
+    default: '{}'
+  - name: gitlab_runner_entrypoint
+    type: str
+    description: Optional container entrypoint override.
+    default: '""'
+  - name: gitlab_runner_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src (controller path) or source (target path), dest, optional mount, mode, and template.
+    default: '[]'
+  - name: gitlab_runner_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src (controller directory) or source (target path), dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

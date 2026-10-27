@@ -1,0 +1,75 @@
+---
+title: beszel
+description: Deploy the Beszel monitoring hub as a Podman quadlet.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: beszel
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless podman operations.
+    default: '{{ ansible_user }}'
+  - name: beszel_image
+    type: str
+    description: Image name without tag.
+    default: docker.io/henrygd/beszel
+  - name: beszel_version
+    type: str
+    description: Container image version.
+    default: 0.21.1
+  - name: beszel_autoupdate
+    type: bool
+    description: Enable podman auto-update for this container.
+    default: 'true'
+  - name: beszel_network_enabled
+    type: bool
+    description: Create and manage the podman network.
+    default: 'true'
+  - name: beszel_network_name
+    type: str
+    description: Podman network name.
+    default: beszel-internal
+  - name: beszel_network_driver
+    type: str
+    description: Podman network driver.
+    default: bridge
+  - name: beszel_port_map_enabled
+    type: bool
+    description: Expose container ports on the host.
+    default: 'false'
+  - name: beszel_bind_ip
+    type: str
+    description: Host IP to bind exposed ports to.
+    default: 127.0.0.1
+  - name: beszel_port_map
+    type: list[str]
+    description: Host:container port mappings.
+    default: '- 8090:8090'
+  - name: beszel_app_url
+    type: str
+    description: External URL of the hub.
+    default: '""'
+  - name: beszel_environment_vars
+    type: dict
+    description: Environment variables injected into the hub container.
+    default: 'APP_URL: ''{{ beszel_app_url }}''
+
+      DISABLE_SSH: ''true'''
+  - name: beszel_entrypoint
+    type: str
+    description: Optional container entrypoint override.
+    default: '""'
+  - name: beszel_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src (controller path) or source (target path), dest, optional mount, mode, and template.
+    default: '[]'
+  - name: beszel_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src (controller directory) or source (target path), dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

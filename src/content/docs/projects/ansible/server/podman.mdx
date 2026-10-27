@@ -1,0 +1,73 @@
+---
+title: podman
+description: Install Podman and configure the rootless port forwarder.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.server
+  name: podman
+  variables:
+  - name: podman_user
+    type: str
+    description: system user for rootless podman operations.
+    default: '{{ ansible_user }}'
+  - name: podman_service_name
+    type: str
+    description: systemd service unit name.
+    default: podman.service
+  - name: podman_service_state
+    type: str
+    description: desired state of the podman service.
+    default: started
+    choices:
+    - reloaded
+    - restarted
+    - started
+    - stopped
+  - name: podman_service_enabled
+    type: bool
+    description: whether the podman service is enabled at boot.
+    default: 'true'
+  - name: podman_package_state
+    type: str
+    description: desired state of podman packages.
+    default: present
+    choices:
+    - present
+    - absent
+    - latest
+  - name: podman_package
+    type: list[str]
+    description: list of packages to install.
+    default: '- podman'
+  - name: podman_rootless_port_forwarder
+    type: str
+    description: rootless port forwarder backend (e.g. pasta, slirp4netns).
+    default: pasta
+  - name: podman_log_driver
+    type: str
+    description: default log driver for rootless containers.
+    default: '""'
+    choices:
+    - ''
+    - k8s-file
+    - journald
+    - json-file
+    - passthrough
+    - none
+  - name: podman_image_prune_enabled
+    type: bool
+    description: remove unused images on a timer (images labelled quadlet.build are kept).
+    default: 'true'
+  - name: podman_image_prune_schedule
+    type: str
+    description: systemd OnCalendar expression for the prune timer.
+    default: weekly
+  - name: podman_image_prune_until
+    type: str
+    description: only prune images created longer ago than this duration (e.g. 168h).
+    default: 168h
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

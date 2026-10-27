@@ -1,0 +1,102 @@
+---
+import { Icon } from "@astrojs/starlight/components";
+
+const { entry } = Astro.locals.starlightRoute;
+const { description, ansibleCollection } = entry.data;
+if (!ansibleCollection) throw new Error("AnsibleCollection needs `ansibleCollection` frontmatter.");
+
+const { name, roles } = ansibleCollection;
+---
+
+<div class="not-content">
+  {description && <p class="lead">{description}</p>}
+  <ul class="roles">
+    {
+      roles.map((role) => (
+        <li>
+          <a href={`/${entry.id}/${role.name}/`}>
+            <span class="head">
+              <span class="title">{role.name}</span>
+              <Icon name="right-arrow" class="arrow" size="1.125rem" />
+            </span>
+            <code>
+              {name}.{role.name}
+            </code>
+            {role.description && <span class="description">{role.description}</span>}
+            <span class="count">{role.variables} variables</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .lead {
+    margin: 0;
+    font-size: var(--sl-text-xl);
+    line-height: 1.5;
+  }
+  .roles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    gap: 0.75rem;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 100%;
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+    background: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-on-surface);
+    text-decoration: none;
+    transition: background-color 0.15s;
+  }
+  a:hover,
+  a:focus-visible {
+    background: var(--md-sys-color-surface-container-highest);
+  }
+  .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .title {
+    font-size: var(--sl-text-lg);
+    font-weight: 600;
+  }
+  .arrow {
+    flex-shrink: 0;
+    color: var(--md-sys-color-primary);
+    transition: transform 0.15s;
+  }
+  a:hover .arrow {
+    transform: translateX(0.25rem);
+  }
+  code {
+    color: var(--md-sys-color-primary);
+    font-family: var(--__sl-font-mono);
+    font-size: var(--sl-text-code-sm);
+    overflow-wrap: anywhere;
+  }
+  .description {
+    flex: 1;
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: var(--sl-text-sm);
+  }
+  .count {
+    align-self: start;
+    padding: 0.125rem 0.625rem;
+    border-radius: 0.5rem;
+    background: var(--md-sys-color-tertiary-container);
+    color: var(--md-sys-color-on-tertiary-container);
+    font-size: var(--sl-text-xs);
+    font-weight: 500;
+  }
+</style>

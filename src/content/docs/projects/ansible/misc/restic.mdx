@@ -1,0 +1,108 @@
+---
+title: restic
+description: Install and configure restic/resticprofile for automated repository backups.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.misc
+  name: restic
+  variables:
+  - name: resticprofile_version
+    type: str
+    description: resticprofile release version.
+    default: 0.33.1
+  - name: rest_server_version
+    type: str
+    description: rest-server release version.
+    default: 0.14.0
+  - name: restic_mode
+    type: str
+    description: role operating mode.
+    default: client
+    choices:
+    - client
+    - server
+    - both
+  - name: restic_user
+    type: str
+    description: system user for restic operations.
+    default: backup
+  - name: restic_user_home
+    type: str
+    description: home directory of the restic user.
+    default: /home/{{ restic_user }}
+  - name: restic_config_dir
+    type: str
+    description: directory for resticprofile configuration.
+    default: /etc/resticprofile
+  - name: restic_cache_dir
+    type: str
+    description: directory for restic cache data.
+    default: /var/cache/restic
+  - name: restic_log_dir
+    type: str
+    description: directory for restic log files.
+    default: '{{ restic_config_dir }}/logs'
+  - name: restic_password_dir
+    type: str
+    description: directory for repository password files.
+    default: '{{ restic_config_dir }}/passwords'
+  - name: restic_ssh_key_type
+    type: str
+    description: SSH key type for backup connections.
+    default: ed25519
+  - name: restic_ssh_key_path
+    type: str
+    description: path to the SSH private key.
+    default: '{{ restic_user_home }}/.ssh/id_{{ restic_ssh_key_type }}'
+  - name: restic_server_repo_base
+    type: str
+    description: base directory for server-side repositories.
+    default: /var/lib/restic
+  - name: restic_server_host
+    type: str
+    description: hostname or IP of the rest-server.
+    default: '""'
+  - name: restic_repositories
+    type: list[dict]
+    description: list of restic repositories to manage.
+    default: '[]'
+    options:
+    - name: name
+      type: str
+      description: repository name.
+    - name: password
+      type: str
+      description: repository password.
+    - name: backup_paths
+      type: list[str]
+      description: paths to back up.
+    - name: exclude_patterns
+      type: list[str]
+      description: patterns to exclude from backup.
+    - name: schedule
+      type: str
+      description: systemd calendar schedule (e.g. *-*-* 02:00:00).
+    - name: retention
+      type: dict
+      options:
+      - name: keep_daily
+        type: int
+        description: number of daily snapshots to keep.
+      - name: keep_weekly
+        type: int
+        description: number of weekly snapshots to keep.
+      - name: keep_monthly
+        type: int
+        description: number of monthly snapshots to keep.
+      - name: keep_yearly
+        type: int
+        description: number of yearly snapshots to keep.
+  - name: restic_repository_defaults
+    type: dict
+    description: values for keys missing in restic_repositories entries (merged recursively).
+    default: "exclude_patterns: []\nretention:\n  keep_daily: 14\n  keep_weekly: 8\n  keep_monthly: 12\n  keep_yearly: 3"
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

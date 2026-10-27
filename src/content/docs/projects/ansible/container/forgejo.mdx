@@ -1,0 +1,195 @@
+---
+title: forgejo
+description: Deploy the Forgejo Git service as a Podman quadlet.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: forgejo
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless podman operations.
+    default: '{{ ansible_user }}'
+  - name: forgejo_image
+    type: str
+    description: Image name without tag.
+    default: codeberg.org/forgejo/forgejo
+  - name: forgejo_version
+    type: str
+    description: Container image version.
+    default: 17.0.0
+  - name: forgejo_autoupdate
+    type: bool
+    description: Enable podman auto-update for this container.
+    default: 'true'
+  - name: forgejo_network_enabled
+    type: bool
+    description: Create and manage the podman network.
+    default: 'true'
+  - name: forgejo_network_name
+    type: str
+    description: Podman network name.
+    default: forgejo-internal
+  - name: forgejo_network_driver
+    type: str
+    description: Podman network driver.
+    default: bridge
+  - name: forgejo_port_map_enabled
+    type: bool
+    description: Expose container ports on the host.
+    default: 'true'
+  - name: forgejo_bind_ip
+    type: str
+    description: Host IP to bind exposed ports to.
+    default: 127.0.0.1
+  - name: forgejo_port_map
+    type: list[str]
+    description: Host:container port mappings.
+    default: '- 3000:3000
+
+      - ''{{ forgejo_ssh_port }}:22'''
+  - name: forgejo_domain
+    type: str
+    description: External domain for the Forgejo instance.
+    default: '""'
+  - name: forgejo_ssh_port
+    type: int
+    description: host port of the git SSH server, shown in clone URLs.
+    default: '2222'
+  - name: forgejo_log_level
+    type: str
+    description: Forgejo log level.
+    default: Info
+  - name: forgejo_db_host
+    type: str
+    description: PostgreSQL container hostname.
+    default: postgresql-pod
+  - name: forgejo_db_name
+    type: str
+    description: Database name.
+    default: forgejo
+  - name: forgejo_db_user
+    type: str
+    description: Database user.
+    default: forgejo
+  - name: forgejo_db_password
+    type: str
+    description: Database user password.
+    default: '""'
+  - name: forgejo_oauth_name
+    type: str
+    description: OAuth2 provider display name.
+    default: '""'
+  - name: forgejo_oauth_domain
+    type: str
+    description: OAuth2 provider domain.
+    default: '""'
+  - name: forgejo_oauth_client_id
+    type: str
+    description: OAuth2 client ID for external authentication.
+    default: '""'
+  - name: forgejo_oauth_client_secret
+    type: str
+    description: OAuth2 client secret.
+    default: '""'
+  - name: forgejo_oauth_admin_group
+    type: str
+    description: OAuth2 group that grants admin access.
+    default: forgejo-admin
+  - name: forgejo_environment_vars
+    type: dict
+    description: Extra environment variables injected into the container.
+    default: 'USER_UID: ''1000''
+
+      USER_GID: ''1000''
+
+      APP_NAME: Forgejo
+
+      APP_SLOGAN: ''''
+
+      FORGEJO__server__DOMAIN: ''{{ forgejo_domain }}''
+
+      FORGEJO__server__ROOT_URL: https://{{ forgejo_domain }}/
+
+      FORGEJO__server__PROTOCOL: http
+
+      FORGEJO__server__HTTP_PORT: 3000
+
+      FORGEJO__server__SSH_PORT: ''{{ forgejo_ssh_port }}''
+
+      SSH_LISTEN_PORT: 22
+
+      FORGEJO__server__OFFLINE_MODE: false
+
+      FORGEJO__log__LEVEL: ''{{ forgejo_log_level }}''
+
+      FORGEJO__database__DB_TYPE: postgres
+
+      FORGEJO__database__HOST: ''{{ forgejo_db_host }}:5432''
+
+      FORGEJO__database__NAME: ''{{ forgejo_db_name }}''
+
+      FORGEJO__database__USER: ''{{ forgejo_db_user }}''
+
+      FORGEJO__database__PASSWD: ''{{ forgejo_db_password }}''
+
+      FORGEJO__security__LOGIN_REMEMBER_DAYS: ''14''
+
+      FORGEJO__security__INSTALL_LOCK: true
+
+      FORGEJO__service__DISABLE_REGISTRATION: true
+
+      FORGEJO__service__ALLOW_ONLY_EXTERNAL_REGISTRATION: true
+
+      FORGEJO__service__SHOW_REGISTRATION_BUTTON: false
+
+      FORGEJO__service__ENABLE_INTERNAL_SIGNIN: true
+
+      FORGEJO__oauth2_client__ENABLE_AUTO_REGISTRATION: true
+
+      FORGEJO__oauth2_client__USERNAME: preferred_username
+
+      FORGEJO__oauth2_client__UPDATE_AVATAR: true
+
+      FORGEJO__oauth2_client__ACCOUNT_LINKING: auto
+
+      FORGEJO__oauth2_client__OPENID_CONNECT_SCOPES: ''"profile email"''
+
+      FORGEJO__oauth2_client__ADMIN_GROUP: ''{{ forgejo_oauth_admin_group }}''
+
+      FORGEJO__openid__ENABLE_OPENID_SIGNIN: false
+
+      FORGEJO__openid__ENABLE_OPENID_SIGNUP: false
+
+      OAUTH_NAME: ''{{ forgejo_oauth_name }}''
+
+      OAUTH_CLIENT_ID: ''{{ forgejo_oauth_client_id }}''
+
+      OAUTH_CLIENT_SECRET: ''{{ forgejo_oauth_client_secret }}''
+
+      OAUTH_DISCOVERY_URL: https://{{ forgejo_oauth_domain }}/.well-known/openid-configuration
+
+      OAUTH_SCOPES: openid profile email groups
+
+      OAUTH_ADMIN_GROUP: ''{{ forgejo_oauth_admin_group }}'''
+  - name: forgejo_entrypoint
+    type: str
+    description: Optional Forgejo container entrypoint override.
+    default: '""'
+  - name: forgejo_oauth_init_entrypoint
+    type: str
+    description: Optional Forgejo OAuth initialization container entrypoint override.
+    default: '""'
+  - name: forgejo_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src (controller path) or source (target path), dest, optional mount, mode, and template.
+    default: '[]'
+  - name: forgejo_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src (controller directory) or source (target path), dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

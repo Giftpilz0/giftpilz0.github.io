@@ -1,0 +1,189 @@
+/* Maps the Material colors from src/lib/theme.ts onto Starlight. */
+
+:root {
+  --sl-font: "Google Sans Flex Variable";
+  --sl-font-mono: "Google Sans Code Variable";
+
+  --sl-text-2xs: 0.8125rem;
+  --sl-text-xs: 0.875rem;
+  --sl-text-sm: 0.9375rem;
+  --sl-text-base: 1.0625rem;
+  --sl-text-lg: 1.1875rem;
+  --sl-text-code: 0.9375rem;
+  --sl-text-code-sm: 0.875rem;
+  --sl-line-height: 1.7;
+  --sl-text-h2: var(--sl-text-2xl);
+  --sl-text-h3: var(--sl-text-xl);
+  --sl-text-h4: var(--sl-text-lg);
+
+  --sl-color-white: var(--md-sys-color-on-surface);
+  --sl-color-gray-1: var(--md-sys-color-on-surface);
+  --sl-color-gray-2: var(--md-sys-color-on-surface);
+  --sl-color-gray-3: var(--md-sys-color-on-surface-variant);
+  --sl-color-gray-4: var(--md-sys-color-outline);
+  --sl-color-gray-5: var(--md-sys-color-surface-container-highest);
+  --sl-color-gray-6: var(--md-sys-color-surface-container);
+  --sl-color-gray-7: var(--md-sys-color-surface-container-low);
+  --sl-color-black: var(--md-sys-color-surface);
+
+  --sl-color-accent-low: var(--md-sys-color-primary-container);
+  --sl-color-accent: var(--md-sys-color-primary);
+  --sl-color-accent-high: var(--md-sys-color-primary);
+
+  --sl-color-text: var(--md-sys-color-on-surface);
+  --sl-color-text-invert: var(--md-sys-color-on-primary);
+  --sl-color-bg-accent: var(--md-sys-color-primary);
+  --sl-color-bg-nav: var(--md-sys-color-surface-container-low);
+  --sl-color-bg-sidebar: var(--md-sys-color-surface-container-low);
+  --sl-color-bg-inline-code: var(--md-sys-color-surface-container-highest);
+  --sl-color-hairline-light: var(--md-sys-color-outline-variant);
+  --sl-color-hairline: var(--md-sys-color-outline-variant);
+  --sl-color-hairline-shade: var(--md-sys-color-surface-container-highest);
+  --sl-color-backdrop-overlay: color-mix(in srgb, var(--md-sys-color-scrim) 40%, transparent);
+
+  --sl-color-blue-low: var(--md-sys-color-primary-container);
+  --sl-color-blue: var(--md-sys-color-primary);
+  --sl-color-blue-high: var(--md-sys-color-on-primary-container);
+  --sl-color-purple-low: var(--md-sys-color-tertiary-container);
+  --sl-color-purple: var(--md-sys-color-tertiary);
+  --sl-color-purple-high: var(--md-sys-color-on-tertiary-container);
+  --sl-color-red-low: var(--md-sys-color-error-container);
+  --sl-color-red: var(--md-sys-color-error);
+  --sl-color-red-high: var(--md-sys-color-on-error-container);
+
+  --m3-shape-sm: 0.5rem;
+  --m3-shape-md: 0.75rem;
+  --m3-shape-lg: 1rem;
+  --m3-shape-full: 999px;
+}
+
+::selection {
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+/* Sidebar */
+.sidebar-content a {
+  border-radius: var(--m3-shape-full);
+  padding-inline: 1rem;
+  color: var(--md-sys-color-on-surface-variant);
+}
+@media (min-width: 50rem) {
+  .sidebar-content a {
+    font-size: var(--sl-text-sm);
+  }
+}
+.sidebar-content a:hover {
+  background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
+}
+.sidebar-content a[aria-current="page"],
+.sidebar-content a[aria-current="page"]:hover,
+.sidebar-content a[aria-current="page"]:focus {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+.sidebar-content summary {
+  border-radius: var(--m3-shape-full);
+}
+.sidebar-content .top-level > li > a {
+  padding-inline: var(--sl-sidebar-item-padding-inline);
+  color: var(--sl-color-white);
+  font-size: var(--sl-text-lg);
+  font-weight: 600;
+}
+@media (min-width: 50rem) {
+  .sidebar-content .top-level > li > a {
+    font-size: var(--sl-text-base);
+  }
+}
+.sidebar-content ul ul li {
+  border-inline-start-color: transparent;
+}
+
+.sidebar-content .starlight-sidebar-topics a {
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  border-radius: var(--m3-shape-full);
+  color: var(--md-sys-color-on-surface);
+  font-weight: 500;
+}
+.sidebar-content .starlight-sidebar-topics a:hover {
+  background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
+  color: var(--md-sys-color-on-surface);
+}
+.sidebar-content .starlight-sidebar-topics a.starlight-sidebar-topics-current {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  font-weight: 600;
+}
+.sidebar-content .starlight-sidebar-topics .starlight-sidebar-topics-icon,
+.sidebar-content .starlight-sidebar-topics a:is(:hover, .starlight-sidebar-topics-current) .starlight-sidebar-topics-icon {
+  padding: 0.375rem;
+  border: none;
+  border-radius: var(--m3-shape-full);
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+site-search button[data-open-modal] {
+  border: none;
+  border-radius: var(--m3-shape-full);
+  background: var(--md-sys-color-surface-container-highest);
+}
+.sl-link-button {
+  border-radius: var(--m3-shape-full);
+}
+
+/* Content */
+.sl-markdown-content hr {
+  margin-block: 2rem;
+  border: none;
+}
+.sl-markdown-content h2 {
+  color: var(--md-sys-color-primary);
+}
+.sl-markdown-content li::marker {
+  color: var(--md-sys-color-primary);
+  font-weight: 600;
+}
+.sl-markdown-content :not(pre) > code {
+  border-radius: var(--m3-shape-sm);
+}
+.sl-markdown-content img {
+  border-radius: var(--m3-shape-md);
+}
+.starlight-aside {
+  border-inline-start: none;
+  border-radius: var(--m3-shape-lg);
+}
+
+.sl-markdown-content table {
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: var(--m3-shape-lg);
+  width: fit-content;
+  max-width: 100%;
+  font-size: var(--sl-text-sm);
+}
+.sl-markdown-content :is(th, td) {
+  padding: 0.625rem 1rem;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+.sl-markdown-content tr:last-child td {
+  border-bottom: none;
+}
+.sl-markdown-content th {
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+}
+.sl-markdown-content tbody tr:hover {
+  background: var(--md-sys-color-surface-container-low);
+}
+/* Let long values wrap so wide tables fit. */
+.sl-markdown-content td code {
+  overflow-wrap: break-word;
+}
+
+.hero h1 {
+  color: var(--md-sys-color-primary);
+}

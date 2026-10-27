@@ -1,0 +1,181 @@
+---
+title: firewalld
+description: Install, configure, and manage firewalld zones and rules.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.general
+  name: firewalld
+  variables:
+  - name: firewalld_service_name
+    type: str
+    description: systemd service unit name.
+    default: firewalld.service
+  - name: firewalld_service_state
+    type: str
+    description: desired state of the firewalld service.
+    default: started
+    choices:
+    - reloaded
+    - restarted
+    - started
+    - stopped
+  - name: firewalld_service_enabled
+    type: bool
+    description: whether the firewalld service is enabled at boot.
+    default: 'true'
+  - name: firewalld_package_state
+    type: str
+    description: desired state of firewalld packages.
+    default: present
+    choices:
+    - present
+    - absent
+    - latest
+  - name: firewalld_package
+    type: list[str]
+    description: list of packages to install.
+    default: '- firewalld'
+  - name: firewalld_logging
+    type: str
+    description: LogDenied setting in firewalld.conf.
+    default: all
+  - name: firewalld_permanent
+    type: bool
+    description: whether rules are applied permanently.
+    default: 'true'
+  - name: firewalld_immediate
+    type: bool
+    description: whether rules are applied immediately.
+    default: 'true'
+  - name: firewalld_default_zone
+    type: str
+    description: default firewall zone.
+    default: block
+  - name: firewalld_require_ssh
+    type: bool
+    description: fail when no enabled ssh rule exists for a defined zone.
+    default: 'true'
+  - name: firewalld_remove_unmanaged
+    type: bool
+    description: remove sources, services and ports that are not in the inventory.
+    default: 'false'
+  - name: firewalld_rule_defaults
+    type: dict
+    description: values for keys missing in icmp, service and port rules.
+    default: 'state: enabled'
+  - name: firewalld_zones_define
+    type: list[dict]
+    description: list of zones to create and configure.
+    default: '[]'
+    options:
+    - name: zone
+      type: str
+      description: zone name.
+    - name: source
+      type: str
+      description: zone source (e.g. CIDR).
+    - name: target
+      type: str
+      description: zone target.
+  - name: firewalld_rules_icmp
+    type: list[dict]
+    description: list of ICMP block rules.
+    default: '[]'
+    options:
+    - name: icmp_type
+      type: str
+      description: ICMP type to block.
+    - name: zone
+      type: str
+      description: target zone.
+    - name: state
+      type: str
+      description: whether the rule is enabled or disabled.
+      choices:
+      - enabled
+      - disabled
+  - name: firewalld_rules_services
+    type: list[dict]
+    description: list of service rules.
+    default: '[]'
+    options:
+    - name: service
+      type: str
+      description: service name.
+    - name: zone
+      type: str
+      description: target zone.
+    - name: state
+      type: str
+      description: whether the rule is enabled or disabled.
+      choices:
+      - enabled
+      - disabled
+  - name: firewalld_rules_ports
+    type: list[dict]
+    description: list of port rules.
+    default: '[]'
+    options:
+    - name: port
+      type: str
+      description: port number.
+    - name: protocol
+      type: str
+      description: protocol.
+      choices:
+      - tcp
+      - udp
+    - name: zone
+      type: str
+      description: target zone.
+    - name: state
+      type: str
+      description: whether the rule is enabled or disabled.
+      choices:
+      - enabled
+      - disabled
+  - name: firewalld_richrules_ports
+    type: list[dict]
+    description: list of rich rules for port access.
+    default: '[]'
+    options:
+    - name: allowip
+      type: str
+      description: source IP to allow.
+    - name: port
+      type: str
+      description: port number.
+    - name: protocol
+      type: str
+      description: protocol.
+      choices:
+      - tcp
+      - udp
+    - name: action
+      type: str
+      description: rich rule action (e.g. accept).
+    - name: zone
+      type: str
+      description: target zone.
+  - name: firewalld_richrules_services
+    type: list[dict]
+    description: list of rich rules for service access.
+    default: '[]'
+    options:
+    - name: allowip
+      type: str
+      description: source IP to allow.
+    - name: service
+      type: str
+      description: service name.
+    - name: action
+      type: str
+      description: rich rule action (e.g. accept).
+    - name: zone
+      type: str
+      description: target zone.
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

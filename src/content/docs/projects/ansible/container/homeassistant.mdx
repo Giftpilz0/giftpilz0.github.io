@@ -1,0 +1,73 @@
+---
+title: homeassistant
+description: Deploy Home Assistant as a Podman quadlet.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: homeassistant
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless podman operations.
+    default: '{{ ansible_user }}'
+  - name: homeassistant_image
+    type: str
+    description: Image name without tag.
+    default: ghcr.io/home-assistant/home-assistant
+  - name: homeassistant_version
+    type: str
+    description: Container image version.
+    default: 2026.10.2
+  - name: homeassistant_autoupdate
+    type: bool
+    description: Enable podman auto-update for this container.
+    default: 'true'
+  - name: homeassistant_network_enabled
+    type: bool
+    description: Create and manage the podman network.
+    default: 'true'
+  - name: homeassistant_network_name
+    type: str
+    description: Podman network name.
+    default: homeassistant-internal
+  - name: homeassistant_network_driver
+    type: str
+    description: Podman network driver.
+    default: bridge
+  - name: homeassistant_port_map_enabled
+    type: bool
+    description: Expose container ports on the host.
+    default: 'true'
+  - name: homeassistant_bind_ip
+    type: str
+    description: Host IP to bind exposed ports to.
+    default: 127.0.0.1
+  - name: homeassistant_port_map
+    type: list[str]
+    description: Host:container port mappings.
+    default: '- 8123:8123'
+  - name: homeassistant_device_access
+    type: bool
+    description: Grant access to devices mounted via extra files (dialout group, original groups, SELinux spc_t).
+    default: 'false'
+  - name: homeassistant_environment_vars
+    type: dict
+    description: Extra environment variables injected into the container.
+    default: 'TZ: Europe/Berlin'
+  - name: homeassistant_entrypoint
+    type: str
+    description: Optional container entrypoint override.
+    default: '""'
+  - name: homeassistant_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src (controller path) or source (target path), dest, optional mount, mode, and template.
+    default: '[]'
+  - name: homeassistant_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src (controller directory) or source (target path), dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

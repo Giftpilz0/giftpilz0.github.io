@@ -1,0 +1,29 @@
+---
+title: timezone
+description: Set the system timezone.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.general
+  name: timezone
+  variables:
+  - name: timezone_package_state
+    type: str
+    description: desired state of timezone packages.
+    default: present
+    choices:
+    - present
+    - absent
+    - latest
+  - name: timezone_package
+    type: list[str]
+    description: list of packages to install.
+    default: '- tzdata'
+  - name: timezone_timezone
+    type: str
+    description: system timezone (e.g. Europe/Berlin).
+    default: Etc/UTC
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

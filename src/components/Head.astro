@@ -1,0 +1,22 @@
+---
+import Default from "@astrojs/starlight/components/Head.astro";
+import { DEFAULT_SEED, STORAGE_KEY, STYLE_ID } from "../lib/theme-constants";
+import { themeCss } from "../lib/theme";
+import MermaidRenderer from "./MermaidRenderer.astro";
+---
+
+<Default />
+<MermaidRenderer />
+<style is:inline set:html={themeCss(DEFAULT_SEED)} />
+{/* Apply the saved theme before the first paint; ColorPicker regenerates it afterwards. */}
+<script is:inline define:vars={{ key: STORAGE_KEY, userStyleId: STYLE_ID }}>
+  try {
+    const saved = JSON.parse(localStorage.getItem(key) || "null");
+    if (saved?.css) {
+      const style = document.createElement("style");
+      style.id = userStyleId;
+      style.textContent = saved.css;
+      document.head.appendChild(style);
+    }
+  } catch {}
+</script>

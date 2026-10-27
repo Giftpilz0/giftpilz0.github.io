@@ -1,0 +1,129 @@
+---
+title: gatus
+description: Deploy Gatus (endpoint monitoring and status page) as a Podman quadlet.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: gatus
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless podman operations.
+    default: '{{ ansible_user }}'
+  - name: gatus_image
+    type: str
+    description: Image name without tag.
+    default: docker.io/twinproduction/gatus
+  - name: gatus_version
+    type: str
+    description: Container image version.
+    default: v5.37.0
+  - name: gatus_autoupdate
+    type: bool
+    description: Enable podman auto-update for this container.
+    default: 'true'
+  - name: gatus_network_enabled
+    type: bool
+    description: Create and manage the podman network.
+    default: 'true'
+  - name: gatus_network_name
+    type: str
+    description: Podman network name.
+    default: gatus-internal
+  - name: gatus_network_driver
+    type: str
+    description: Podman network driver.
+    default: bridge
+  - name: gatus_port_map_enabled
+    type: bool
+    description: Expose container ports on the host.
+    default: 'false'
+  - name: gatus_bind_ip
+    type: str
+    description: Host IP to bind exposed ports to.
+    default: 127.0.0.1
+  - name: gatus_port_map
+    type: list[str]
+    description: Host:container port mappings.
+    default: '- 8080:8080'
+  - name: gatus_url
+    type: str
+    description: External URL of the status page, used for the OIDC redirect.
+    default: '""'
+  - name: gatus_title
+    type: str
+    description: Page title and header.
+    default: Homelab
+  - name: gatus_traefik_hosts
+    type: list[str]
+    description: Inventory hosts whose traefik_http_services become endpoints.
+    default: '{{ groups[''all''] }}'
+  - name: gatus_traefik_exclude
+    type: list[str]
+    description: traefik_http_services names that get no endpoint.
+    default: '[]'
+  - name: gatus_traefik_overrides
+    type: dict
+    description: Endpoint keys for single generated endpoints, keyed by traefik_http_services name.
+    default: '{}'
+  - name: gatus_endpoints
+    type: list[dict]
+    description: Additional Gatus endpoint definitions.
+    default: '[]'
+  - name: gatus_endpoint_defaults
+    type: dict
+    description: Values for keys missing in generated and additional endpoints.
+    default: 'interval: 1m
+
+      conditions:
+
+      - ''[STATUS] < 400''
+
+      - ''[CERTIFICATE_EXPIRATION] > 336h''
+
+      alerts: []'
+  - name: gatus_oidc_enabled
+    type: bool
+    description: Require an OIDC login for the status page.
+    default: 'false'
+  - name: gatus_oidc_issuer_url
+    type: str
+    description: OIDC issuer URL.
+    default: '""'
+  - name: gatus_oidc_client_id
+    type: str
+    description: OIDC client ID.
+    default: gatus
+  - name: gatus_oidc_client_secret
+    type: str
+    description: OIDC client secret.
+    default: '""'
+  - name: gatus_alerting
+    type: dict
+    description: Gatus alerting providers configuration.
+    default: '{}'
+  - name: gatus_extra_config
+    type: dict
+    description: Merged recursively into the generated config.yaml.
+    default: '{}'
+  - name: gatus_environment_vars
+    type: dict
+    description: Extra environment variables injected into the container.
+    default: '{}'
+  - name: gatus_entrypoint
+    type: str
+    description: Optional container entrypoint override.
+    default: '""'
+  - name: gatus_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src (controller path) or source (target path), dest, optional mount, mode, and template.
+    default: '[]'
+  - name: gatus_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src (controller directory) or source (target path), dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

@@ -1,0 +1,29 @@
+---
+title: giftpilz0.kubernetes
+description: Ansible collection for kubernetes cluster
+sidebar:
+  order: 0
+tableOfContents: false
+ansibleCollection:
+  name: giftpilz0.kubernetes
+  roles:
+  - name: cilium
+    description: Install and configure the Cilium CNI on a Kubernetes cluster.
+    variables: 26
+  - name: fluxcli
+    description: Install the Flux CLI (flux) binary.
+    variables: 5
+  - name: helm
+    description: Install the Helm package manager binary.
+    variables: 5
+  - name: k3s
+    description: Install and configure a single-server k3s cluster with kube-vip.
+    variables: 19
+  - name: k9s
+    description: Install the k9s terminal UI for Kubernetes.
+    variables: 5
+---
+
+import AnsibleCollection from "../../../../../components/ansible/AnsibleCollection.astro";
+
+<AnsibleCollection />

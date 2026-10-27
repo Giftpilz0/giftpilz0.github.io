@@ -1,0 +1,41 @@
+---
+title: beszel_agent
+description: Install the Beszel monitoring agent as a systemd service.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.general
+  name: beszel_agent
+  variables:
+  - name: beszel_agent_version
+    type: str
+    description: Beszel release version.
+    default: 0.21.1
+  - name: beszel_agent_user
+    type: str
+    description: User the agent runs as; created as a system user if missing.
+    default: beszel
+  - name: beszel_agent_podman_socket
+    type: bool
+    description: Enable the Podman API socket of beszel_agent_user and point the agent at it.
+    default: 'false'
+  - name: beszel_agent_hub_url
+    type: str
+    description: URL of the Beszel hub the agent connects to.
+    default: '""'
+  - name: beszel_agent_key
+    type: str
+    description: Public key of the hub.
+    default: '""'
+  - name: beszel_agent_token
+    type: str
+    description: Universal or per-system registration token of the hub.
+    default: '""'
+  - name: beszel_agent_environment_vars
+    type: dict
+    description: Extra agent environment variables.
+    default: '{}'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

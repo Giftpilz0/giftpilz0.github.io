@@ -1,0 +1,107 @@
+---
+title: navidrome
+description: Deploy Navidrome as a Podman Quadlet pod.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: navidrome
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless Podman operations.
+    default: '{{ ansible_user }}'
+  - name: navidrome_image
+    type: str
+    description: Navidrome image without tag.
+    default: docker.io/deluan/navidrome
+  - name: navidrome_version
+    type: str
+    description: Navidrome image tag.
+    default: 0.64.2
+  - name: navidrome_autoupdate
+    type: bool
+    description: Enable Podman registry auto-update for Navidrome.
+    default: 'true'
+  - name: navidrome_network_enabled
+    type: bool
+    description: Create and manage the Podman network.
+    default: 'true'
+  - name: navidrome_network_name
+    type: str
+    description: Podman network name.
+    default: navidrome-internal
+  - name: navidrome_network_driver
+    type: str
+    description: Podman network driver.
+    default: bridge
+  - name: navidrome_port_map_enabled
+    type: bool
+    description: Publish Navidrome ports directly on the host.
+    default: 'false'
+  - name: navidrome_bind_ip
+    type: str
+    description: Host IP for optional direct port publishing.
+    default: 127.0.0.1
+  - name: navidrome_port_map
+    type: list[str]
+    description: Host-to-container port mappings.
+    default: '- 4533:4533'
+  - name: navidrome_environment_vars
+    type: dict
+    description: Environment variables passed to Navidrome.
+    default: 'ND_MUSICFOLDER: /music/transcoded/shared
+
+      ND_DATAFOLDER: /data
+
+      ND_CACHEFOLDER: /cache
+
+      ND_SCANSCHEDULE: 1h
+
+      ND_SCANNER_PURGEMISSING: always
+
+      ND_LOGLEVEL: info
+
+      ND_TRANSCODINGCACHESIZE: 1GB
+
+      ND_DEFAULTPLAYLISTPUBLICVISIBILITY: true'
+  - name: navidrome_webui_enabled
+    type: bool
+    description: Deploy the music library management WebUI in the Navidrome pod.
+    default: 'false'
+  - name: navidrome_webui_image
+    type: str
+    description: Music library WebUI image without tag.
+    default: ghcr.io/giftpilz0/musiclibrary
+  - name: navidrome_webui_version
+    type: str
+    description: Image tag for the music library WebUI.
+    default: edge
+  - name: navidrome_webui_autoupdate
+    type: bool
+    description: Enable Podman registry auto-update for the music library WebUI.
+    default: 'true'
+  - name: navidrome_webui_user
+    type: str
+    description: UID and GID used by the WebUI container for shared-volume writes (match Navidrome).
+    default: 1001:1001
+  - name: navidrome_webui_environment_vars
+    type: dict
+    description: Environment variables passed to the music library WebUI.
+    default: 'MUSIC_LIBRARY_ROOT: /music'
+  - name: navidrome_entrypoint
+    type: str
+    description: Optional container entrypoint override.
+    default: '""'
+  - name: navidrome_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src (controller path) or source (target path), dest, optional mount, mode, and template.
+    default: '[]'
+  - name: navidrome_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src (controller directory) or source (target path), dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

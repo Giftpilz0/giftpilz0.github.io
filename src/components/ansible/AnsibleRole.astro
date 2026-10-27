@@ -1,0 +1,153 @@
+---
+import { Code, Icon } from "@astrojs/starlight/components";
+import AnsibleVariable from "./AnsibleVariable.astro";
+
+const { entry } = Astro.locals.starlightRoute;
+const { description, ansibleRole } = entry.data;
+if (!ansibleRole) throw new Error("AnsibleRole needs `ansibleRole` frontmatter.");
+
+const { collection, name, variables } = ansibleRole;
+const fqcn = `${collection}.${name}`;
+const collectionLink = `/${entry.id.slice(0, entry.id.lastIndexOf("/"))}/`;
+const required = variables.filter((v) => v.required).length;
+const usage = [
+  "- hosts: all",
+  "  roles:",
+  `    - role: ${fqcn}`,
+  ...(required ? ["      vars:", ...variables.filter((v) => v.required).map((v) => `        ${v.name}: ...`)] : []),
+].join("\n");
+---
+
+<div class="not-content intro">
+  {description && <p class="lead">{description}</p>}
+  <div class="facts">
+    <a class="fact link" href={collectionLink}>
+      <Icon name="puzzle" size="1rem" />
+      {collection}
+    </a>
+    <span class="fact">{variables.length} variables</span>
+    {required > 0 && <span class="fact">{required} required</span>}
+  </div>
+</div>
+
+<h2 id="usage">Usage</h2>
+<Code code={usage} lang="yaml" title="playbook.yml" />
+
+<h2 id="variables">Variables</h2>
+{
+  variables.length === 0 ? (
+    <p>This role has no variables.</p>
+  ) : (
+    <ansible-variables class="not-content">
+      <label class="filter">
+        <Icon name="magnifier" size="1.125rem" />
+        <input type="search" placeholder={`Filter ${variables.length} variables`} aria-label="Filter variables" />
+      </label>
+      <ul class="variables">
+        {variables.map((variable) => (
+          <AnsibleVariable variable={variable} />
+        ))}
+      </ul>
+      <p class="empty" hidden>
+        No variables match.
+      </p>
+    </ansible-variables>
+  )
+}
+
+<script>
+  class AnsibleVariables extends HTMLElement {
+    connectedCallback() {
+      const input = this.querySelector("input")!;
+      const items = [...this.querySelectorAll<HTMLElement>(".variables > .variable")];
+      const empty = this.querySelector<HTMLElement>(".empty")!;
+      input.addEventListener("input", () => {
+        const query = input.value.trim().toLowerCase();
+        let shown = 0;
+        for (const item of items) {
+          item.hidden = !item.dataset.search!.includes(query);
+          if (!item.hidden) shown++;
+        }
+        empty.hidden = shown > 0;
+      });
+    }
+  }
+  customElements.define("ansible-variables", AnsibleVariables);
+</script>
+
+<style>
+  .lead {
+    margin: 0;
+    font-size: var(--sl-text-xl);
+    line-height: 1.5;
+  }
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .fact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.875rem;
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: 0.5rem;
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: var(--sl-text-sm);
+    font-weight: 500;
+  }
+  .link {
+    border-color: transparent;
+    background: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+    text-decoration: none;
+  }
+  .link:hover {
+    background: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+  }
+  ansible-variables {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .filter {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 1.25rem;
+    border-radius: 999px;
+    background: var(--md-sys-color-surface-container-high);
+    color: var(--md-sys-color-on-surface-variant);
+  }
+  .filter:focus-within {
+    outline: 2px solid var(--md-sys-color-primary);
+  }
+  input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.75rem 0;
+    border: none;
+    background: none;
+    color: var(--md-sys-color-on-surface);
+    font: inherit;
+    outline: none;
+  }
+  .variables {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .variables > :global([hidden]) {
+    display: none;
+  }
+  .empty {
+    color: var(--md-sys-color-on-surface-variant);
+  }
+</style>

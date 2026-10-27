@@ -1,0 +1,137 @@
+---
+title: keycloak
+description: Deploy Keycloak identity and access management as a Podman quadlet.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: keycloak
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless podman operations.
+    default: '{{ ansible_user }}'
+  - name: keycloak_image
+    type: str
+    description: Image name without tag.
+    default: quay.io/keycloak/keycloak
+  - name: keycloak_version
+    type: str
+    description: Container image version.
+    default: 26.8.1
+  - name: keycloak_autoupdate
+    type: bool
+    description: Enable podman auto-update for this container.
+    default: 'true'
+  - name: keycloak_network_enabled
+    type: bool
+    description: Create and manage the podman network.
+    default: 'true'
+  - name: keycloak_network_name
+    type: str
+    description: Podman network name.
+    default: keycloak-internal
+  - name: keycloak_network_driver
+    type: str
+    description: Podman network driver.
+    default: bridge
+  - name: keycloak_port_map_enabled
+    type: bool
+    description: Expose container ports on the host.
+    default: 'true'
+  - name: keycloak_bind_ip
+    type: str
+    description: Host IP to bind exposed ports to.
+    default: 127.0.0.1
+  - name: keycloak_port_map
+    type: list[str]
+    description: Host:container port mappings.
+    default: '- 8080:8080'
+  - name: keycloak_domain
+    type: str
+    description: External domain for the Keycloak instance.
+    default: login.nixpi.de
+  - name: keycloak_admin_password
+    type: str
+    description: Admin bootstrap password.
+    default: '""'
+  - name: keycloak_db_host
+    type: str
+    description: PostgreSQL container hostname.
+    default: postgresql-pod
+  - name: keycloak_db_name
+    type: str
+    description: Database name.
+    default: keycloak
+  - name: keycloak_db_user
+    type: str
+    description: Database user.
+    default: keycloak
+  - name: keycloak_db_password
+    type: str
+    description: Database user password.
+    default: '""'
+  - name: keycloak_environment_vars
+    type: dict
+    description: Extra environment variables injected into the container.
+    default: 'KC_HTTPS_PORT: ''8443''
+
+      KC_HTTP_PORT: ''8080''
+
+      KC_HTTP_ENABLED: ''true''
+
+      KC_HEALTH_ENABLED: ''true''
+
+      KC_HTTP_MANAGEMENT_SCHEME: http
+
+      KC_METRICS_ENABLED: ''true''
+
+      KC_PROXY: edge
+
+      KC_PROXY_HEADERS: xforwarded
+
+      KC_PROXY_TRUSTED_ADDRESSES: 127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+
+      KC_HOSTNAME: ''{{ keycloak_domain }}''
+
+      KC_DB: postgres
+
+      KC_DB_URL: jdbc:postgresql://{{ keycloak_db_host }}:5432/{{ keycloak_db_name }}
+
+      KC_DB_USERNAME: ''{{ keycloak_db_user }}''
+
+      KC_DB_PASSWORD: ''{{ keycloak_db_password }}''
+
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ''{{ keycloak_admin_password }}''
+
+      KC_CACHE: ispn
+
+      KC_CACHE_CONFIG_FILE: cache-ispn.xml
+
+      KC_CACHE_STACK: jdbc-ping
+
+      KC_LOG: console
+
+      KC_LOG_LEVEL: WARN
+
+      KC_LOG_CONSOLE_COLOR: ''true''
+
+      KC_FEATURES: scripts'
+  - name: keycloak_entrypoint
+    type: str
+    description: Optional container entrypoint override.
+    default: '""'
+  - name: keycloak_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src (controller path) or source (target path), dest, optional mount, mode, and template.
+    default: '[]'
+  - name: keycloak_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src (controller directory) or source (target path), dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

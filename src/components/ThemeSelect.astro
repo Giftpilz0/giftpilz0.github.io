@@ -1,0 +1,67 @@
+---
+import { Icon } from "@astrojs/starlight/components";
+import ColorPicker from "./ColorPicker.astro";
+---
+
+<div class="sl-flex">
+  <ColorPicker />
+  <theme-toggle>
+    <button type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <Icon name="sun" class="sun" size="1.25rem" />
+      <Icon name="moon" class="moon" size="1.25rem" />
+    </button>
+  </theme-toggle>
+</div>
+
+<script>
+  const STORAGE_KEY = "starlight-theme";
+  const root = document.documentElement;
+
+  class ThemeToggle extends HTMLElement {
+    connectedCallback() {
+      this.querySelector("button")!.addEventListener("click", () => {
+        const theme = root.dataset.theme === "dark" ? "light" : "dark";
+        root.dataset.theme = theme;
+        try {
+          localStorage.setItem(STORAGE_KEY, theme);
+        } catch {}
+      });
+    }
+  }
+  customElements.define("theme-toggle", ThemeToggle);
+
+  // Follow the system setting until the visitor picks a mode.
+  matchMedia("(prefers-color-scheme: light)").addEventListener("change", (e) => {
+    try {
+      if (localStorage.getItem(STORAGE_KEY)) return;
+    } catch {}
+    root.dataset.theme = e.matches ? "light" : "dark";
+  });
+</script>
+
+<style>
+  div {
+    align-items: center;
+    gap: 0.5rem;
+  }
+  button {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: none;
+    border-radius: 999px;
+    background: none;
+    color: var(--md-sys-color-on-surface-variant);
+    cursor: pointer;
+  }
+  button:hover {
+    background: var(--md-sys-color-surface-container-highest);
+    color: var(--md-sys-color-on-surface);
+  }
+  :global([data-theme="dark"]) .moon,
+  :global([data-theme="light"]) .sun {
+    display: none;
+  }
+</style>

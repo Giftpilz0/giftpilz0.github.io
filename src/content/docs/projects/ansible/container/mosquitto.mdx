@@ -1,0 +1,107 @@
+---
+title: mosquitto
+description: Deploy the Eclipse Mosquitto MQTT broker as a Podman quadlet.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: mosquitto
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless podman operations.
+    default: '{{ ansible_user }}'
+  - name: mosquitto_image
+    type: str
+    description: Custom image name and tag.
+    default: localhost/mosquitto-custom
+  - name: mosquitto_version
+    type: str
+    description: mosquitto release built from source (e.g. 2.1.2); the go-auth plugin is built against it.
+    default: 2.1.2
+  - name: mosquitto_go_auth_version
+    type: str
+    description: Mosquitto-go-auth release used to build the image.
+    default: 3.5.0
+  - name: mosquitto_autoupdate
+    type: bool
+    description: Enable podman auto-update for this container.
+    default: 'true'
+  - name: mosquitto_network_enabled
+    type: bool
+    description: Create and manage the podman network.
+    default: 'true'
+  - name: mosquitto_network_name
+    type: str
+    description: Podman network name.
+    default: mosquitto-internal
+  - name: mosquitto_network_driver
+    type: str
+    description: Podman network driver.
+    default: bridge
+  - name: mosquitto_port_map_enabled
+    type: bool
+    description: Expose container ports on the host.
+    default: 'true'
+  - name: mosquitto_bind_ip
+    type: str
+    description: Host IP to bind exposed ports to.
+    default: 127.0.0.1
+  - name: mosquitto_port_map
+    type: list[str]
+    description: Host:container port mappings.
+    default: '- 1883:1883
+
+      - 9001:9001'
+  - name: mosquitto_users
+    type: dict
+    description: Map of username to clear-text password; hashes are generated during deployment.
+    default: '{}'
+  - name: mosquitto_rehash_passwords
+    type: bool
+    description: Regenerate all password hashes instead of keeping deployed ones.
+    default: 'false'
+  - name: mosquitto_pwfile_users
+    type: dict
+    description: Map of username to password_hash for the password file.
+    default: '{}'
+  - name: mosquitto_acl_users
+    type: dict
+    description: Map of usernames to ACL rule objects or raw topic rules.
+    default: '{}'
+  - name: mosquitto_acl_patterns
+    type: list[dict]
+    description: ACL pattern rules using %u and %c substitutions.
+    default: "- access: readwrite\n  topic: '%u/#'"
+  - name: mosquitto_acl_rules
+    type: list[str]
+    description: Raw Mosquitto ACL lines for advanced rules.
+    default: '[]'
+  - name: mosquitto_go_auth_options
+    type: dict
+    description: Map passed through as auth_opt_* go-auth settings.
+    default: 'backends: files
+
+      files_password_path: /mosquitto/config/passwd
+
+      files_acl_path: /mosquitto/config/acl'
+  - name: mosquitto_environment_vars
+    type: dict
+    description: Extra environment variables injected into the container.
+    default: '{}'
+  - name: mosquitto_entrypoint
+    type: str
+    description: Optional container entrypoint override.
+    default: '""'
+  - name: mosquitto_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src (controller path) or source (target path), dest, optional mount, mode, and template.
+    default: '[]'
+  - name: mosquitto_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src (controller directory) or source (target path), dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />
