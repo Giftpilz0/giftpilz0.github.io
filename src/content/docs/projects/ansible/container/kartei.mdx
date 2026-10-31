@@ -1,0 +1,93 @@
+---
+title: kartei
+description: Deploy kartei (spaced-repetition flashcards) as a Podman Quadlet pod.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: kartei
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless Podman operations.
+    default: '{{ ansible_user }}'
+  - name: kartei_image
+    type: str
+    description: kartei image without tag.
+    default: ghcr.io/giftpilz0/kartei
+  - name: kartei_version
+    type: str
+    description: kartei image tag.
+    default: edge
+  - name: kartei_autoupdate
+    type: bool
+    description: Enable Podman registry auto-update for kartei.
+    default: 'true'
+  - name: kartei_network_enabled
+    type: bool
+    description: Create and manage the Podman network.
+    default: 'true'
+  - name: kartei_network_name
+    type: str
+    description: Podman network name.
+    default: kartei-internal
+  - name: kartei_network_driver
+    type: str
+    description: Podman network driver.
+    default: bridge
+  - name: kartei_port_map_enabled
+    type: bool
+    description: Publish the kartei port directly on the host.
+    default: 'false'
+  - name: kartei_bind_ip
+    type: str
+    description: Host IP for optional direct port publishing.
+    default: 127.0.0.1
+  - name: kartei_port_map
+    type: list[str]
+    description: Host-to-container port mappings.
+    default: '- 8080:8080'
+  - name: kartei_base_url
+    type: str
+    description: Public URL of kartei, e.g. https://kartei.example.com.
+    default: '""'
+  - name: kartei_oidc_issuer_url
+    type: str
+    description: OIDC issuer (Keycloak realm URL).
+    default: '""'
+  - name: kartei_oidc_client_id
+    type: str
+    description: OIDC client ID.
+    default: kartei
+  - name: kartei_oidc_client_secret
+    type: str
+    description: OIDC client secret.
+    default: '""'
+  - name: kartei_environment_vars
+    type: dict
+    description: Environment variables passed to kartei.
+    default: 'BASE_URL: ''{{ kartei_base_url }}''
+
+      OIDC_ISSUER_URL: ''{{ kartei_oidc_issuer_url }}''
+
+      OIDC_CLIENT_ID: ''{{ kartei_oidc_client_id }}''
+
+      OIDC_CLIENT_SECRET: ''{{ kartei_oidc_client_secret }}''
+
+      LOG_LEVEL: info'
+  - name: kartei_entrypoint
+    type: str
+    description: Optional container entrypoint override.
+    default: '""'
+  - name: kartei_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src (controller path) or source (target path), dest, optional mount, mode, and template.
+    default: '[]'
+  - name: kartei_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src (controller directory) or source (target path), dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

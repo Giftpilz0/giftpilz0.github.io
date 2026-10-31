@@ -13,7 +13,7 @@ ansibleRole:
   - name: monitoring_agent_tag
     type: str
     description: alloy release version tag.
-    default: 1.21.1
+    default: 1.21.3
   - name: monitoring_agent_package_state
     type: str
     description: desired state of the alloy package.
@@ -102,18 +102,6 @@ ansibleRole:
     type: str
     description: maximum age of journal entries sent to Loki.
     default: 24h
-  - name: monitoring_alloy_traefik_scrape_enabled
-    type: bool
-    description: whether to scrape Traefik metrics.
-    default: 'false'
-  - name: monitoring_alloy_traefik_metrics_address
-    type: str
-    description: Traefik metrics endpoint address.
-    default: 127.0.0.1:8082
-  - name: monitoring_alloy_traefik_scrape_interval
-    type: str
-    description: scrape interval for Traefik metrics.
-    default: 30s
   - name: monitoring_alloy_extra_config
     type: str
     description: extra Alloy configuration appended to the main config.

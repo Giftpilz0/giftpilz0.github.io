@@ -22,6 +22,14 @@ ansibleRole:
     type: str
     description: system timezone (e.g. Europe/Berlin).
     default: Etc/UTC
+  - name: timezone_hwclock
+    type: str
+    description: what the hardware clock is kept in, empty leaves it alone.
+    default: '""'
+    choices:
+    - ''
+    - UTC
+    - local
 ---
 
 import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";

@@ -46,14 +46,10 @@ ansibleRole:
     type: str
     description: directory for repository password files.
     default: '{{ restic_config_dir }}/passwords'
-  - name: restic_ssh_key_type
+  - name: restic_env_dir
     type: str
-    description: SSH key type for backup connections.
-    default: ed25519
-  - name: restic_ssh_key_path
-    type: str
-    description: path to the SSH private key.
-    default: '{{ restic_user_home }}/.ssh/id_{{ restic_ssh_key_type }}'
+    description: directory for the environment files of restic-repo and resticprofile.
+    default: '{{ restic_config_dir }}/env'
   - name: restic_server_repo_base
     type: str
     description: base directory for server-side repositories.
@@ -61,6 +57,18 @@ ansibleRole:
   - name: restic_server_host
     type: str
     description: hostname or IP of the rest-server.
+    default: '""'
+  - name: restic_server_port
+    type: int
+    description: port of the rest-server.
+    default: '8000'
+  - name: restic_server_password
+    type: str
+    description: rest-server password of the client, the username is the inventory hostname.
+    default: '""'
+  - name: restic_stop_units_user
+    type: str
+    description: owner of the user units in stop_units of a repository.
     default: '""'
   - name: restic_repositories
     type: list[dict]
@@ -79,6 +87,9 @@ ansibleRole:
     - name: exclude_patterns
       type: list[str]
       description: patterns to exclude from backup.
+    - name: stop_units
+      type: list[str]
+      description: user units stopped in order during the backup and started in reverse.
     - name: schedule
       type: str
       description: systemd calendar schedule (e.g. *-*-* 02:00:00).
@@ -100,7 +111,27 @@ ansibleRole:
   - name: restic_repository_defaults
     type: dict
     description: values for keys missing in restic_repositories entries (merged recursively).
-    default: "exclude_patterns: []\nretention:\n  keep_daily: 14\n  keep_weekly: 8\n  keep_monthly: 12\n  keep_yearly: 3"
+    default: "exclude_patterns: []\nstop_units: []\nretention:\n  keep_daily: 14\n  keep_weekly: 8\n  keep_monthly: 12\n  keep_yearly: 3"
+  - name: restic_restore_test_enabled
+    type: bool
+    description: run the weekly restore test.
+    default: 'true'
+  - name: restic_restore_test_schedule
+    type: str
+    description: systemd calendar schedule of the restore test.
+    default: Sat 04:00
+  - name: restic_restore_test_max_age_hours
+    type: int
+    description: the restore test fails when the latest snapshot is older.
+    default: '36'
+  - name: restic_restore_test_files
+    type: int
+    description: number of random files restored per repository.
+    default: '20'
+  - name: restic_restore_test_max_file_size
+    type: int
+    description: largest file in bytes picked for the restore test.
+    default: '52428800'
 ---
 
 import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";

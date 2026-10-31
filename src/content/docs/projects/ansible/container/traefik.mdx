@@ -118,18 +118,6 @@ ansibleRole:
     type: int
     description: Access log channel buffer size.
     default: '10'
-  - name: traefik_metrics_enabled
-    type: bool
-    description: Enable Prometheus metrics endpoint.
-    default: 'true'
-  - name: traefik_metrics_internal_port
-    type: int
-    description: Prometheus metrics port inside the container.
-    default: '8082'
-  - name: traefik_metrics_bind_ip
-    type: str
-    description: Bind IP for metrics endpoint.
-    default: 127.0.0.1
   - name: traefik_ping_internal_port
     type: int
     description: Port of the ping endpoint used by the health check, bound to 127.0.0.1.
