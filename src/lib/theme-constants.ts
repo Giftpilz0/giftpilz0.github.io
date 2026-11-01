@@ -1,7 +1,7 @@
-export const DEFAULT_SEED = "#4285f4";
+export const DEFAULT_SEED = "#1590ad";
 
 export const PRESET_SEEDS = [
-  "#4285f4",
+  "#1590ad",
   "#6750a4",
   "#006a6a",
   "#386a20",

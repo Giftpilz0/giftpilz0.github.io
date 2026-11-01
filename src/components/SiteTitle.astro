@@ -1,0 +1,28 @@
+---
+import logo from "../assets/logo.svg";
+import logoDark from "../assets/logo-dark-mode.svg";
+import logoMobile from "../assets/logo-mobile.svg";
+import logoDarkMobile from "../assets/logo-dark-mode-mobile.svg";
+
+const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
+---
+
+{/* Starlight's logo option has no mobile variants. */}
+<a href={siteTitleHref} class="site-title sl-flex">
+  <img class="sl-hidden md:sl-block dark:sl-hidden print:block" alt="" src={logo.src} width={logo.width} height={logo.height} />
+  <img class="sl-hidden md:sl-block light:sl-hidden print:hidden" alt="" src={logoDark.src} width={logoDark.width} height={logoDark.height} />
+  <img class="md:sl-hidden dark:sl-hidden print:hidden" alt="" src={logoMobile.src} width={logoMobile.width} height={logoMobile.height} />
+  <img class="md:sl-hidden light:sl-hidden print:hidden" alt="" src={logoDarkMobile.src} width={logoDarkMobile.width} height={logoDarkMobile.height} />
+  <span class="sr-only" translate="no">{siteTitle}</span>
+</a>
+
+<style>
+  .site-title {
+    align-items: center;
+    min-width: 0;
+  }
+  img {
+    height: calc(var(--sl-nav-height) - 2 * var(--sl-nav-pad-y));
+    width: auto;
+  }
+</style>

@@ -13,7 +13,9 @@ export default defineConfig({
     // Mermaid's diagram modules are large but only loaded on pages that use them.
     build: { chunkSizeWarningLimit: 1600 },
     // The package's ESM imports lack file extensions, which Node can't resolve; bundle it instead.
+    // `ssr` renders pages in dev, `prerender` in the build.
     environments: {
+      ssr: { resolve: { noExternal: ["@material/material-color-utilities"] } },
       prerender: { resolve: { noExternal: ["@material/material-color-utilities"] } },
     },
   },
@@ -24,8 +26,10 @@ export default defineConfig({
     starlight({
       title: "Nixpi",
       description: "Documentation about various tools",
-      favicon: "/img/favicon.svg",
-      logo: { src: "./src/assets/logo.svg" },
+      head: [
+        { tag: "link", attrs: { rel: "icon", href: "/favicon.ico", sizes: "32x32" } },
+        { tag: "link", attrs: { rel: "apple-touch-icon", href: "/apple-touch-icon.png" } },
+      ],
       social: [
         { icon: "github", label: "GitHub", href: "https://github.com/giftpilz0/giftpilz0.github.io" },
       ],
@@ -39,6 +43,7 @@ export default defineConfig({
       ],
       components: {
         Head: "./src/components/Head.astro",
+        SiteTitle: "./src/components/SiteTitle.astro",
         ThemeSelect: "./src/components/ThemeSelect.astro",
       },
       expressiveCode: {
