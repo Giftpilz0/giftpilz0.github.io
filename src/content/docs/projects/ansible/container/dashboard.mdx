@@ -1,0 +1,98 @@
+---
+title: dashboard
+description: Deploy a static page of links to services as a Podman Quadlet pod.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: dashboard
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless Podman operations.
+    default: '{{ ansible_user }}'
+  - name: dashboard_image
+    type: str
+    description: web server image without tag.
+    default: docker.io/library/nginx
+  - name: dashboard_version
+    type: str
+    description: web server image tag.
+    default: 1.31.8-alpine
+  - name: dashboard_autoupdate
+    type: bool
+    description: Enable Podman registry auto-update.
+    default: 'true'
+  - name: dashboard_network_enabled
+    type: bool
+    description: Create and manage the Podman network.
+    default: 'true'
+  - name: dashboard_network_name
+    type: str
+    description: Name of the Podman network.
+    default: dashboard-internal
+  - name: dashboard_network_driver
+    type: str
+    description: Driver of the Podman network.
+    default: bridge
+  - name: dashboard_port_map_enabled
+    type: bool
+    description: Publish ports on the host.
+    default: 'false'
+  - name: dashboard_bind_ip
+    type: str
+    description: Host IP for published ports.
+    default: 127.0.0.1
+  - name: dashboard_port_map
+    type: list[str]
+    description: Published ports as host:container.
+    default: '- 8080:80'
+  - name: dashboard_title
+    type: str
+    description: Heading and browser title of the page.
+    default: Dashboard
+  - name: dashboard_logo
+    type: str
+    description: Favicon and heading logo, a file below site/.
+    default: '""'
+  - name: dashboard_groups
+    type: list[dict]
+    description: groups of links, in display order.
+    default: '[]'
+    options:
+    - name: name
+      type: str
+      required: true
+      description: group label.
+    - name: links
+      type: list[dict]
+      required: true
+      description: links of the group, in display order.
+      options:
+      - name: name
+        type: str
+        required: true
+        description: name of the service.
+      - name: url
+        type: str
+        required: true
+        description: URL of the service.
+      - name: icon
+        type: str
+        description: file below site/, deployed with dashboard_extra_dirs.
+  - name: dashboard_entrypoint
+    type: str
+    description: Optional entrypoint override.
+    default: '""'
+  - name: dashboard_extra_files
+    type: list[dict]
+    description: Extra inventory files, format in the quadlet defaults.
+    default: '[]'
+  - name: dashboard_extra_dirs
+    type: list[dict]
+    description: Extra inventory directories, format in the quadlet defaults.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

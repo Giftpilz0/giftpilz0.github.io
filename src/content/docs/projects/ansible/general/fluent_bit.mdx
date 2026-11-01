@@ -1,0 +1,60 @@
+---
+title: fluent_bit
+description: Ship the systemd journal to VictoriaLogs with Fluent Bit.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.general
+  name: fluent_bit
+  variables:
+  - name: fluent_bit_repo_baseurl
+    type: str
+    description: Package repository URL.
+    default: https://packages.fluentbit.io/almalinux/$releasever/
+  - name: fluent_bit_repo_gpgkey
+    type: str
+    description: Signing key URL of the package repository.
+    default: https://packages.fluentbit.io/fluentbit.key
+  - name: fluent_bit_log_level
+    type: str
+    description: Log level of Fluent Bit itself.
+    default: warn
+  - name: fluent_bit_mem_buf_limit
+    type: str
+    description: Memory limit for buffered entries, reading pauses above it.
+    default: 16MB
+  - name: fluent_bit_timeout_stop_sec
+    type: int
+    description: Seconds before systemd kills a stopping service.
+    default: '15'
+  - name: fluent_bit_http_host
+    type: str
+    description: Host name of the ingest endpoint.
+    default: '""'
+  - name: fluent_bit_http_port
+    type: int
+    description: HTTPS port of the ingest endpoint.
+    default: '443'
+  - name: fluent_bit_stream_fields
+    type: list[str]
+    description: Journal fields that identify a log stream.
+    default: '- HOSTNAME
+
+      - SYSLOG_IDENTIFIER'
+  - name: fluent_bit_exclude_rules
+    type: list[dict]
+    description: Dropped journal entries.
+    default: '[]'
+    options:
+    - name: key
+      type: str
+      required: true
+      description: Journal field without its leading underscore.
+    - name: regex
+      type: str
+      required: true
+      description: Entries whose field matches are dropped.
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

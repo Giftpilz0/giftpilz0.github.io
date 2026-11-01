@@ -1,0 +1,95 @@
+---
+title: victorialogs
+description: Deploy VictoriaLogs as a Podman Quadlet pod.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: victorialogs
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless Podman operations.
+    default: '{{ ansible_user }}'
+  - name: victorialogs_image
+    type: str
+    description: VictoriaLogs image without tag.
+    default: docker.io/victoriametrics/victoria-logs
+  - name: victorialogs_version
+    type: str
+    description: VictoriaLogs image tag.
+    default: v1.53.0
+  - name: victorialogs_autoupdate
+    type: bool
+    description: Enable Podman registry auto-update.
+    default: 'true'
+  - name: victorialogs_network_enabled
+    type: bool
+    description: Create and manage the Podman network.
+    default: 'true'
+  - name: victorialogs_network_name
+    type: str
+    description: Name of the Podman network.
+    default: victorialogs-internal
+  - name: victorialogs_network_driver
+    type: str
+    description: Driver of the Podman network.
+    default: bridge
+  - name: victorialogs_port_map_enabled
+    type: bool
+    description: Publish ports on the host.
+    default: 'false'
+  - name: victorialogs_bind_ip
+    type: str
+    description: Host IP for published ports.
+    default: 127.0.0.1
+  - name: victorialogs_port_map
+    type: list[str]
+    description: Published ports as host:container.
+    default: '- 9428:9428'
+  - name: victorialogs_retention_period
+    type: str
+    description: Age after which logs are deleted.
+    default: 30d
+  - name: victorialogs_retention_max_disk_space
+    type: str
+    description: Disk usage above which the oldest days are dropped.
+    default: 10GiB
+  - name: victorialogs_memory_allowed_percent
+    type: int
+    description: Percent of system memory the caches may use.
+    default: '30'
+  - name: victorialogs_syslog_enabled
+    type: bool
+    description: Receive syslog on TCP and UDP.
+    default: 'false'
+  - name: victorialogs_syslog_port
+    type: int
+    description: Container port of the syslog receiver.
+    default: '5514'
+  - name: victorialogs_syslog_timezone
+    type: str
+    description: Timezone of RFC3164 timestamps.
+    default: UTC
+  - name: victorialogs_syslog_stream_fields
+    type: list[str]
+    description: Syslog fields that identify a log stream.
+    default: '- hostname
+
+      - app_name'
+  - name: victorialogs_entrypoint
+    type: str
+    description: Optional entrypoint override.
+    default: '""'
+  - name: victorialogs_extra_files
+    type: list[dict]
+    description: Extra inventory files, format in the quadlet defaults.
+    default: '[]'
+  - name: victorialogs_extra_dirs
+    type: list[dict]
+    description: Extra inventory directories, format in the quadlet defaults.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

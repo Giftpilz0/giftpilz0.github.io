@@ -16,6 +16,9 @@ ansibleCollection:
   - name: bumper
     description: Deploy the Bumper web application (built from a git commit) as a Podman quadlet.
     variables: 16
+  - name: dashboard
+    description: Deploy a static page of links to services as a Podman Quadlet pod.
+    variables: 16
   - name: forgejo
     description: Deploy the Forgejo Git service as a Podman quadlet.
     variables: 27
@@ -67,6 +70,9 @@ ansibleCollection:
   - name: vaultwarden
     description: Deploy Vaultwarden (Bitwarden-compatible password manager) as a Podman quadlet.
     variables: 16
+  - name: victorialogs
+    description: Deploy VictoriaLogs as a Podman Quadlet pod.
+    variables: 20
 ---
 
 import AnsibleCollection from "../../../../../components/ansible/AnsibleCollection.astro";
