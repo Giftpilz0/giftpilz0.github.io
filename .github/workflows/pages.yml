@@ -32,7 +32,7 @@ jobs:
           # Needed for "last updated" dates.
           fetch-depth: 0
 
-      - uses: astral-sh/setup-uv@v10.3.2
+      - uses: astral-sh/setup-uv@v10.3.3
         if: env.REGENERATE == 'true'
 
       # Dependencies are declared inline in the script (PEP 723).

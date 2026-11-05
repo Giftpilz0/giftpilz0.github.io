@@ -49,7 +49,7 @@ ignores `CMD` and all `docker run` arguments.
 ## Example
 
 ```dockerfile title="Containerfile"
-FROM python:3.13-slim
+FROM python:3.15-slim
 
 WORKDIR /app
 
