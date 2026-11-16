@@ -1,0 +1,191 @@
+---
+title: market_watch
+description: Run the market watch jobs on systemd timers and its web app as Podman quadlets, built from its git repository.
+tableOfContents: false
+ansibleRole:
+  collection: giftpilz0.container
+  name: market_watch
+  variables:
+  - name: podman_user
+    type: str
+    description: System user for rootless podman operations.
+    default: '{{ ansible_user }}'
+  - name: market_watch_image
+    type: str
+    description: Image name without tag.
+    default: localhost/market-watch
+  - name: market_watch_version
+    type: str
+    description: Image tag.
+    default: latest
+  - name: market_watch_git_repo
+    type: str
+    description: Git repository the image is built from.
+    default: ssh://git@ssh.github.com:443/Giftpilz0/market-watch-data.git
+  - name: market_watch_git_version
+    type: str
+    description: Branch, tag or commit to build from.
+    default: main
+  - name: market_watch_git_host_key
+    type: str
+    description: Accepted ssh host key of the git host (known_hosts line).
+    default: '[ssh.github.com]:443 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl'
+  - name: market_watch_containerfile
+    type: str
+    description: Containerfile path inside the repository.
+    default: Containerfile
+  - name: market_watch_autoupdate
+    type: bool
+    description: Enable podman auto-update for the web app.
+    default: 'true'
+  - name: market_watch_network_enabled
+    type: bool
+    description: Create and manage the Podman network.
+    default: 'true'
+  - name: market_watch_network_name
+    type: str
+    description: Podman network name.
+    default: market-watch-internal
+  - name: market_watch_network_driver
+    type: str
+    description: Podman network driver.
+    default: bridge
+  - name: market_watch_schedule
+    type: str
+    description: systemd OnCalendar expression for the ticks; the container decides on each tick whether a full run is due.
+    default: '*:0/15'
+  - name: market_watch_timer_enabled
+    type: bool
+    description: Run the ticks on the schedule; when false it only runs when started by hand.
+    default: 'true'
+  - name: market_watch_timeout
+    type: str
+    description: Maximum runtime of one run (systemd time span).
+    default: 15min
+  - name: market_watch_scan_eod_schedule
+    type: str
+    description: systemd OnCalendar expression for the nightly scan.
+    default: Mon..Fri *-*-* 17:20:00 America/New_York
+  - name: market_watch_scan_eod_timer_enabled
+    type: bool
+    description: Run the nightly scan on its schedule; when false it only runs when started by hand.
+    default: 'true'
+  - name: market_watch_scan_eod_timeout
+    type: str
+    description: Maximum runtime of one nightly scan (systemd time span).
+    default: 45min
+  - name: market_watch_scan_asia_schedule
+    type: str
+    description: systemd OnCalendar expression for the Asia snapshot.
+    default: Mon..Fri *-*-* 12:05:00 Asia/Hong_Kong
+  - name: market_watch_scan_us_pre_schedule
+    type: str
+    description: systemd OnCalendar expression for the US pre-market snapshot.
+    default: Mon..Fri *-*-* 08:20:00 America/New_York
+  - name: market_watch_scan_check_schedule
+    type: str
+    description: systemd OnCalendar expression for the afternoon check snapshot.
+    default: Mon..Fri *-*-* 16:00:00 Europe/Berlin
+  - name: market_watch_scan_snapshots_enabled
+    type: bool
+    description: Run the three snapshots on their schedules; when false they only run when started by hand.
+    default: 'true'
+  - name: market_watch_scan_snapshot_timeout
+    type: str
+    description: Maximum runtime of one snapshot (systemd time span).
+    default: 30min
+  - name: market_watch_scan_fundamentals_schedule
+    type: list[str]
+    description: systemd OnCalendar expressions for the fundamentals job (weekday runs refresh stocks near earnings, Saturday runs all).
+    default: '- Mon..Fri *-*-* 17:00:00 America/New_York
+
+      - Sat *-*-* 10:00:00 Europe/Berlin'
+  - name: market_watch_scan_fundamentals_timer_enabled
+    type: bool
+    description: Run the fundamentals job on its schedule; when false it only runs when started by hand.
+    default: 'true'
+  - name: market_watch_scan_fundamentals_timeout
+    type: str
+    description: Maximum runtime of one fundamentals run (systemd time span).
+    default: 40min
+  - name: market_watch_requests_poll_schedule
+    type: list[str]
+    description: systemd OnCalendar expressions for the on-demand request poll.
+    default: '- Mon..Fri *-*-* 06:15/1:00 Europe/Berlin
+
+      - Mon..Fri *-*-* 07:*:00 Europe/Berlin
+
+      - Mon..Fri *-*-* 08:45/1:00 America/New_York
+
+      - Mon..Fri *-*-* 09:*:00 America/New_York'
+  - name: market_watch_requests_poll_timer_enabled
+    type: bool
+    description: Run the request poll on its schedule; when false it only runs when started by hand.
+    default: 'true'
+  - name: market_watch_requests_poll_timeout
+    type: str
+    description: Maximum runtime of one request poll (systemd time span).
+    default: 15min
+  - name: market_watch_db_path
+    type: str
+    description: Path of the SQLite database inside the containers (on the data volume).
+    default: /data/market-watch.sqlite3
+  - name: market_watch_backfill_timeout
+    type: str
+    description: Maximum runtime of one manual backfill run (systemd time span).
+    default: 60min
+  - name: market_watch_ingest_schedule
+    type: list[str]
+    description: systemd OnCalendar expressions for the ingest of the Claude runs' output.
+    default: '- ''*-*-* 05..22:00/10:00 Europe/Berlin''
+
+      - ''*-*-* 23:00,10,20,30:00 Europe/Berlin'''
+  - name: market_watch_ingest_timer_enabled
+    type: bool
+    description: Run the ingest on its schedule; when false it only runs when started by hand.
+    default: 'true'
+  - name: market_watch_ingest_timeout
+    type: str
+    description: Maximum runtime of one ingest (systemd time span).
+    default: 10min
+  - name: market_watch_classify_routine_url
+    type: str
+    description: API trigger URL of the routine „Jetzt einordnen“ starts (empty disables it).
+    default: '""'
+  - name: market_watch_classify_routine_token
+    type: str
+    description: Bearer token of that API trigger (encrypted host vars).
+    default: '""'
+  - name: market_watch_data_repo
+    type: str
+    description: ssh URL of the data repository holding the watchlist and prices branches.
+    default: '""'
+  - name: market_watch_deploy_key
+    type: str
+    description: Private ssh key with write access to the data repository, also used to clone the build context.
+    default: '""'
+  - name: market_watch_openfigi_api_key
+    type: str
+    description: Optional OpenFIGI API key.
+    default: '""'
+  - name: market_watch_environment_vars
+    type: dict
+    description: Settings passed as environment variables.
+    default: 'TZ: Europe/Berlin'
+  - name: market_watch_entrypoint
+    type: str
+    description: Optional container entrypoint override.
+    default: '""'
+  - name: market_watch_extra_files
+    type: list[dict]
+    description: Arbitrary file entries with src (controller path) or source (target path), dest, optional mount, mode, and template.
+    default: '[]'
+  - name: market_watch_extra_dirs
+    type: list[dict]
+    description: Arbitrary directory entries with src (controller directory) or source (target path), dest, optional mount and mode.
+    default: '[]'
+---
+
+import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
+
+<AnsibleRole />

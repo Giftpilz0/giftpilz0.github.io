@@ -40,9 +40,9 @@ ansibleCollection:
   - name: mariadb
     description: Deploy MariaDB as a Podman quadlet.
     variables: 25
-  - name: market_brief
-    description: Run the market watch price fetcher (built from its git repository) on a systemd timer as a Podman quadlet.
-    variables: 17
+  - name: market_watch
+    description: Run the market watch jobs on systemd timers and its web app as Podman quadlets, built from its git repository.
+    variables: 42
   - name: misc
     description: Deploy the Misc web application (built from a git commit) as a Podman quadlet.
     variables: 17
@@ -54,7 +54,7 @@ ansibleCollection:
     variables: 20
   - name: opencloud
     description: Deploy OpenCloud as a Podman quadlet.
-    variables: 40
+    variables: 49
   - name: postgresql
     description: Deploy PostgreSQL as a Podman quadlet.
     variables: 32
@@ -72,7 +72,7 @@ ansibleCollection:
     variables: 16
   - name: victorialogs
     description: Deploy VictoriaLogs as a Podman Quadlet pod.
-    variables: 20
+    variables: 21
 ---
 
 import AnsibleCollection from "../../../../../components/ansible/AnsibleCollection.astro";

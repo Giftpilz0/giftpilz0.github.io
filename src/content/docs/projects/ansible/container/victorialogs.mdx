@@ -17,7 +17,7 @@ ansibleRole:
   - name: victorialogs_version
     type: str
     description: VictoriaLogs image tag.
-    default: v1.53.0
+    default: v1.54.0
   - name: victorialogs_autoupdate
     type: bool
     description: Enable Podman registry auto-update.
@@ -80,6 +80,10 @@ ansibleRole:
     type: str
     description: Optional entrypoint override.
     default: '""'
+  - name: victorialogs_extra_args
+    type: list[str]
+    description: Additional VictoriaLogs command line flags.
+    default: '[]'
   - name: victorialogs_extra_files
     type: list[dict]
     description: Extra inventory files, format in the quadlet defaults.

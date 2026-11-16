@@ -68,6 +68,10 @@ ansibleRole:
     type: str
     description: Password for a password-based scheduled-task identity.
     default: '""'
+  - name: lego_windows_event_source
+    type: str
+    description: Application event log source the renewal script writes to; empty disables it.
+    default: Lego
   - name: lego_binary
     type: path
     description: Lego executable path.

@@ -17,7 +17,7 @@ ansibleRole:
   - name: opencloud_version
     type: str
     description: Container image version.
-    default: 9.0.0
+    default: 9.1.0
   - name: opencloud_autoupdate
     type: bool
     description: Enable podman auto-update for this container.
@@ -62,12 +62,16 @@ ansibleRole:
     type: str
     description: OIDC origin for Content Security Policy.
     default: '""'
+  - name: opencloud_csp_frame_src
+    type: list[str]
+    description: Extra CSP frame-src origins.
+    default: '[]'
   - name: opencloud_environment_vars
     type: dict
     description: Extra environment variables injected into the container.
     default: 'IDM_ADMIN_PASSWORD: ''{{ opencloud_admin_password }}''
 
-      OPEN_CLOUD_LOG_LEVEL: ''{{ opencloud_log_level }}''
+      OC_LOG_LEVEL: ''{{ opencloud_log_level }}''
 
       OC_URL: ''{{ opencloud_domain }}''
 
@@ -79,7 +83,11 @@ ansibleRole:
 
       THUMBNAILS_MAX_CONCURRENT_REQUESTS: 64
 
-      FRONTEND_CHECK_FOR_UPDATES: false'
+      FRONTEND_CHECK_FOR_UPDATES: false
+
+      WEB_OPTION_DISABLE_SPONSOR_LINK: true
+
+      WEB_OPTION_DISABLE_FEEDBACK_LINK: true'
   - name: opencloud_oidc_clients
     type: str
     description: Merged list of standard and custom OIDC clients.
@@ -104,7 +112,7 @@ ansibleRole:
   - name: opencloud_collabora_version
     type: str
     description: Collabora container image version.
-    default: 26.04.5.2.1
+    default: 26.04.6.1.1
   - name: opencloud_collabora_proof_key_image
     type: str
     description: Image name without tag.
@@ -157,6 +165,38 @@ ansibleRole:
     type: str
     description: Radicale container image version.
     default: v3.9.0
+  - name: opencloud_imagor_enabled
+    type: bool
+    description: Generate thumbnails with imagor, adding HEIC, HEIF and AVIF previews.
+    default: 'false'
+  - name: opencloud_imagor_image
+    type: str
+    description: Image name without tag.
+    default: docker.io/shumc/imagor
+  - name: opencloud_imagor_version
+    type: str
+    description: Imagor container image version.
+    default: 1.10.4
+  - name: opencloud_imagor_port
+    type: int
+    description: Port imagor listens on inside the pod.
+    default: '8000'
+  - name: opencloud_imagor_concurrency
+    type: int
+    description: Images imagor processes at the same time; more are queued.
+    default: '4'
+  - name: opencloud_imagor_memory
+    type: str
+    description: Memory limit of the imagor container, e.g. 1g.
+    default: 2g
+  - name: opencloud_imagor_source_types
+    type: list[str]
+    description: Mime types previewed in addition to the built-in ones.
+    default: '- image/heic
+
+      - image/heif
+
+      - image/avif'
   - name: opencloud_entrypoint
     type: str
     description: Optional OpenCloud container entrypoint override.
@@ -172,6 +212,10 @@ ansibleRole:
   - name: opencloud_radicale_entrypoint
     type: str
     description: Optional Radicale container entrypoint override.
+    default: '""'
+  - name: opencloud_imagor_entrypoint
+    type: str
+    description: Optional imagor container entrypoint override.
     default: '""'
   - name: opencloud_extra_files
     type: list[dict]

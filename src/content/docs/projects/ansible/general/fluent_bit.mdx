@@ -1,6 +1,6 @@
 ---
 title: fluent_bit
-description: Ship the systemd journal to VictoriaLogs with Fluent Bit.
+description: Ship the systemd journal or Windows event log to VictoriaLogs with Fluent Bit.
 tableOfContents: false
 ansibleRole:
   collection: giftpilz0.general
@@ -8,12 +8,36 @@ ansibleRole:
   variables:
   - name: fluent_bit_repo_baseurl
     type: str
-    description: Package repository URL.
-    default: https://packages.fluentbit.io/almalinux/$releasever/
+    description: Package repository URL (Linux).
+    default: "{{ 'https://packages.fluentbit.io/almalinux/$releasever/' if ansible_facts['os_family'] == 'RedHat'\n   else 'https://packages.fluentbit.io/' ~ ansible_facts['distribution'] | lower ~ '/' ~ ansible_facts['distribution_release']\n   if ansible_facts['os_family'] == 'Debian' else '' }}"
+  - name: fluent_bit_repo_suite
+    type: str
+    description: Suite of the APT repository (Debian and Ubuntu).
+    default: '{{ ansible_facts[''distribution_release''] if ansible_facts[''os_family''] == ''Debian'' else '''' }}'
   - name: fluent_bit_repo_gpgkey
     type: str
-    description: Signing key URL of the package repository.
+    description: Signing key URL of the package repository (Linux).
     default: https://packages.fluentbit.io/fluentbit.key
+  - name: fluent_bit_windows_version
+    type: str
+    description: Fluent Bit release installed on Windows.
+    default: 5.2.0
+  - name: fluent_bit_windows_url
+    type: str
+    description: Download URL of the Windows release zip, a .sha256 file must exist next to it.
+    default: https://packages.fluentbit.io/windows/fluent-bit-{{ fluent_bit_windows_version }}-win64.zip
+  - name: fluent_bit_windows_install_path
+    type: str
+    description: Directory the Windows releases are extracted to, older releases are removed.
+    default: C:\Program Files\fluent-bit
+  - name: fluent_bit_config_path
+    type: str
+    description: Directory of fluent-bit.conf.
+    default: '{{ "C:\\ProgramData\\fluent-bit" if ansible_facts["os_family"] == "Windows" else "/etc/fluent-bit" }}'
+  - name: fluent_bit_state_path
+    type: str
+    description: Directory of the read position databases and, on Windows, the log file.
+    default: '{{ "C:\\ProgramData\\fluent-bit" if ansible_facts["os_family"] == "Windows" else "/var/lib/fluent-bit" }}'
   - name: fluent_bit_log_level
     type: str
     description: Log level of Fluent Bit itself.
@@ -24,11 +48,75 @@ ansibleRole:
     default: 16MB
   - name: fluent_bit_timeout_stop_sec
     type: int
-    description: Seconds before systemd kills a stopping service.
+    description: Seconds before systemd kills a stopping service (Linux).
     default: '15'
+  - name: fluent_bit_windows_channels
+    type: list[str]
+    description: Windows event log channels to read, missing channels are skipped.
+    default: '- Application
+
+      - System
+
+      - Security'
+  - name: fluent_bit_windows_event_query
+    type: str
+    description: XPath query that selects events in every channel.
+    default: '*'
+  - name: fluent_bit_tail_inputs
+    type: list[dict]
+    description: Log files to read.
+    default: '[]'
+    options:
+    - name: name
+      type: str
+      required: true
+      description: Unique name, stored in the source field. Letters, digits, - and _.
+    - name: path
+      type: str
+      required: true
+      description: File path, wildcards allowed.
+    - name: exclude_path
+      type: str
+      description: Files matching Path that are not read.
+    - name: parser
+      type: str
+      description: Parser from parsers.conf or fluent_bit_parsers.
+    - name: multiline_parser
+      type: str
+      description: Multiline parser that joins lines such as stack traces.
+    - name: msg_field
+      type: str
+      description: Record field shown as the message.
+  - name: fluent_bit_tail_input_defaults
+    type: dict
+    description: Defaults merged into every entry of fluent_bit_tail_inputs.
+    default: 'exclude_path: ''''
+
+      parser: ''''
+
+      multiline_parser: ''''
+
+      msg_field: log'
+  - name: fluent_bit_parsers
+    type: list[dict]
+    description: Custom parsers, each a dict of Fluent Bit [PARSER] keys and values.
+    default: '[]'
+  - name: fluent_bit_exclude_rules
+    type: list[dict]
+    description: Dropped log entries of all inputs.
+    default: '[]'
+    options:
+    - name: key
+      type: str
+      required: true
+      description: Record field, journal fields without their leading underscore.
+    - name: regex
+      type: str
+      required: true
+      description: Entries whose field matches are dropped.
   - name: fluent_bit_http_host
     type: str
-    description: Host name of the ingest endpoint.
+    description: Host name of the VictoriaLogs ingest endpoint.
     default: '""'
   - name: fluent_bit_http_port
     type: int
@@ -36,23 +124,8 @@ ansibleRole:
     default: '443'
   - name: fluent_bit_stream_fields
     type: list[str]
-    description: Journal fields that identify a log stream.
-    default: '- HOSTNAME
-
-      - SYSLOG_IDENTIFIER'
-  - name: fluent_bit_exclude_rules
-    type: list[dict]
-    description: Dropped journal entries.
-    default: '[]'
-    options:
-    - name: key
-      type: str
-      required: true
-      description: Journal field without its leading underscore.
-    - name: regex
-      type: str
-      required: true
-      description: Entries whose field matches are dropped.
+    description: Record fields that identify a log stream.
+    default: '{{ [''Computer'', ''Channel''] if ansible_facts[''os_family''] == ''Windows'' else [''HOSTNAME'', ''SYSLOG_IDENTIFIER''] }}'
 ---
 
 import AnsibleRole from "../../../../../components/ansible/AnsibleRole.astro";
