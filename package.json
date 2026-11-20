@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "^0.4.6",
-    "@astrojs/starlight": "^0.42.9",
+    "@astrojs/starlight": "^0.43.0",
     "@fontsource-variable/google-sans-code": "^5.3.2",
     "@fontsource-variable/google-sans-flex": "^5.3.2",
     "@material/material-color-utilities": "^0.4.0",
